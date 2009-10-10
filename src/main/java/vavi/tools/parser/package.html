@@ -1,0 +1,94 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html lang="ja">
+
+<head>
+<link rev="MADE" href="mailto:vavivavi@yahoo.co.jp">
+<link rel="INDEX" href="orverview.html">
+<meta http-equiv="Content-Type" content="text/html; charset=shift_jis">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<link rel="stylesheet" type="text/css" href="../../../vavi.css">
+<title>vavi.tools.parser</title>
+<!--
+ * Copyright (c) 2002 by Naohide Sano, All rights reserved.
+ *
+ * Written by Naohide Sano
+ *
+ * @author	<a href="mailto:vavivavi@yahoo.co.jp">Naohide Sano</a> (nsano)
+ *
+ * @version	0.00	020519	nsano	initial version
+-->
+<style type="text/css">
+<!--
+em {
+    color:	#ff0000;
+    font-style:	normal;
+}
+//-->
+</style>
+</head>
+
+<body>
+
+<p>
+JavaParser 関連のクラスを提供します．
+</p>
+
+<h2>How to build</h2>
+
+<ol>
+  <li><tt>% jjtree Java1.2-b.jjt</tt></li>
+  <li><tt>% emacs Java1.2-b.jj</tt>
+<pre>
+options {
+ <em> UNICODE_INPUT=true;</em>
+  :
+}
+</pre>
+  </li>
+  <li><tt>% javacc Java1.2-b.jj</tt></li>
+  <li><tt>% mv SimpleCharStream.java MyCharStream.java</tt></li>
+  <li><tt>% emacs MyCharStream.java</tt>
+<pre>
+public final class SimpleCharStream <em>implements CharStream</em> {
+ :
+</pre>
+  </li>
+  <li><tt>% emacs Java1.2-b.jj</tt>
+<pre>
+options {
+<em>  UNICODE_INPUT=true;
+  USER_CHAR_STREAM=true;</em>
+   :
+}
+
+   :
+            try {
+                startTime = System.currentTimeMillis();
+                parser = new JavaParser(
+<em>                    new SimpleCharStream(new java.io.InputStreamReader(
+                    new java.io.FileInputStream(filename), "JISAutoDetect")));
+</em>                stopTime = System.currentTimeMillis();
+                initTime = stopTime - startTime;
+            }
+<em>            catch (java.io.UnsupportedEncodingException e) {
+		System.out.println("Java Parser: UnsupportedEncode: " + e);
+		return;
+            }</em>
+
+</pre>
+  </li>
+  <li><tt>% mv MyCharStream.java SimpleCharStream.java</tt></li>
+  <li><tt>% javac *.java</tt></li>
+  <li><tt>% java -cp . JavaParser Foo.java</tt></li>
+</ol>
+
+<h2>これから実装すること</h2>
+
+<ul>
+  <li>import リスタ</li>
+  <li><del datetime="021012">javadoc ant</del> &rarr; XDoclet</li>
+</ul>
+
+</body>
+
+</html>
