@@ -17,7 +17,7 @@ import javax.xml.transform.stream.StreamResult;
 
 
 /**
- * XmlUtil. 
+ * XmlUtil. TODO IIOMetadataNode Ç‚ÇÒÇ©ÅAÇ‡Ç¡Ç∆îƒópÇ…
  *
  * @author <a href="mailto:sano-n@klab.jp">Naohide Sano</a> (nsano)
  * @version 0.00 2009/05/18 nsano initial version <br>

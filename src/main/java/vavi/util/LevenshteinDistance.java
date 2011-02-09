@@ -1,10 +1,8 @@
 /*
- * Copyright (c) 2006 by Naohide Sano, All rights reserved.
- *
- * Programmed by Naohide Sano
+ * http://www.merriampark.com/ld.htm
  */
 
-package vavix.util;
+package vavi.util;
 
 
 /**
@@ -20,24 +18,24 @@ public class LevenshteinDistance {
      * Get minimum of three values
      */
     private int getMinimum(int a, int b, int c) {
-        int mi;
+        int mi = a;
 
-        mi = a;
         if (b < mi) {
             mi = b;
         }
         if (c < mi) {
             mi = c;
         }
-        return mi;
 
+        return mi;
     }
 
     /**
      * Compute Levenshtein distance
+     * @thread safe
      */
     public int calculate(String s, String t) {
-        int d[][]; // matrix
+        int[][] d; // matrix
         int n; // length of s
         int m; // length of t
         int i; // iterates through s

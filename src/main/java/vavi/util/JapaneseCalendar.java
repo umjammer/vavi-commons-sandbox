@@ -153,7 +153,7 @@ public class JapaneseCalendar extends Calendar {
                 util.check(year, month, day);
                 current = util;
                 set(year + util.diff, month - 1, day);
-                Debug.println("1: " + toFS(this));
+Debug.println("1: " + toFS(this));
                 return;
             }
         }
@@ -167,16 +167,14 @@ public class JapaneseCalendar extends Calendar {
     private void setup(GregorianCalendar calendar) {
         for (int i = 0; i < utils.size(); i++) {
             CalendarUtilJa util = utils.get(i);
-            // Debug.println(toFS(calendar) + ".before(" + toFS(util.startYear)
-            // + "): " + calendar.before(util.startYear));
-            // Debug.println(toFS(calendar) + ".after(" + toFS(util.endYear) +
-            // "): " + calendar.after(util.endYear));
+//Debug.println(toFS(calendar) + ".before(" + toFS(util.startYear) + "): " + calendar.before(util.startYear));
+//Debug.println(toFS(calendar) + ".after(" + toFS(util.endYear) + "): " + calendar.after(util.endYear));
             if (!(calendar.before(util.startYear) || calendar.after(util.endYear))) {
                 current = util;
-                Debug.println("2: " + toFS(calendar));
+Debug.println("2: " + toFS(calendar));
                 set(calendar.get(YEAR), calendar.get(MONTH), calendar.get(DAY_OF_MONTH), calendar.get(HOUR_OF_DAY), calendar.get(MINUTE), calendar.get(SECOND));
                 this.getTime();
-                Debug.println("2: " + toFS(this));
+Debug.println("2: " + toFS(this));
                 return;
             }
         }
@@ -198,7 +196,7 @@ public class JapaneseCalendar extends Calendar {
     /** */
     private void copyInto(HackedGregorianCalendar calendar) {
         calendar.set(super.internalGet(YEAR), super.internalGet(MONTH), super.internalGet(DATE), super.internalGet(HOUR_OF_DAY), super.internalGet(MINUTE), super.internalGet(SECOND));
-        Debug.println(toFS(calendar) + ": " + Debug.getCallerMethod(5));
+Debug.println(toFS(calendar) + ": " + Debug.getCallerMethod(5));
     }
 
     /** */
@@ -213,7 +211,7 @@ public class JapaneseCalendar extends Calendar {
 
         public void copyInto(Calendar calendar) {
             calendar.set(internalGet(YEAR), internalGet(MONTH), internalGet(DATE), internalGet(HOUR_OF_DAY), internalGet(MINUTE), internalGet(SECOND));
-            Debug.println(toFS(this));
+Debug.println(toFS(this));
         }
     }
 
@@ -276,7 +274,7 @@ public class JapaneseCalendar extends Calendar {
      * 指定されたフィールドの最小値 (たとえば、グレゴリオ暦の DAY_OF_MONTH では、1) を返します。
      */
     public int getMinimum(int field) {
-        Debug.println("here");
+Debug.println("here");
         HackedGregorianCalendar tmp = new HackedGregorianCalendar();
         copyInto(tmp);
         int min = tmp.getMinimum(field);
@@ -286,7 +284,7 @@ public class JapaneseCalendar extends Calendar {
 
     /** 指定された年が、うるう年かどうかを判定します。 */
     public boolean isLeapYear(int year) {
-        Debug.println("here");
+Debug.println("here");
         HackedGregorianCalendar tmp = new HackedGregorianCalendar();
         copyInto(tmp);
         return tmp.isLeapYear(year);
@@ -296,7 +294,7 @@ public class JapaneseCalendar extends Calendar {
      * 大きいフィールドを変更せずに指定された時間フィールドの 1 つの単位の時間を上または下に加算または減算します。
      */
     public void roll(int field, boolean up) {
-        Debug.println("here");
+Debug.println("here");
         HackedGregorianCalendar tmp = new HackedGregorianCalendar();
         copyInto(tmp);
         tmp.roll(field, up);
@@ -409,7 +407,7 @@ public class JapaneseCalendar extends Calendar {
                 try {
                     value = rb.getString("calendar.ja." + i + ".gengou.short");
                 } catch (MissingResourceException e) {
-                    Debug.println("calender util: " + i + " not found, break");
+Debug.println("calender util: " + i + " not found, break");
                     break;
                 }
                 util.shortName = value;
@@ -437,14 +435,14 @@ public class JapaneseCalendar extends Calendar {
                 value = rb.getString("calendar.ja." + i + ".year.diff");
                 util.diff = Integer.parseInt(value);
 
-                // Debug.println("---- " + i + " ----");
-                // util.debug();
+// Debug.println("---- " + i + " ----");
+// util.debug();
                 utils.add(util);
 
                 i++;
             }
         } catch (Exception e) {
-            Debug.printStackTrace(e);
+Debug.printStackTrace(e);
         }
     }
 

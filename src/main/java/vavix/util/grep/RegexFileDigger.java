@@ -48,6 +48,7 @@ public class RegexFileDigger implements FileDigger {
     /**
      * 掘ります。
      * @param dir トップディレクトリ 
+     * @throws NullPointerException dir is not found
      */
     public void dig(File dir) throws IOException {
         File[] files = dir.listFiles();
