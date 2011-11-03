@@ -48,8 +48,9 @@ public class InputEngineOutputStream extends OutputStream {
     /** */
     private byte[] one = new byte[1];
 
-    /** */
+    /* */
     public void write(int b) throws IOException {
+        one[0] = (byte) (b & 0xff);
         write(one, 0, 1);
     }
 
@@ -65,7 +66,7 @@ public class InputEngineOutputStream extends OutputStream {
      * |xxx+------------------|
      * </pre>
      */
-    public void write(byte data[], int offset, int length) throws IOException {
+    public void write(byte[] data, int offset, int length) throws IOException {
 //Debug.println("offset: " + offset + ", length: " + length + "\n" + StringUtil.getDump(data, offset, length));
         if (data == null) {
             throw new NullPointerException();
@@ -77,15 +78,39 @@ public class InputEngineOutputStream extends OutputStream {
             if (capacity - limit < length) {
                 int filling = capacity - limit;
                 // first time
+                //
+                //  buffer
+                //  |              +limit  +capacity
+                //  |oooooooooooooo+-------|
+                //  write
+                //  |                      +limit = capacity
+                //  |--------------oooooooo|
+                //                 <------> filling
+                //
                 System.arraycopy(data, offset, buffer, limit, filling); // full
+                offset += filling;
                 limit += filling; // = capacity
                 engine.execute();
 
                 // second time ...
+                //
+                //  buffer
+                //  |                      +limit = capacity
+                //  |--------------oooooooo|
+                //  write
+                //  |                      ******************************
+                //  |                      <----------------------------> rest
+                //  while rest > capacity
+                //  |                      +limit = capacity
+                //  |oooooooooooooooooooooo|
+                //  |                      ********
+                //  |                      <------> rest
+                //
                 int rest = length - filling;
                 while (rest > capacity) {
                     limit = 0;
                     System.arraycopy(data, offset, buffer, limit, capacity); // full
+                    offset += capacity;
                     limit = capacity;
                     engine.execute();
                     rest -= capacity;
@@ -97,11 +122,12 @@ public class InputEngineOutputStream extends OutputStream {
                 limit = 0;
             }
             System.arraycopy(data, offset, buffer, limit, length);
+//Debug.println(StringUtil.getDump(buffer, limit, length));
             limit += length;
         }
     }
 
-    /** */
+    /** •K‚¸‚·‚é‚±‚Æ */
     public void flush() throws IOException {
         if (closed) {
             throw new IOException("Stream closed");
@@ -109,7 +135,7 @@ public class InputEngineOutputStream extends OutputStream {
         engine.execute();
     }
 
-    /** */
+    /* */
     public void close() throws IOException {
         if (!closed) {
             closed = true;
@@ -122,7 +148,7 @@ public class InputEngineOutputStream extends OutputStream {
      */
     private int readImpl(byte[] data, int offset, int length) {
         if (limit - index <= 0) {
-            length = 0;
+            return -1;
         } else if (length > limit - index) {
             length = limit - index;
         }
@@ -138,12 +164,12 @@ public class InputEngineOutputStream extends OutputStream {
 
     /** */
     private class InputStreamImpl extends InputStream {
-        /** */
+        /* */
         public int available() {
             return index;
         }
 
-        /** */
+        /* */
         public int read() throws IOException {
             int r = read(one, 0, 1);
             if (r != 1) {
@@ -153,21 +179,22 @@ public class InputEngineOutputStream extends OutputStream {
             }
         }
 
-        /** */
+        /* */
         public int read(byte[] data, int offset, int length) throws IOException {
             if (data == null) {
-                throw new NullPointerException("byte[]");
+                throw new NullPointerException("data");
             } else if ((offset < 0) || (offset > data.length) || (length < 0) ||
                      ((offset + length) > data.length) || ((offset + length) < 0)) {
                 throw new IndexOutOfBoundsException("off: " + offset + ", len: " + length);
             } else if (eof) {
                 throw new IOException("Stream closed");
             } else {
-                return readImpl(data, offset, length);
+                int r = readImpl(data, offset, length);
+                return r;
             }
         }
 
-        /** */
+        /* */
         public void close() {
             eof = true;
         }

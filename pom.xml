@@ -11,7 +11,7 @@
   <organization>
     <name></name>
   </organization>
-  <version>0.3.0</version>
+  <version>0.3.1</version>
   <url>http://www.vavisoft.com/</url>
   <description></description>
   <build>
@@ -66,6 +66,63 @@
         </executions>
       </plugin>
     </plugins>
+    <pluginManagement>
+      <plugins>
+        <!--This plugin's configuration is used to store Eclipse m2e settings only. It has no influence on the Maven build itself.-->
+        <plugin>
+          <groupId>org.eclipse.m2e</groupId>
+          <artifactId>lifecycle-mapping</artifactId>
+          <version>1.0.0</version>
+          <configuration>
+            <lifecycleMappingMetadata>
+              <pluginExecutions>
+                <pluginExecution>
+                  <pluginExecutionFilter>
+                    <groupId>org.codehaus.mojo</groupId>
+                    <artifactId>javacc-maven-plugin</artifactId>
+                    <versionRange>[2.5,)</versionRange>
+                    <goals>
+                      <goal>javacc</goal>
+                      <goal>jjtree-javacc</goal>
+                    </goals>
+                  </pluginExecutionFilter>
+                  <action>
+                    <ignore></ignore>
+                  </action>
+                </pluginExecution>
+                <pluginExecution>
+                  <pluginExecutionFilter>
+                    <groupId>org.codehaus.mojo</groupId>
+                    <artifactId>native2ascii-maven-plugin</artifactId>
+                    <versionRange>[1.0-alpha-1,)</versionRange>
+                    <goals>
+                      <goal>native2ascii</goal>
+                    </goals>
+                  </pluginExecutionFilter>
+                  <action>
+                    <execute/>
+                  </action>
+                </pluginExecution>
+              </pluginExecutions>
+            </lifecycleMappingMetadata>
+          </configuration>
+        </plugin>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-jar-plugin</artifactId>
+          <version>2.3.1</version>
+          <configuration>
+            <archive>
+              <manifestEntries>
+                <Premain-Class>vavix.util.VaviInstrumentation</Premain-Class>
+                <Can-Redefine-Classes>true</Can-Redefine-Classes>
+                <Boot-Class-Path>javassist-3.8.0.GA.jar</Boot-Class-Path>
+              </manifestEntries>
+            </archive>
+          </configuration>
+        </plugin>
+      </plugins>
+    </pluginManagement>
   </build>
   <repositories>
   </repositories>

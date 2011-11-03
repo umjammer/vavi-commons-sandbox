@@ -67,7 +67,7 @@ public class SwingBeanUtils extends AdvancedBeanUtils {
      */
     public static void setReadOnly(boolean readOnly) {
         // TODO Auto-generated method stub
-
+logger.debug("");
     }
 }
 

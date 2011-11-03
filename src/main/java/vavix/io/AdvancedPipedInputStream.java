@@ -1,7 +1,5 @@
 /*
- * Copyright (c) 2006 by Naohide Sano, All rights reserved.
- *
- * Programmed by Naohide Sano
+ * http://www.ibm.com/developerworks/jp/java/library/j-io2/
  */
 
 package vavix.io;
@@ -90,7 +88,7 @@ public class AdvancedPipedInputStream extends InputStream {
     /** */
     private byte[] one = new byte[1];
 
-    /** */
+    /* */
     public int read() throws IOException {
         // read 1 byte
         int amount = read(one, 0, 1);
@@ -98,7 +96,7 @@ public class AdvancedPipedInputStream extends InputStream {
         return (amount < 0) ? -1 : one[0] & 0xff;
     }
 
-    /** */
+    /* */
     public synchronized int read(byte data[], int offset, int length) throws IOException {
         // take a reference to the reader thread
         if (reader == null)
@@ -142,7 +140,7 @@ public class AdvancedPipedInputStream extends InputStream {
         }
     }
 
-    /** */
+    /* */
     public synchronized long skip(long amount) throws IOException {
         // take a reference to the reader thread
         if (reader == null)
@@ -187,7 +185,7 @@ public class AdvancedPipedInputStream extends InputStream {
         }
     }
 
-    /** */
+    /* */
     public synchronized int available() throws IOException {
         // throw an exception if the stream is closed
         closedCheck();
@@ -248,13 +246,13 @@ public class AdvancedPipedInputStream extends InputStream {
         }
     }
 
-    /** */
+    /* */
     public void close() throws IOException {
         // close the read end of this pipe
         close(READER);
     }
 
-    /** */
+    /* */
     private synchronized void close(boolean rw) throws IOException {
         if (rw == READER) { // reader
             // set closed flag

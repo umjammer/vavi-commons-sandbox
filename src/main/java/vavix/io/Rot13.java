@@ -37,20 +37,22 @@ public class Rot13 {
         return c;
     }
 
-    /** */
+    /**
+     * Rot13 InputStream
+     */
     public static class InputStream extends FilterInputStream {
         /** */
         public InputStream(java.io.InputStream in) {
             super(in);
         }
-        /** */
+        /* */
         public int read() throws IOException {
             return codec(in.read());
         }
-        /** */
-        public int read(byte b[], int off, int len) throws IOException {
+        /* */
+        public int read(byte[] b, int off, int len) throws IOException {
             if (b == null) {
-                throw new NullPointerException("byte[]");
+                throw new NullPointerException("b");
             } else if ((off < 0) || (off > b.length) || (len < 0) ||
                      ((off + len) > b.length) || ((off + len) < 0)) {
                 throw new IndexOutOfBoundsException("off: " + off + ", len: " + len);
@@ -82,13 +84,15 @@ e.printStackTrace(System.err);
         }
     }
 
-    /** */
+    /**
+     * Rot13 OutputStream
+     */
     public static class OutputStream extends FilterOutputStream {
-        /** */
+        /* */
         public OutputStream(java.io.OutputStream out) {
             super(out);
         }
-        /** */
+        /* */
         public void write(int b) throws IOException {
             out.write(codec(b));
         }

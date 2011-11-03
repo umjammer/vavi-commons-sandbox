@@ -4,7 +4,7 @@
  * Programmed by Naohide Sano
  */
 
-package vavi.util.test;
+package vavi.util;
 
 import vavi.util.Singleton;
 
@@ -19,7 +19,7 @@ import junit.framework.TestCase;
  * @version 0.00 050914 nsano initial version <br>
  */
 @SuppressWarnings("unused")
-public class SingletonTest extends TestCase {
+public class Singleton2Test extends TestCase {
 
     public static class A extends Singleton {
     }

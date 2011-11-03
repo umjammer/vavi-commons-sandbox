@@ -48,7 +48,7 @@ public class ReaderWriterOutputEngine implements OutputEngine {
         buffer = new char[bufferSize];
     }
 
-    /** */
+    /* */
     public void initialize(OutputStream out) throws IOException {
         if (writer != null) {
             throw new IOException("Already initialized");
@@ -57,7 +57,7 @@ public class ReaderWriterOutputEngine implements OutputEngine {
         }
     }
 
-    /** */
+    /* */
     public void execute() throws IOException {
         if (writer == null) {
             throw new IOException("Not yet initialized");
@@ -71,7 +71,7 @@ public class ReaderWriterOutputEngine implements OutputEngine {
         }
     }
 
-    /** */
+    /* */
     public void finish() throws IOException {
         reader.close();
     }

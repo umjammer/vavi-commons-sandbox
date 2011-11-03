@@ -17,13 +17,15 @@ import java.io.InputStream;
  */
 public interface InputEngine {
     /** */
-    public void initialize(InputStream out) throws IOException;
+    void initialize(InputStream in) throws IOException;
+
+    /** 
+     * in Ç™ -1 Çï‘Ç∑Ç‹Ç≈ì«Ç›çûÇﬁïKóvÇ™Ç†ÇÈ 
+     */
+    void execute() throws IOException;
 
     /** */
-    public void execute() throws IOException;
-
-    /** */
-    public void finish() throws IOException;
+    void finish() throws IOException;
 }
 
 /* */

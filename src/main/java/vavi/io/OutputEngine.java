@@ -18,13 +18,13 @@ import java.io.OutputStream;
  */
 public interface OutputEngine {
     /** */
-    public void initialize(OutputStream out) throws IOException;
+    void initialize(OutputStream out) throws IOException;
 
     /** */
-    public void execute() throws IOException;
+    void execute() throws IOException;
 
     /** */
-    public void finish() throws IOException;
+    void finish() throws IOException;
 }
 
 /* */

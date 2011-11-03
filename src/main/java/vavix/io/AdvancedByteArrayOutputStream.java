@@ -1,7 +1,5 @@
 /*
- * Copyright (c) 2006 by Naohide Sano, All rights reserved.
- *
- * Programmed by Naohide Sano
+ * http://www.ibm.com/developerworks/jp/java/library/j-io2/
  */
 
 package vavix.io;

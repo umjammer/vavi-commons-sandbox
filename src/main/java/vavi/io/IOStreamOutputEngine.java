@@ -46,7 +46,7 @@ public class IOStreamOutputEngine implements OutputEngine {
         buffer = new byte[bufferSize];
     }
 
-    /** */
+    /* */
     public void initialize(OutputStream out) throws IOException {
         if (this.out != null) {
             throw new IOException("Already initialized");
@@ -55,7 +55,7 @@ public class IOStreamOutputEngine implements OutputEngine {
         }
     }
 
-    /** */
+    /* */
     public void execute() throws IOException {
         if (out == null) {
             throw new IOException("Not yet initialized");
@@ -69,7 +69,7 @@ public class IOStreamOutputEngine implements OutputEngine {
         }
     }
 
-    /** */
+    /* */
     public void finish() throws IOException {
         in.close();
     }

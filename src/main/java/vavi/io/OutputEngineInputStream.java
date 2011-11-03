@@ -49,14 +49,14 @@ public class OutputEngineInputStream extends InputStream {
     /** */
     private byte[] one = new byte[1];
 
-    /** */
+    /* */
     public int read() throws IOException {
         int amount = read(one, 0, 1);
         return (amount < 0) ? -1 : one[0] & 0xff;
     }
 
-    /** */
-    public int read(byte data[], int offset, int length) throws IOException {
+    /* */
+    public int read(byte[] data, int offset, int length) throws IOException {
         if (data == null) {
             throw new NullPointerException();
         } else if ((offset < 0) || (offset + length > data.length) || (length < 0)) {
@@ -78,7 +78,7 @@ public class OutputEngineInputStream extends InputStream {
         }
     }
 
-    /** */
+    /* */
     public long skip(long amount) throws IOException {
         if (closed) {
             throw new IOException("Stream closed");
@@ -99,7 +99,7 @@ public class OutputEngineInputStream extends InputStream {
         }
     }
 
-    /** */
+    /* */
     public int available() throws IOException {
         if (closed) {
             throw new IOException("Stream closed");
@@ -108,7 +108,7 @@ public class OutputEngineInputStream extends InputStream {
         }
     }
 
-    /** */
+    /* */
     public void close() throws IOException {
         if (!closed) {
             closed = true;

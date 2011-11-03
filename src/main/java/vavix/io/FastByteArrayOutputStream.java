@@ -1,7 +1,5 @@
 /*
- * Copyright (c) 2007 by Naohide Sano, All rights reserved.
- *
- * Programmed by Naohide Sano
+ * http://javatechniques.com/blog/faster-deep-copies-of-java-objects/
  */
 
 package vavix.io;
@@ -13,9 +11,6 @@ import java.io.OutputStream;
 /**
  * ByteArrayOutputStream implementation that doesn't synchronize methods
  * and doesn't copy the data on toByteArray().
- *
- * @author <a href="mailto:vavivavi@yahoo.co.jp">Naohide Sano</a> (nsano)
- * @version 0.00 071106 nsano initial version <br>
  */
 public class FastByteArrayOutputStream extends OutputStream {
 
@@ -57,31 +52,37 @@ public class FastByteArrayOutputStream extends OutputStream {
     }
 
     /**
-     * Returns the byte array containing the written data. Note that this
+     * Returns the byte array containing the written data. <del>Note that this
      * array will almost always be larger than the amount of data actually
-     * written.
+     * written.</del>
      */
     public byte[] getByteArray() {
-        return buf;
+        byte[] bytes = new byte[size];
+        System.arraycopy(buf, 0, bytes, 0, size);
+        return bytes;
     }
 
-    public final void write(byte b[]) {
+    /* */
+    public final void write(byte[] b) {
         verifyBufferSize(size + b.length);
         System.arraycopy(b, 0, buf, size, b.length);
         size += b.length;
     }
 
-    public final void write(byte b[], int off, int len) {
+    /* */
+    public final void write(byte[] b, int off, int len) {
         verifyBufferSize(size + len);
         System.arraycopy(b, off, buf, size, len);
         size += len;
     }
 
+    /* */
     public final void write(int b) {
         verifyBufferSize(size + 1);
         buf[size++] = (byte) b;
     }
 
+    /** */
     public void reset() {
         size = 0;
     }
@@ -90,7 +91,7 @@ public class FastByteArrayOutputStream extends OutputStream {
      * Returns a ByteArrayInputStream for reading back the written data
      */
     public InputStream getInputStream() {
-        return new FastByteArrayInputStream(buf, size);
+        return new FastByteArrayInputStream(buf, 0, size);
     }
 }
 

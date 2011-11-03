@@ -1,7 +1,5 @@
 /*
- * Copyright (c) 2007 by Naohide Sano, All rights reserved.
- *
- * Programmed by Naohide Sano
+ * http://javatechniques.com/blog/faster-deep-copies-of-java-objects/
  */
 
 package vavix.io;
@@ -11,9 +9,6 @@ import java.io.InputStream;
 
 /**
  * ByteArrayInputStream implementation that does not synchronize methods.
- *
- * @author <a href="mailto:vavivavi@yahoo.co.jp">Naohide Sano</a> (nsano)
- * @version 0.00 071106 nsano initial version <br>
  */
 public class FastByteArrayInputStream extends InputStream {
     /**
@@ -31,19 +26,29 @@ public class FastByteArrayInputStream extends InputStream {
      */
     protected int pos = 0;
 
-    public FastByteArrayInputStream(byte[] buf, int count) {
-        this.buf = buf;
-        this.count = count;
+    /** */
+    public FastByteArrayInputStream(byte[] b) {
+        this(b, 0, b.length);
     }
 
+    /** */
+    public FastByteArrayInputStream(byte[] b, int off, int len) {
+        this.buf = b;
+        this.pos = off;
+        this.count = off + len;
+    }
+
+    /* */
     public final int available() {
         return count - pos;
     }
 
+    /* */
     public final int read() {
         return (pos < count) ? (buf[pos++] & 0xff) : -1;
     }
 
+    /* */
     public final int read(byte[] b, int off, int len) {
         if (pos >= count)
             return -1;
@@ -56,6 +61,7 @@ public class FastByteArrayInputStream extends InputStream {
         return len;
     }
 
+    /* */
     public final long skip(long n) {
         if ((pos + n) > count)
             n = count - pos;

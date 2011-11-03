@@ -61,7 +61,7 @@ public class RegexFileDigger implements FileDigger {
                     try {
                         dredger.dredge(files[i]);
                     } catch (IOException e) {
-System.err.println("ERROR in file: " + files[i]);
+System.err.println("ERROR (" + e.getMessage() + ") in file: " + files[i]); // TODO Dredger#handlError()
                     }
                 }
             }

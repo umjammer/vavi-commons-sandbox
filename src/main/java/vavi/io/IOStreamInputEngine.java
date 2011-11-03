@@ -60,7 +60,7 @@ public class IOStreamInputEngine implements InputEngine {
         }
     }
 
-    /** */
+    /* */
     public void execute() throws IOException {
         if (in == null) {
             throw new IOException("Not yet initialized");
@@ -75,7 +75,7 @@ public class IOStreamInputEngine implements InputEngine {
         }
     }
 
-    /** */
+    /* */
     public void finish() throws IOException {
         out.flush();
         out.close();

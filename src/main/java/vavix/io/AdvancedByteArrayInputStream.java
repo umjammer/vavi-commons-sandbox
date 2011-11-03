@@ -1,7 +1,5 @@
 /*
- * Copyright (c) 2006 by Naohide Sano, All rights reserved.
- *
- * Programmed by Naohide Sano
+ * http://www.ibm.com/developerworks/jp/java/library/j-io2/
  */
 
 package vavix.io;
@@ -44,7 +42,7 @@ public class AdvancedByteArrayInputStream extends InputStream {
         }
     }
 
-    /** */
+    /* */
     public int read() throws IOException {
         if (closed) {
             throw new IOException("Stream closed");
@@ -55,7 +53,7 @@ public class AdvancedByteArrayInputStream extends InputStream {
         }
     }
 
-    /** */
+    /* */
     public int read(byte data[], int offset, int length) throws IOException {
         if (data == null) {
             throw new NullPointerException();
@@ -76,7 +74,7 @@ public class AdvancedByteArrayInputStream extends InputStream {
         }
     }
 
-    /** */
+    /* */
     public long skip(long amount) throws IOException {
         if (closed) {
             throw new IOException("Stream closed");
@@ -91,7 +89,7 @@ public class AdvancedByteArrayInputStream extends InputStream {
         }
     }
 
-    /** */
+    /* */
     public int available() throws IOException {
         if (closed) {
             throw new IOException("Stream closed");
@@ -100,17 +98,17 @@ public class AdvancedByteArrayInputStream extends InputStream {
         }
     }
 
-    /** */
+    /* */
     public void close() {
         closed = true;
     }
 
-    /** */
+    /* */
     public void mark(int readLimit) {
         mark = index;
     }
 
-    /** */
+    /* */
     public void reset() throws IOException {
         if (closed) {
             throw new IOException("Stream closed");
@@ -120,7 +118,7 @@ public class AdvancedByteArrayInputStream extends InputStream {
         }
     }
 
-    /** */
+    /* */
     public boolean markSupported() {
         return true;
     }

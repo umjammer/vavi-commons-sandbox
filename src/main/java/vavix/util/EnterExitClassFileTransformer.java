@@ -7,7 +7,6 @@
 package vavix.util;
 
 import java.io.ByteArrayInputStream;
-import java.io.IOException;
 import java.lang.instrument.IllegalClassFormatException;
 import java.security.ProtectionDomain;
 import java.util.Properties;
@@ -31,7 +30,7 @@ public class EnterExitClassFileTransformer implements VaviClassFileTransformer {
     private static Pattern pattern; 
 
     /** */
-    private static final String prefix = "vavix.util.EnterExitClassFileTransformer";
+    private static final String prefix = EnterExitClassFileTransformer.class.getName();
 
     /** */
     private String key; 
@@ -44,48 +43,43 @@ public class EnterExitClassFileTransformer implements VaviClassFileTransformer {
     /** */
     public void setKey(String key) {
         this.key = key;
+//System.err.println("EnterExitClassFileTransformer::setKey: key: " + key);
     }
 
     /**
      * <pre>
-     * vavix.util.EnterExitClassFileTransformer.pattern ... class name matcher in regex
+     * vavix.util.EnterExitClassFileTransformer.${key}.pattern ... class name matcher in regex
      * </pre>
      */
     public byte[] transform(ClassLoader loader, String className, Class<?> classBeingRedefined, ProtectionDomain protectionDomain, byte[] classfileBuffer) throws IllegalClassFormatException {
         ClassPool classPool = ClassPool.getDefault();
 
         if (pattern == null) {
-            try {
-                Properties props = new Properties();
-                props.load(VaviInstrumentation.class.getResourceAsStream("/VaviInstrumentation.properties"));
-        
-                pattern = Pattern.compile(props.getProperty(prefix + "." + key + "." + "pattern"));
-//System.err.println("pattern: " + pattern.pattern());
-            } catch (IOException e) {
-//e.printStackTrace(System.err);
-System.err.println(e);
-                throw (IllegalClassFormatException) new IllegalClassFormatException().initCause(e);
-            }
+            Properties props = System.getProperties();
+            pattern = Pattern.compile(props.getProperty(prefix + "." + key + "." + "pattern"));
+System.err.println("EnterExitClassFileTransformer::transform: pattern: " + pattern.pattern());
         }
 
+//System.err.println("EnterExitClassFileTransformer::transform: format: " + className);
         Matcher matcher = pattern.matcher(className);
         if (matcher.matches()) {
-//System.err.println("format: " + className);
+//System.err.println("EnterExitClassFileTransformer::transform: format: " + className);
             try {
                 ByteArrayInputStream stream = new ByteArrayInputStream(classfileBuffer);
                 CtClass ctClass = classPool.makeClass(stream);
 
                 CtMethod[] ctMethods = ctClass.getDeclaredMethods();
                 for (int i = 0; i < ctMethods.length; i++) {
-                    ctMethods[i].insertBefore("{System.err.println(\"Enter " + ctClass.getName() + "#" + ctMethods[i].getName() + "\");}");
-                    ctMethods[i].insertAfter("{System.err.println(\"Exit " + ctClass.getName() + "#" + ctMethods[i].getName() + "\");}");
+                    ctMethods[i].insertBefore("{System.err.println(\"Enter " + ctClass.getName() + "#" + ctMethods[i].getName() + ctMethods[i].getSignature() + "\");}");
+                    ctMethods[i].insertAfter("{System.err.println(\"Exit " + ctClass.getName() + "#" + ctMethods[i].getName() + ctMethods[i].getSignature() + "\");}");
                 }
 
                 return ctClass.toBytecode();
             } catch (Exception e) {
 //e.printStackTrace(System.err);
-System.err.println(className + ": " + e);
-                throw (IllegalClassFormatException) new IllegalClassFormatException().initCause(e);
+System.err.println("EnterExitClassFileTransformer::transform: " + className + ": " + e);
+//                throw (IllegalClassFormatException) new IllegalClassFormatException().initCause(e);
+                return null;
             }
         } else {
 //System.err.println("ignore: " + className);
