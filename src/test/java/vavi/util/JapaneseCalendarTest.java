@@ -69,7 +69,7 @@ public class JapaneseCalendarTest extends TestCase {
      * Class under test for void JapaneseCalendar()
      */
     public void test2() {
-        jc.set(2001, 8 - 1, 11);        // TODO ‹@”\‚µ‚Ä‚¢‚È‚¢
+        jc.set(2001, 8 - 1, 11);        // TODO æ©Ÿèƒ½ã—ã¦ã„ãªã„
         assertEquals("2001 8 11", jc);
         assertEquals("2001 8 11", JapaneseCalendar.toFS(jc));
     }

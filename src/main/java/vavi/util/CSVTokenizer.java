@@ -11,25 +11,25 @@ import java.util.NoSuchElementException;
 
 
 /**
- * 1 s‚Ì CSV Œ`®‚Ìƒf[ƒ^‚ğ‰ğÍ‚µA‚»‚ê‚¼‚ê‚Ì€–Ú‚É•ª‰ğ‚·‚éƒNƒ‰ƒXB
- * CSV Œ`®‚É‘Î‰‚µ‚½ java.util.StringTokenizer ‚Ì‚æ‚¤‚È‚à‚ÌB
+ * 1 è¡Œã® CSV å½¢å¼ã®ãƒ‡ãƒ¼ã‚¿ã‚’è§£æã—ã€ãã‚Œãã‚Œã®é …ç›®ã«åˆ†è§£ã™ã‚‹ã‚¯ãƒ©ã‚¹ã€‚
+ * CSV å½¢å¼ã«å¯¾å¿œã—ãŸ java.util.StringTokenizer ã®ã‚ˆã†ãªã‚‚ã®ã€‚
  *
  * @author	<a href="mailto:kent@muraoka.info.waseda.ac.jp">TAMURA Kent</a>
  * @author	<a href="mailto:tomoharu@wakhok.ac.jp">ANDOH Tomoharu</a>
  * @version	1.01	990406	tandoh	tandoh version <br>
  */
 public class CSVTokenizer implements Enumeration<Object> {
-    /** ‘ÎÛ‚Æ‚È‚é•¶š—ñ */
+    /** å¯¾è±¡ã¨ãªã‚‹æ–‡å­—åˆ— */
     private String source;
-    /** Ÿ‚Ì“Ç‚İo‚µˆÊ’u */
+    /** æ¬¡ã®èª­ã¿å‡ºã—ä½ç½® */
     private int currentPosition;
     private int maxPosition;
 
     /**
-     * CSV Œ`®‚Ì line ‚ğ‰ğÍ‚·‚é CSVTokenizer ‚ÌƒCƒ“ƒXƒ^ƒ“ƒX‚ğ
-     * ì¬‚·‚éB
+     * CSV å½¢å¼ã® line ã‚’è§£æã™ã‚‹ CSVTokenizer ã®ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹ã‚’
+     * ä½œæˆã™ã‚‹ã€‚
      *
-     * @param line CSVŒ`®‚Ì•¶š—ñ  TODO ‰üsƒR[ƒh‚ğŠÜ‚Ü‚È‚¢B
+     * @param line CSVå½¢å¼ã®æ–‡å­—åˆ—  TODO æ”¹è¡Œã‚³ãƒ¼ãƒ‰ã‚’å«ã¾ãªã„ã€‚
      */
     public CSVTokenizer(String line) {
         source = line;
@@ -38,13 +38,13 @@ public class CSVTokenizer implements Enumeration<Object> {
     }
 
     /**
-     * Ÿ‚ÌƒJƒ“ƒ}‚ª‚ ‚éˆÊ’u‚ğ•Ô‚·B
-     * ƒJƒ“ƒ}‚ªc‚Á‚Ä‚¢‚È‚¢ê‡‚Í nextComma() == maxPosition ‚Æ‚È‚éB
-     * ‚Ü‚½ÅŒã‚Ì€–Ú‚ª‹ó‚Ìê‡‚à nextComma() == maxPosition ‚Æ‚È‚éB
+     * æ¬¡ã®ã‚«ãƒ³ãƒãŒã‚ã‚‹ä½ç½®ã‚’è¿”ã™ã€‚
+     * ã‚«ãƒ³ãƒãŒæ®‹ã£ã¦ã„ãªã„å ´åˆã¯ nextComma() == maxPosition ã¨ãªã‚‹ã€‚
+     * ã¾ãŸæœ€å¾Œã®é …ç›®ãŒç©ºã®å ´åˆã‚‚ nextComma() == maxPosition ã¨ãªã‚‹ã€‚
      *
-     * @param ind ŒŸõ‚ğŠJn‚·‚éˆÊ’u
-     * @return Ÿ‚ÌƒJƒ“ƒ}‚ª‚ ‚éˆÊ’uBƒJƒ“ƒ}‚ª‚È‚¢ê‡‚ÍA•¶š—ñ‚Ì
-     * ’·‚³‚Ì’l‚Æ‚È‚éB
+     * @param ind æ¤œç´¢ã‚’é–‹å§‹ã™ã‚‹ä½ç½®
+     * @return æ¬¡ã®ã‚«ãƒ³ãƒãŒã‚ã‚‹ä½ç½®ã€‚ã‚«ãƒ³ãƒãŒãªã„å ´åˆã¯ã€æ–‡å­—åˆ—ã®
+     * é•·ã•ã®å€¤ã¨ãªã‚‹ã€‚
      */
     private int nextComma(int ind) {
         boolean inquote = false;
@@ -54,7 +54,7 @@ public class CSVTokenizer implements Enumeration<Object> {
                 break;
             }
             else if ('"' == ch) {
-                inquote = !inquote;       // "" ‚Ìˆ—‚à‚±‚ê‚Å OK
+                inquote = !inquote;       // "" ã®å‡¦ç†ã‚‚ã“ã‚Œã§ OK
             }
             ind ++;
         }
@@ -62,9 +62,9 @@ public class CSVTokenizer implements Enumeration<Object> {
     }
 
     /**
-     * ŠÜ‚Ü‚ê‚Ä‚¢‚é€–Ú‚Ì”‚ğ•Ô‚·B
+     * å«ã¾ã‚Œã¦ã„ã‚‹é …ç›®ã®æ•°ã‚’è¿”ã™ã€‚
      *
-     * @return ŠÜ‚Ü‚ê‚Ä‚¢‚é€–Ú‚Ì”
+     * @return å«ã¾ã‚Œã¦ã„ã‚‹é …ç›®ã®æ•°
      */
     public int countTokens() {
         int i = 0;
@@ -77,15 +77,15 @@ public class CSVTokenizer implements Enumeration<Object> {
     }
 
     /**
-     * Ÿ‚Ì€–Ú‚Ì•¶š—ñ‚ğ•Ô‚·B
+     * æ¬¡ã®é …ç›®ã®æ–‡å­—åˆ—ã‚’è¿”ã™ã€‚
      *
-     * @return Ÿ‚Ì€–Ú
-     * @exception NoSuchElementException €–Ú‚ªc‚Á‚Ä‚¢‚È‚¢‚Æ‚«
+     * @return æ¬¡ã®é …ç›®
+     * @exception NoSuchElementException é …ç›®ãŒæ®‹ã£ã¦ã„ãªã„ã¨ã
      */
     public String nextToken() {
-        // ">=" ‚Å‚Í––”ö‚Ì€–Ú‚ğ³‚µ‚­ˆ—‚Å‚«‚È‚¢B
-        // ––”ö‚Ì€–Ú‚ª‹óiƒJƒ“ƒ}‚Å1s‚ªI‚í‚éjê‡A—áŠO‚ª”­¶‚µ‚Ä
-        // ‚µ‚Ü‚¤‚Ì‚ÅB
+        // ">=" ã§ã¯æœ«å°¾ã®é …ç›®ã‚’æ­£ã—ãå‡¦ç†ã§ããªã„ã€‚
+        // æœ«å°¾ã®é …ç›®ãŒç©ºï¼ˆã‚«ãƒ³ãƒã§1è¡ŒãŒçµ‚ã‚ã‚‹ï¼‰å ´åˆã€ä¾‹å¤–ãŒç™ºç”Ÿã—ã¦
+        // ã—ã¾ã†ã®ã§ã€‚
         if (currentPosition > maxPosition)
             throw new NoSuchElementException(toString() + "#nextToken");
 
@@ -96,7 +96,7 @@ public class CSVTokenizer implements Enumeration<Object> {
         while (st < currentPosition) {
             char ch = source.charAt(st++);
             if (ch == '"') {
-		// "‚ª’P“Æ‚ÅŒ»‚ê‚½‚Æ‚«‚Í‰½‚à‚µ‚È‚¢
+		// "ãŒå˜ç‹¬ã§ç¾ã‚ŒãŸã¨ãã¯ä½•ã‚‚ã—ãªã„
                 if ((st < currentPosition) && (source.charAt(st) == '"')) {
                     strb.append(ch);
                     st ++;
@@ -111,14 +111,14 @@ public class CSVTokenizer implements Enumeration<Object> {
     }
 
     /**
-     * <code>nextToken</code>ƒƒ\ƒbƒh‚Æ“¯‚¶‚ÅA
-     * Ÿ‚Ì€–Ú‚Ì•¶š—ñ‚ğ•Ô‚·B<br>
-     * ‚½‚¾‚µ•Ô’l‚ÍAStringŒ^‚Å‚Í‚È‚­AObjectŒ^‚Å‚ ‚éB<br>
-     * java.util.Enumeration‚ğÀ‘•‚µ‚Ä‚¢‚é‚½‚ßA‚±‚Ìƒƒ\ƒbƒh‚ª
-     * ‚ ‚éB
+     * <code>nextToken</code>ãƒ¡ã‚½ãƒƒãƒ‰ã¨åŒã˜ã§ã€
+     * æ¬¡ã®é …ç›®ã®æ–‡å­—åˆ—ã‚’è¿”ã™ã€‚<br>
+     * ãŸã ã—è¿”å€¤ã¯ã€Stringå‹ã§ã¯ãªãã€Objectå‹ã§ã‚ã‚‹ã€‚<br>
+     * java.util.Enumerationã‚’å®Ÿè£…ã—ã¦ã„ã‚‹ãŸã‚ã€ã“ã®ãƒ¡ã‚½ãƒƒãƒ‰ãŒ
+     * ã‚ã‚‹ã€‚
      *
-     * @return Ÿ‚Ì€–Ú
-     * @exception NoSuchElementException €–Ú‚ªc‚Á‚Ä‚¢‚È‚¢‚Æ‚«
+     * @return æ¬¡ã®é …ç›®
+     * @exception NoSuchElementException é …ç›®ãŒæ®‹ã£ã¦ã„ãªã„ã¨ã
      * @see java.util.Enumeration
      * @see #nextElement()
      */
@@ -127,22 +127,22 @@ public class CSVTokenizer implements Enumeration<Object> {
     }
 
     /**
-     * ‚Ü‚¾€–Ú‚ªc‚Á‚Ä‚¢‚é‚©‚Ç‚¤‚©’²‚×‚éB
+     * ã¾ã é …ç›®ãŒæ®‹ã£ã¦ã„ã‚‹ã‹ã©ã†ã‹èª¿ã¹ã‚‹ã€‚
      *
-     * @return ‚Ü‚¾€–Ú‚ª‚Ì‚±‚Á‚Ä‚¢‚é‚È‚çtrue
+     * @return ã¾ã é …ç›®ãŒã®ã“ã£ã¦ã„ã‚‹ãªã‚‰true
      */
     public boolean hasMoreTokens() {
-        // "<=" ‚Å‚È‚­A"<" ‚¾‚Æ––”ö‚Ì€–Ú‚ğ³‚µ‚­ˆ—‚Å‚«‚È‚¢B
+        // "<=" ã§ãªãã€"<" ã ã¨æœ«å°¾ã®é …ç›®ã‚’æ­£ã—ãå‡¦ç†ã§ããªã„ã€‚
         return (nextComma(currentPosition) <= maxPosition);
     }
 
     /**
-     * <code>hasMoreTokens</code>ƒƒ\ƒbƒh‚Æ“¯‚¶‚ÅA
-     * ‚Ü‚¾€–Ú‚ªc‚Á‚Ä‚¢‚é‚©‚Ç‚¤‚©’²‚×‚éB<br>
-     * java.util.Enumeration‚ğÀ‘•‚µ‚Ä‚¢‚é‚½‚ßA‚±‚Ìƒƒ\ƒbƒh‚ª
-     * ‚ ‚éB
+     * <code>hasMoreTokens</code>ãƒ¡ã‚½ãƒƒãƒ‰ã¨åŒã˜ã§ã€
+     * ã¾ã é …ç›®ãŒæ®‹ã£ã¦ã„ã‚‹ã‹ã©ã†ã‹èª¿ã¹ã‚‹ã€‚<br>
+     * java.util.Enumerationã‚’å®Ÿè£…ã—ã¦ã„ã‚‹ãŸã‚ã€ã“ã®ãƒ¡ã‚½ãƒƒãƒ‰ãŒ
+     * ã‚ã‚‹ã€‚
      *
-     * @return ‚Ü‚¾€–Ú‚ª‚Ì‚±‚Á‚Ä‚¢‚é‚È‚çtrue
+     * @return ã¾ã é …ç›®ãŒã®ã“ã£ã¦ã„ã‚‹ãªã‚‰true
      * @see java.util.Enumeration
      * @see #hasMoreTokens()
      */
@@ -151,9 +151,9 @@ public class CSVTokenizer implements Enumeration<Object> {
     }
 
     /**
-     * ƒCƒ“ƒXƒ^ƒ“ƒX‚Ì•¶š—ñ•\Œ»‚ğ•Ô‚·B
+     * ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹ã®æ–‡å­—åˆ—è¡¨ç¾ã‚’è¿”ã™ã€‚
      * TODO
-     * @return ƒCƒ“ƒXƒ^ƒ“ƒX‚Ì•¶š—ñ•\Œ»B
+     * @return ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹ã®æ–‡å­—åˆ—è¡¨ç¾ã€‚
      */
     public String toString() {
         return "CSVTokenizer(\"" + source + "\")";

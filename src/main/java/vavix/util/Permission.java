@@ -12,7 +12,7 @@ import vavi.util.Debug;
 
 
 /**
- * Œ ŒÀ‚ğ•\Œ»‚·‚éƒNƒ‰ƒX‚Å‚·D unix ‚Ìƒtƒ@ƒCƒ‹ƒVƒXƒeƒ€‚ÌŒ ŒÀ‚Æ“¯‚¶‚Å‚·D
+ * æ¨©é™ã‚’è¡¨ç¾ã™ã‚‹ã‚¯ãƒ©ã‚¹ã§ã™ï¼ unix ã®ãƒ•ã‚¡ã‚¤ãƒ«ã‚·ã‚¹ãƒ†ãƒ ã®æ¨©é™ã¨åŒã˜ã§ã™ï¼
  * 
  * @author <a href=mailto:vavivavi@yahoo.co.jp>Naohide Sano</a> (nsano)
  * 
@@ -21,31 +21,31 @@ import vavi.util.Debug;
  */
 public class Permission {
 
-    /** “Ç‚İ‚İ‰Â”\‚Ìƒ}ƒXƒN */
+    /** èª­ã¿è¾¼ã¿å¯èƒ½ã®ãƒã‚¹ã‚¯ */
     public static final int READ_MASK = 0x04;
 
-    /** ‘‚«‚İ‰Â”\‚Ìƒ}ƒXƒN */
+    /** æ›¸ãè¾¼ã¿å¯èƒ½ã®ãƒã‚¹ã‚¯ */
     public static final int WRITE_MASK = 0x02;
 
-    /** Às‰Â”\‚Ìƒ}ƒXƒN */
+    /** å®Ÿè¡Œå¯èƒ½ã®ãƒã‚¹ã‚¯ */
     public static final int EXECUTE_MASK = 0x01;
 
-    /** Š—LÒ‚Ìƒ}ƒXƒN */
+    /** æ‰€æœ‰è€…ã®ãƒã‚¹ã‚¯ */
     public static final int OWNER_MASK = 0;
 
-    /** ƒOƒ‹[ƒv‚Ìƒ}ƒXƒN */
+    /** ã‚°ãƒ«ãƒ¼ãƒ—ã®ãƒã‚¹ã‚¯ */
     public static final int GROUP_MASK = 1;
 
-    /** ‚»‚Ì‘¼‚Ìƒ}ƒXƒN */
+    /** ãã®ä»–ã®ãƒã‚¹ã‚¯ */
     public static final int OTHER_MASK = 2;
 
-    /** Œ ŒÀ */
+    /** æ¨©é™ */
     private int[] permission = new int[3];
 
     /**
-     * Permission ƒIƒuƒWƒFƒNƒg‚ğ\’z‚µ‚Ü‚·D
+     * Permission ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã‚’æ§‹ç¯‰ã—ã¾ã™ï¼
      * 
-     * @param permission 3 Œ…‚Ì”’l
+     * @param permission 3 æ¡ã®æ•°å€¤
      */
     public Permission(String permission) {
         try {
@@ -59,9 +59,9 @@ public class Permission {
     }
 
     /**
-     * “Ç‚İæ‚èŒ ŒÀ‚ª‚ ‚é‚©‚Ç‚¤‚©D
+     * èª­ã¿å–ã‚Šæ¨©é™ãŒã‚ã‚‹ã‹ã©ã†ã‹ï¼
      * 
-     * @param mask ‘ÎÛ‚Ìƒ}ƒXƒN
+     * @param mask å¯¾è±¡ã®ãƒã‚¹ã‚¯
      * @see #OWNER_MASK
      * @see #GROUP_MASK
      * @see #OTHER_MASK
@@ -71,9 +71,9 @@ public class Permission {
     }
 
     /**
-     * ‘‚«‚İŒ ŒÀ‚ª‚ ‚é‚©‚Ç‚¤‚©D
+     * æ›¸ãè¾¼ã¿æ¨©é™ãŒã‚ã‚‹ã‹ã©ã†ã‹ï¼
      * 
-     * @param mask ‘ÎÛ‚Ìƒ}ƒXƒN
+     * @param mask å¯¾è±¡ã®ãƒã‚¹ã‚¯
      * @see #OWNER_MASK
      * @see #GROUP_MASK
      * @see #OTHER_MASK
@@ -83,9 +83,9 @@ public class Permission {
     }
 
     /**
-     * ÀsŒ ŒÀ‚ª‚ ‚é‚©‚Ç‚¤‚©D
+     * å®Ÿè¡Œæ¨©é™ãŒã‚ã‚‹ã‹ã©ã†ã‹ï¼
      * 
-     * @param mask ‘ÎÛ‚Ìƒ}ƒXƒN
+     * @param mask å¯¾è±¡ã®ãƒã‚¹ã‚¯
      * @see #OWNER_MASK
      * @see #GROUP_MASK
      * @see #OTHER_MASK
@@ -95,13 +95,13 @@ public class Permission {
     }
 
     /**
-     * Œ ŒÀ‚ª‚ ‚é‚©‚Ç‚¤‚©D
+     * æ¨©é™ãŒã‚ã‚‹ã‹ã©ã†ã‹ï¼
      * 
-     * @param level ‘ÎÛ‚Ìƒ}ƒXƒN
+     * @param level å¯¾è±¡ã®ãƒã‚¹ã‚¯
      * @see #OWNER_MASK
      * @see #GROUP_MASK
      * @see #OTHER_MASK
-     * @param type Œ ŒÀ‚Ìƒ^ƒCƒv
+     * @param type æ¨©é™ã®ã‚¿ã‚¤ãƒ—
      * @see #READ_MASK
      * @see #WRITE_MASK
      * @see #EXECUTE_MASK

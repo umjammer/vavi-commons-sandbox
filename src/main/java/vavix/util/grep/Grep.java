@@ -21,7 +21,7 @@ import java.util.regex.Pattern;
 
 
 /**
- * àh‚µŠí
+ * æ¿¾ã—å™¨
  * @author <a href="mailto:vavivavi@yahoo.co.jp">Naohide Sano</a> (nsano)
  * @version 0.00 050215 nsano initial version <br>
  */
@@ -34,22 +34,22 @@ public class Grep {
     /** Pattern used to parse lines */
     private static final Pattern linePattern = Pattern.compile(".*\r?\n");
     
-    /** àh‚·ƒpƒ^[ƒ“ */
+    /** æ¿¾ã™ãƒ‘ã‚¿ãƒ¼ãƒ³ */
     private Pattern pattern;
     
-    /** àh‚·‘ÎÛ */
+    /** æ¿¾ã™å¯¾è±¡ */
     private File file;
     
-    /** àh‚µŠíì¬ */
+    /** æ¿¾ã—å™¨ä½œæˆ */
     public Grep(File file, Pattern pattern) {
         this.file = file;
         this.pattern = pattern;
     }
     
     /**
-     * grep ‚Åˆø‚Á‚©‚©‚Á‚½s‚ğ•\‚·ƒNƒ‰ƒX‚Å‚·B
+     * grep ã§å¼•ã£ã‹ã‹ã£ãŸè¡Œã‚’è¡¨ã™ã‚¯ãƒ©ã‚¹ã§ã™ã€‚
      * <p>
-     * àh‚µ‚½Œ‹‰Ê
+     * æ¿¾ã—ãŸçµæœ
      * </p>
      */
     public static class ResultSet {
@@ -58,18 +58,18 @@ public class Grep {
             this.lineNumber = lineNumber;
             this.line = line;
         }
-        /** grep ‚Åˆø‚Á‚©‚©‚Á‚½ƒtƒ@ƒCƒ‹ */
+        /** grep ã§å¼•ã£ã‹ã‹ã£ãŸãƒ•ã‚¡ã‚¤ãƒ« */
         File file;
-        /** grep ‚Åˆø‚Á‚©‚©‚Á‚½s”Ô† */
+        /** grep ã§å¼•ã£ã‹ã‹ã£ãŸè¡Œç•ªå· */
         int lineNumber;
-        /** grep ‚Åˆø‚Á‚©‚©‚Á‚½s */
+        /** grep ã§å¼•ã£ã‹ã‹ã£ãŸè¡Œ */
         String line;
     }
     
-    /** àh‚µ‚½‚Ì‚ğ—­‚ß‚é */
+    /** æ¿¾ã—ãŸã®ã‚’æºœã‚ã‚‹ */
     private List<ResultSet> results = new ArrayList<ResultSet>();
     
-    /** ‚Ğ‚Æ‚Âàh‚µ‚Ü‚· */
+    /** ã²ã¨ã¤æ¿¾ã—ã¾ã™ */
     private void grep(CharBuffer cb) {
         Matcher lm = linePattern.matcher(cb); // Line matcher
         Matcher pm = null; // Pattern matcher
@@ -91,7 +91,7 @@ public class Grep {
         }
     }
     
-    /** àh‚µ‚Ü‚· */
+    /** æ¿¾ã—ã¾ã™ */
     public List<ResultSet> exec() throws IOException {
         // Open the file and then get a channel from the stream
         FileInputStream fis = new FileInputStream(file);

@@ -11,9 +11,9 @@ import java.io.IOException;
 
 
 /**
- * �f�B���N�g�����ċA�I�Ɍ@�艺���Ă����C���^�[�t�F�[�X�ł��B
+ * ディレクトリを再帰的に掘り下げていくインターフェースです。
  * <p> 
- * �@��l�`
+ * 掘る人形
  * </p> 
  * @author <a href="mailto:vavivavi@yahoo.co.jp">Naohide Sano</a> (nsano)
  * @version 0.00 050215 nsano initial version <br>
@@ -21,22 +21,22 @@ import java.io.IOException;
 public interface FileDigger {
 
     /**
-     * ��̃t�@�C���ɑ΂��ĉ��炩�̃A�N�V�������s���C���^�[�t�F�[�X�ł��B
+     * 一つのファイルに対して何らかのアクションを行うインターフェースです。
      * <p> 
-     * �����l�`
+     * 浚う人形
      * </p> 
      */
     public interface FileDredger {
         /**
-         * �����܂��B
-         * @param file FileDigger �Ō@�蓖�Ă�ꂽ�t�@�C��
+         * 浚います。
+         * @param file FileDigger で掘り当てられたファイル
          */
         void dredge(File file) throws IOException;
     }
 
     /**
-     * �@��܂��B
-     * @param dir �g�b�v�f�B���N�g�� 
+     * 掘ります。
+     * @param dir トップディレクトリ 
      */
     void dig(File dir) throws IOException;
 }

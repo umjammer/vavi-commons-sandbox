@@ -13,11 +13,11 @@ import org.apache.commons.logging.LogFactory;
 
 
 /**
- * Swing �R���|�[�l���g���t�B�[���h�Ƃ��Ď��� bean �ɑ΂���
- * POJO �Ƃ� BeanUtils �I�ȑ�����s���N���X�ł��B
- * Swing �R���|�[�l���g�� java �̌^�̃}�b�s���O�͈ȉ��Ɏ����܂��B
+ * Swing コンポーネントをフィールドとして持つ bean に対して
+ * POJO との BeanUtils 的な操作を行うクラスです。
+ * Swing コンポーネントと java の型のマッピングは以下に示します。
  * 
- * TODO �}�b�s���O�͒�`�t�@�C��
+ * TODO マッピングは定義ファイル
  * @author <a href="mailto:vavivavi@yahoo.co.jp">Naohide Sano</a> (nsano)
  * @version 0.00 040830 nsano initial version <br>
  */

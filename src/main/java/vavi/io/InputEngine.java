@@ -20,7 +20,7 @@ public interface InputEngine {
     void initialize(InputStream in) throws IOException;
 
     /** 
-     * in ‚ª -1 ‚ğ•Ô‚·‚Ü‚Å“Ç‚İ‚Ş•K—v‚ª‚ ‚é 
+     * in ãŒ -1 ã‚’è¿”ã™ã¾ã§èª­ã¿è¾¼ã‚€å¿…è¦ãŒã‚ã‚‹ 
      */
     void execute() throws IOException;
 

@@ -14,7 +14,7 @@ import java.util.Map;
 /**
  * Singleton.
  * <p>
- * ƒpƒbƒP[ƒW‚ªˆá‚¤ƒTƒuƒNƒ‰ƒX‚ÍƒNƒ‰ƒXAƒfƒtƒHƒ‹ƒgƒRƒ“ƒXƒgƒ‰ƒNƒ^‚Æ‚à‚É public ‚Å‚È‚¯‚ê‚Î‚È‚è‚Ü‚¹‚ñB
+ * ãƒ‘ãƒƒã‚±ãƒ¼ã‚¸ãŒé•ã†ã‚µãƒ–ã‚¯ãƒ©ã‚¹ã¯ã‚¯ãƒ©ã‚¹ã€ãƒ‡ãƒ•ã‚©ãƒ«ãƒˆã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿ã¨ã‚‚ã« public ã§ãªã‘ã‚Œã°ãªã‚Šã¾ã›ã‚“ã€‚
  * </p>
  * @author <a href="mailto:vavivavi@yahoo.co.jp">Naohide Sano</a> (nsano)
  * @version 0.00 030821 nsano initial version <br>
@@ -22,7 +22,7 @@ import java.util.Map;
 public abstract class Singleton {
 
     /**
-     * ƒTƒuƒNƒ‰ƒX‚ğì‚ê‚é‚æ‚¤‚É‚·‚é‚½‚ßAƒRƒ“ƒXƒgƒ‰ƒNƒ^‚ğ protected ‚É‚·‚é
+     * ã‚µãƒ–ã‚¯ãƒ©ã‚¹ã‚’ä½œã‚Œã‚‹ã‚ˆã†ã«ã™ã‚‹ãŸã‚ã€ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿ã‚’ protected ã«ã™ã‚‹
      */
     protected Singleton() {
 Debug.println("class: " + this.getClass());
@@ -35,7 +35,7 @@ Debug.println("class: " + this.getClass());
     protected static Map<Class<? extends Singleton>, Singleton> singletons = new HashMap<Class<? extends Singleton>, Singleton>();
 
     /**
-     * @return ‚±‚ÌƒNƒ‰ƒX‚Ì—Bˆê‚ÌƒCƒ“ƒXƒ^ƒ“ƒX
+     * @return ã“ã®ã‚¯ãƒ©ã‚¹ã®å”¯ä¸€ã®ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹
      */
     @SuppressWarnings("unchecked")
     public static <T extends Singleton> T getInstance(Class<T> clazz) {

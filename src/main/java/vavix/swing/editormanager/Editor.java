@@ -10,7 +10,7 @@ import vavi.swing.event.EditorListener;
 
 
 /**
- * ƒGƒfƒBƒ^‚ÌƒCƒ“ƒ^[ƒtƒF[ƒX‚Å‚·D
+ * ã‚¨ãƒ‡ã‚£ã‚¿ã®ã‚¤ãƒ³ã‚¿ãƒ¼ãƒ•ã‚§ãƒ¼ã‚¹ã§ã™ï¼
  * 
  * @todo add close open exit
  * @author <a href="mailto:vavivavi@yahoo.co.jp">Naohide Sano</a> (nsano)

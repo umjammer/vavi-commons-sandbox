@@ -20,9 +20,9 @@ import java.util.Properties;
 public class VaviInstrumentation {
 
     /**
-     * System Properties ��
-     * "ctf." �Ŏn�܂閼�O�̃v���p�e�B�� {@link VaviClassFileTransformer} �����������N���X���w�肵�܂��B
-     * "." �ȍ~�͎��ʎq�Ƃ��ė��p����܂��B
+     * System Properties に
+     * "ctf." で始まる名前のプロパティに {@link VaviClassFileTransformer} を実装したクラスを指定します。
+     * "." 以降は識別子として利用されます。
      */
     public static void premain(String agentArgs, Instrumentation instrumentation) {
         try {

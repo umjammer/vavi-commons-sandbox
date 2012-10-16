@@ -21,7 +21,7 @@ public class IOStreamInputEngine implements InputEngine {
     /** */
     private static final int DEFAULT_BUFFER_SIZE = 8192;
 
-    /** ŽÀÛ‚É‘‚«o‚·ƒXƒgƒŠ[ƒ€ */
+    /** å®Ÿéš›ã«æ›¸ãå‡ºã™ã‚¹ãƒˆãƒªãƒ¼ãƒ  */
     private OutputStream out;
 
     /** */
@@ -34,14 +34,14 @@ public class IOStreamInputEngine implements InputEngine {
     private InputStream in;
 
     /**
-     * @param out ŽÀÛ‚É‘‚«o‚·ƒXƒgƒŠ[ƒ€ 
+     * @param out å®Ÿéš›ã«æ›¸ãå‡ºã™ã‚¹ãƒˆãƒªãƒ¼ãƒ  
      */
     public IOStreamInputEngine(OutputStream out, InputStreamFactory factory) {
         this(out, factory, DEFAULT_BUFFER_SIZE);
     }
 
     /**
-     * @param out ŽÀÛ‚É‘‚«o‚·ƒXƒgƒŠ[ƒ€ 
+     * @param out å®Ÿéš›ã«æ›¸ãå‡ºã™ã‚¹ãƒˆãƒªãƒ¼ãƒ  
      */
     public IOStreamInputEngine(OutputStream out, InputStreamFactory factory, int bufferSize) {
         this.out = out;

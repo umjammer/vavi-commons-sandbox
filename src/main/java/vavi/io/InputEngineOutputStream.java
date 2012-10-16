@@ -55,7 +55,7 @@ public class InputEngineOutputStream extends OutputStream {
     }
 
     /**
-     * <li> limit ‚ª capacity ‚É’B‚µ‚½‚ç {@link InputEngine#execute()}</li>
+     * <li> limit ãŒ capacity ã«é”ã—ãŸã‚‰ {@link InputEngine#execute()}</li>
      * 
      * <pre>
      * buffer
@@ -127,7 +127,7 @@ public class InputEngineOutputStream extends OutputStream {
         }
     }
 
-    /** •K‚¸‚·‚é‚±‚Æ */
+    /** å¿…ãšã™ã‚‹ã“ã¨ */
     public void flush() throws IOException {
         if (closed) {
             throw new IOException("Stream closed");

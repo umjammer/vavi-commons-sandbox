@@ -46,11 +46,11 @@ public class PropertiesClassFileTransformer implements VaviClassFileTransformer 
     }
 
     /**
-     * "VaviInstrumentation.properties" ‚ğƒNƒ‰ƒXƒpƒX‚ª’Ê‚Á‚½êŠ‚É‚¨‚¢‚Ä‚­‚¾‚³‚¢B
+     * "VaviInstrumentation.properties" ã‚’ã‚¯ãƒ©ã‚¹ãƒ‘ã‚¹ãŒé€šã£ãŸå ´æ‰€ã«ãŠã„ã¦ãã ã•ã„ã€‚
      * <pre>
      * vavix.util.PropertiesClassFileTransformer.class ... package/name/ClassName
      * vavix.util.PropertiesClassFileTransformer.method ... method name ("*" means for all methods)
-     * vavix.util.PropertiesClassFileTransformer.constructor ... constructor name ("vavix.util.PropertiesClassFileTransformer.method" ‚Ì•û‚ª—Dæ‚·‚é)
+     * vavix.util.PropertiesClassFileTransformer.constructor ... constructor name ("vavix.util.PropertiesClassFileTransformer.method" ã®æ–¹ãŒå„ªå…ˆã™ã‚‹)
      * vavix.util.PropertiesClassFileTransformer.inserBefore ... ex. {System.err.println("args: " + $$);}
      * vavix.util.PropertiesClassFileTransformer.insertAfter ... ex. {System.err.println("result: " + $_);}
      * </pre>

@@ -12,7 +12,7 @@
 <!--                                                                        -->
 <!-- ////////////////////////////////////////////////////////////////////// -->
 
-<project name="vavi-commons-sandbox" default="run" basedir="."
+<project name="vavi-commons-sandbox" default="compile" basedir="."
          xmlns:ivy="antlib:org.apache.ivy.ant">
 
   <property file="local.properties" />
@@ -73,11 +73,12 @@
 
   <!-- run -->
   <target name="run" depends="compile" description="Run">
-    <java classname="vavi.util.JapaneseCalendar" fork="yes">
+    <java classname="vavi.util.JapaneseCalendarTest" fork="yes">
       <jvmarg value="-Dfile.encoding=UTF-8" />
       <classpath>
         <path refid="project.class.path" />
         <pathelement location="${dir.build}" />
+        <pathelement location="target/test-classes" />
       </classpath>
       <arg line="${args}" />
     </java>

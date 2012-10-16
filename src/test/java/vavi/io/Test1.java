@@ -81,8 +81,8 @@ System.err.println(r);
 
     class GZIPInputStreamFactory implements IOStreamInputEngine.InputStreamFactory {
         public InputStream getInputStream(InputStream in) throws IOException {
-            // header ‚ğ“Ç‚İ‚Ş‚½‚ß IOStreamInputEngine ‚Í‚¢‚­‚ç‚©“Ç‚İ‚ñ‚Å‚©‚ç
-            // initialize() ‚·‚é•K—v‚ª‚ ‚é (*1)
+            // header ã‚’èª­ã¿è¾¼ã‚€ãŸã‚ IOStreamInputEngine ã¯ã„ãã‚‰ã‹èª­ã¿è¾¼ã‚“ã§ã‹ã‚‰
+            // initialize() ã™ã‚‹å¿…è¦ãŒã‚ã‚‹ (*1)
             return new GZIPInputStream(in);
         }
     }

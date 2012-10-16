@@ -14,7 +14,7 @@ import vavi.swing.event.EditorListener;
 
 
 /**
- * •¡”‚ÌƒGƒfƒBƒ^‚ğŠÇ—‚·‚éŠî–{ƒNƒ‰ƒX‚Å‚·D
+ * è¤‡æ•°ã®ã‚¨ãƒ‡ã‚£ã‚¿ã‚’ç®¡ç†ã™ã‚‹åŸºæœ¬ã‚¯ãƒ©ã‚¹ã§ã™ï¼
  * 
  * @author <a href="mailto:vavivavi@yahoo.co.jp">Naohide Sano</a> (nsano)
  * @version 0.00 010820 nsano initial version <br>
@@ -23,14 +23,14 @@ import vavi.swing.event.EditorListener;
  */
 public abstract class EditorManager implements EditorListener {
 
-    /** •¡”‚ÌƒGƒfƒBƒ^ŠÇ——pƒxƒNƒ^ */
+    /** è¤‡æ•°ã®ã‚¨ãƒ‡ã‚£ã‚¿ç®¡ç†ç”¨ãƒ™ã‚¯ã‚¿ */
     protected volatile List<Editor> editors = new ArrayList<Editor>();
 
-    /** ƒJƒŒƒ“ƒg‚ÌƒGƒfƒBƒ^ */
+    /** ã‚«ãƒ¬ãƒ³ãƒˆã®ã‚¨ãƒ‡ã‚£ã‚¿ */
     protected Editor current;
 
     /**
-     * ƒGƒfƒBƒ^‚ªƒI[ƒvƒ“‚³‚ê‚½‚Æ‚«‚ÉŒÄ‚Î‚ê‚Ü‚·D
+     * ã‚¨ãƒ‡ã‚£ã‚¿ãŒã‚ªãƒ¼ãƒ—ãƒ³ã•ã‚ŒãŸã¨ãã«å‘¼ã°ã‚Œã¾ã™ï¼
      */
     public void editorOpened(EditorEvent ev) {
         Editor editor = (Editor) ev.getSource();
@@ -41,12 +41,12 @@ public abstract class EditorManager implements EditorListener {
     }
 
     /**
-     * ƒGƒfƒBƒ^‚ªƒI[ƒvƒ“‚³‚ê‚½‚Æ‚«‚ÉŒÄ‚Î‚ê‚éˆ—‚ÌÀ‘•‚Å‚·D
+     * ã‚¨ãƒ‡ã‚£ã‚¿ãŒã‚ªãƒ¼ãƒ—ãƒ³ã•ã‚ŒãŸã¨ãã«å‘¼ã°ã‚Œã‚‹å‡¦ç†ã®å®Ÿè£…ã§ã™ï¼
      */
     protected abstract void editorOpenedImpl(Editor editor);
 
     /**
-     * ƒGƒfƒBƒ^‚ªƒNƒ[ƒY‚³‚ê‚½‚Æ‚«‚ÉŒÄ‚Î‚ê‚Ü‚·D
+     * ã‚¨ãƒ‡ã‚£ã‚¿ãŒã‚¯ãƒ­ãƒ¼ã‚ºã•ã‚ŒãŸã¨ãã«å‘¼ã°ã‚Œã¾ã™ï¼
      */
     public void editorClosed(EditorEvent ev) {
         Editor editor = (Editor) ev.getSource();
@@ -63,12 +63,12 @@ public abstract class EditorManager implements EditorListener {
     }
 
     /**
-     * ƒGƒfƒBƒ^‚ªƒNƒ[ƒY‚³‚ê‚½‚Æ‚«‚ÉŒÄ‚Î‚ê‚éˆ—‚ÌÀ‘•‚Å‚·D
+     * ã‚¨ãƒ‡ã‚£ã‚¿ãŒã‚¯ãƒ­ãƒ¼ã‚ºã•ã‚ŒãŸã¨ãã«å‘¼ã°ã‚Œã‚‹å‡¦ç†ã®å®Ÿè£…ã§ã™ï¼
      */
     protected abstract void editorClosedImpl(Editor editor);
 
     /**
-     * ƒGƒfƒBƒ^‚ªƒAƒbƒvƒf[ƒg‚³‚ê‚½‚Æ‚«‚ÉŒÄ‚Î‚ê‚Ü‚·D
+     * ã‚¨ãƒ‡ã‚£ã‚¿ãŒã‚¢ãƒƒãƒ—ãƒ‡ãƒ¼ãƒˆã•ã‚ŒãŸã¨ãã«å‘¼ã°ã‚Œã¾ã™ï¼
      */
     public void editorUpdated(EditorEvent ev) {
         Editor editor = (Editor) ev.getSource();
@@ -76,33 +76,33 @@ public abstract class EditorManager implements EditorListener {
     }
 
     /**
-     * ƒGƒfƒBƒ^‚ªƒAƒbƒvƒf[ƒg‚³‚ê‚½‚Æ‚«‚ÉŒÄ‚Î‚ê‚éˆ—‚ÌÀ‘•‚Å‚·D
+     * ã‚¨ãƒ‡ã‚£ã‚¿ãŒã‚¢ãƒƒãƒ—ãƒ‡ãƒ¼ãƒˆã•ã‚ŒãŸã¨ãã«å‘¼ã°ã‚Œã‚‹å‡¦ç†ã®å®Ÿè£…ã§ã™ï¼
      */
     protected abstract void editorUpdatedImpl(Editor editor);
 
     /**
-     * ƒGƒfƒBƒ^‚ğƒI[ƒvƒ“‚µ‚Ü‚·D
+     * ã‚¨ãƒ‡ã‚£ã‚¿ã‚’ã‚ªãƒ¼ãƒ—ãƒ³ã—ã¾ã™ï¼
      * 
-     * @param editor ƒGƒfƒBƒ^
+     * @param editor ã‚¨ãƒ‡ã‚£ã‚¿
      */
     public abstract void openEditor(Editor editor);
 
     /**
-     * ƒGƒfƒBƒ^‚ğƒNƒ[ƒY‚µ‚Ü‚·D
+     * ã‚¨ãƒ‡ã‚£ã‚¿ã‚’ã‚¯ãƒ­ãƒ¼ã‚ºã—ã¾ã™ï¼
      * 
-     * @param editor ƒGƒfƒBƒ^
+     * @param editor ã‚¨ãƒ‡ã‚£ã‚¿
      */
     public abstract void closeEditor(Editor editor);
 
     /**
-     * ƒGƒfƒBƒ^‚ğƒAƒbƒvƒf[ƒg‚µ‚Ü‚·D
+     * ã‚¨ãƒ‡ã‚£ã‚¿ã‚’ã‚¢ãƒƒãƒ—ãƒ‡ãƒ¼ãƒˆã—ã¾ã™ï¼
      * 
-     * @param editor ƒGƒfƒBƒ^
+     * @param editor ã‚¨ãƒ‡ã‚£ã‚¿
      */
     public abstract void updateEditor(Editor editor);
 
     /**
-     * ‘SƒGƒfƒBƒ^‚ğƒNƒ[ƒY‚µ‚Ü‚·D
+     * å…¨ã‚¨ãƒ‡ã‚£ã‚¿ã‚’ã‚¯ãƒ­ãƒ¼ã‚ºã—ã¾ã™ï¼
      */
     public void closeAllEditors() {
         @SuppressWarnings("unchecked")
@@ -117,21 +117,21 @@ public abstract class EditorManager implements EditorListener {
     }
 
     /**
-     * ƒGƒfƒBƒ^ƒ}ƒl[ƒWƒƒ‚ğg‚Á‚Ä‘SƒGƒfƒBƒ^‚ğƒNƒ[ƒY‚µ‚½‚Æ‚«‚Ìˆ—‚ÌÀ‘•‚Å‚·D
+     * ã‚¨ãƒ‡ã‚£ã‚¿ãƒãƒãƒ¼ã‚¸ãƒ£ã‚’ä½¿ã£ã¦å…¨ã‚¨ãƒ‡ã‚£ã‚¿ã‚’ã‚¯ãƒ­ãƒ¼ã‚ºã—ãŸã¨ãã®å‡¦ç†ã®å®Ÿè£…ã§ã™ï¼
      */
     protected abstract void closedAllEditorsImpl();
 
     /**
-     * ƒGƒfƒBƒ^‚ÌƒŠƒXƒg‚ğæ“¾‚µ‚Ü‚·D
+     * ã‚¨ãƒ‡ã‚£ã‚¿ã®ãƒªã‚¹ãƒˆã‚’å–å¾—ã—ã¾ã™ï¼
      * 
-     * @return ƒGƒfƒBƒ^‚ÌƒŠƒXƒg
+     * @return ã‚¨ãƒ‡ã‚£ã‚¿ã®ãƒªã‚¹ãƒˆ
      */
     public List<Editor> getEditors() {
         return editors;
     }
 
     /**
-     * ƒJƒŒƒ“ƒg‚ÌƒGƒfƒBƒ^‚ğæ“¾‚µ‚Ü‚·D
+     * ã‚«ãƒ¬ãƒ³ãƒˆã®ã‚¨ãƒ‡ã‚£ã‚¿ã‚’å–å¾—ã—ã¾ã™ï¼
      */
     public Editor getCurrentEditor() {
         return current;

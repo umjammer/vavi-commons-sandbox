@@ -10,23 +10,23 @@ import java.util.Calendar;
 
 
 /**
- * “ú–{‚É‚¨‚¯‚é‘–¯‚Ìj“ú‚ðŽæ“¾‚·‚éƒNƒ‰ƒX‚Å‚·B
+ * æ—¥æœ¬ã«ãŠã‘ã‚‹å›½æ°‘ã®ç¥æ—¥ã‚’å–å¾—ã™ã‚‹ã‚¯ãƒ©ã‚¹ã§ã™ã€‚
  * <pre>
- * 1ŒŽ1“ú          Œ³’U
- * 1ŒŽ‘æ2ŒŽ—j“ú    ¬l‚Ì“ú
- * 2ŒŽ11“ú         Œš‘‹L”O‚Ì“ú
- * 3ŒŽ*“ú          t•ª‚Ì“ú
- * 4ŒŽ29“ú         ‚Ý‚Ç‚è‚Ì“ú
- * 5ŒŽ3“ú          Œ›–@‹L”O“ú
- * 5ŒŽ4“ú          ‘–¯‚Ì‹x“ú
- * 5ŒŽ5“ú          ‚±‚Ç‚à‚Ì“ú
- * 7ŒŽ20“ú         ŠC‚Ì“ú (2003”N‚©‚ç‘æŽOŒŽ—j“ú)
- * 9ŒŽ15“ú         Œh˜V‚Ì“ú (2003”N‚©‚ç‘æŽOŒŽ—j“ú)
- * 9ŒŽ*“ú          H•ª‚Ì“ú
- * 10ŒŽ‘æ2ŒŽ—j“ú   ‘Ìˆç‚Ì“ú
- * 11ŒŽ3“ú         •¶‰»‚Ì“ú
- * 11ŒŽ23“ú        ‹Î˜JŠ´ŽÓ‚Ì“ú
- * 12ŒŽ23“ú        “Vc’a¶“ú
+ * 1æœˆ1æ—¥          å…ƒæ—¦
+ * 1æœˆç¬¬2æœˆæ›œæ—¥    æˆäººã®æ—¥
+ * 2æœˆ11æ—¥         å»ºå›½è¨˜å¿µã®æ—¥
+ * 3æœˆ*æ—¥          æ˜¥åˆ†ã®æ—¥
+ * 4æœˆ29æ—¥         ã¿ã©ã‚Šã®æ—¥
+ * 5æœˆ3æ—¥          æ†²æ³•è¨˜å¿µæ—¥
+ * 5æœˆ4æ—¥          å›½æ°‘ã®ä¼‘æ—¥
+ * 5æœˆ5æ—¥          ã“ã©ã‚‚ã®æ—¥
+ * 7æœˆ20æ—¥         æµ·ã®æ—¥ (2003å¹´ã‹ã‚‰ç¬¬ä¸‰æœˆæ›œæ—¥)
+ * 9æœˆ15æ—¥         æ•¬è€ã®æ—¥ (2003å¹´ã‹ã‚‰ç¬¬ä¸‰æœˆæ›œæ—¥)
+ * 9æœˆ*æ—¥          ç§‹åˆ†ã®æ—¥
+ * 10æœˆç¬¬2æœˆæ›œæ—¥   ä½“è‚²ã®æ—¥
+ * 11æœˆ3æ—¥         æ–‡åŒ–ã®æ—¥
+ * 11æœˆ23æ—¥        å‹¤åŠ´æ„Ÿè¬ã®æ—¥
+ * 12æœˆ23æ—¥        å¤©çš‡èª•ç”Ÿæ—¥
  * </pre>
  *
  * @author	<a href="mailto:vavivavi@yahoo.co.jp">Naohide Sano</a> (nsano)
@@ -34,30 +34,30 @@ import java.util.Calendar;
  */
 public class JapaneseHoliday {
 
-    /** ‚±‚ÌƒIƒuƒWƒFƒNƒg‚ªŽw‚·“ú•t */
+    /** ã“ã®ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆãŒæŒ‡ã™æ—¥ä»˜ */
     private Calendar calendar;
 
-    /** “y—j“ú‚à‹x“ú‚Æ‚·‚é‚©‚Ç‚¤‚© */
+    /** åœŸæ›œæ—¥ã‚‚ä¼‘æ—¥ã¨ã™ã‚‹ã‹ã©ã†ã‹ */
     private boolean saturdayHoliday;
 
     /**
-     * ƒfƒtƒHƒ‹ƒg‚Ìƒ^ƒCƒ€ƒ][ƒ“‚¨‚æ‚ÑƒƒP[ƒ‹‚ðŽ‚ÂƒJƒŒƒ“ƒ_[‚ðŽg—p‚µ‚Ü‚·B
+     * ãƒ‡ãƒ•ã‚©ãƒ«ãƒˆã®ã‚¿ã‚¤ãƒ ã‚¾ãƒ¼ãƒ³ãŠã‚ˆã³ãƒ­ã‚±ãƒ¼ãƒ«ã‚’æŒã¤ã‚«ãƒ¬ãƒ³ãƒ€ãƒ¼ã‚’ä½¿ç”¨ã—ã¾ã™ã€‚
      */
     public JapaneseHoliday() {
         this.calendar = Calendar.getInstance();
     }
 
     /**
-     * “y—j“ú‚à‹x“ú‚Æ‚·‚é‚©‚Ç‚¤‚©‚ðÝ’è‚µ‚Ü‚·B
-     * @param sturdayHoliday “y—j“ú‚à‹x“ú‚Æ‚·‚é‚È‚ç trueA‚»‚¤‚Å‚È‚¢‚È‚ç false
+     * åœŸæ›œæ—¥ã‚‚ä¼‘æ—¥ã¨ã™ã‚‹ã‹ã©ã†ã‹ã‚’è¨­å®šã—ã¾ã™ã€‚
+     * @param sturdayHoliday åœŸæ›œæ—¥ã‚‚ä¼‘æ—¥ã¨ã™ã‚‹ãªã‚‰ trueã€ãã†ã§ãªã„ãªã‚‰ false
      */
     public void setSaturdayHoliday(boolean sturdayHoliday) {
         this.saturdayHoliday = sturdayHoliday;
     }
 
     /**
-     * ‚±‚ÌƒCƒ“ƒXƒ^ƒ“ƒX‚ðì¬‚µ‚½Žž‚Ì“ú•t‚ª‹x“ú‚©‚Ç‚¤‚©‚ð”»’è‚µ‚Ü‚·B
-     * @return ‹x“ú‚È‚ç‚Î trueA‚»‚¤‚Å‚È‚¢‚È‚ç false
+     * ã“ã®ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹ã‚’ä½œæˆã—ãŸæ™‚åˆ»ã®æ—¥ä»˜ãŒä¼‘æ—¥ã‹ã©ã†ã‹ã‚’åˆ¤å®šã—ã¾ã™ã€‚
+     * @return ä¼‘æ—¥ãªã‚‰ã° trueã€ãã†ã§ãªã„ãªã‚‰ false
      */
     public boolean isHoliday() {
         return isHoliday(calendar.get(Calendar.YEAR),
@@ -67,19 +67,19 @@ public class JapaneseHoliday {
     }
 
     /**
-     * Žw’è‚³‚ê‚½”NŒŽ“ú‚ª‹x“ú‚©‚Ç‚¤‚©”»’è‚µ‚Ü‚·B
-     * ƒIƒuƒWƒFƒNƒg‚ÌƒJƒŒƒ“ƒ_[‚ÍŽw’è‚³‚ê‚½“ú‚É•ÏX‚³‚ê‚Ü‚·B
-     * @param yyyy ”NA¼—ï 4 Œ…‚ÅŽw’è
-     * @param mm ŒŽA10 ŒŽ‚Ìê‡‚Í 9 ‚ðŽw’è 
-     * @param dd “ú
-     * @return ‹x“ú‚È‚ç‚Î trueA‚»‚¤‚Å‚È‚¢‚È‚ç false
+     * æŒ‡å®šã•ã‚ŒãŸå¹´æœˆæ—¥ãŒä¼‘æ—¥ã‹ã©ã†ã‹åˆ¤å®šã—ã¾ã™ã€‚
+     * ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã®ã‚«ãƒ¬ãƒ³ãƒ€ãƒ¼ã¯æŒ‡å®šã•ã‚ŒãŸæ—¥ã«å¤‰æ›´ã•ã‚Œã¾ã™ã€‚
+     * @param yyyy å¹´ã€è¥¿æš¦ 4 æ¡ã§æŒ‡å®š
+     * @param mm æœˆã€10 æœˆã®å ´åˆã¯ 9 ã‚’æŒ‡å®š 
+     * @param dd æ—¥
+     * @return ä¼‘æ—¥ãªã‚‰ã° trueã€ãã†ã§ãªã„ãªã‚‰ false
      */
     public boolean isHoliday(int yyyy, int mm, int dd) {
         int[] equinox = getEquinoxDays(yyyy);
         
         int[] monday = getMondayHoliday(yyyy);
         mm++;
-        // ‚í‚©‚è‚â‚·‚­ cal.set(Calendar.YEAR, yyyy);
+        // ã‚ã‹ã‚Šã‚„ã™ã cal.set(Calendar.YEAR, yyyy);
         calendar.set(Calendar.MONTH, mm - 1);
         calendar.set(Calendar.DAY_OF_MONTH, dd);
         if (calendar.get(Calendar.DAY_OF_WEEK) == Calendar.SUNDAY) {
@@ -175,11 +175,11 @@ public class JapaneseHoliday {
 
     /**
      * @param yyyy
-     * @return t•ªAH•ª‚Ì“ú
+     * @return æ˜¥åˆ†ã€ç§‹åˆ†ã®æ—¥
      */
     private int[] getEquinoxDays(int yyyy) {
         long temp = 0;
-        // ˆêŽž“I‚È•Ï” temp = (242194 * (yyyy - 1980));
+        // ä¸€æ™‚çš„ãªå¤‰æ•° temp = (242194 * (yyyy - 1980));
         
         temp -= ((yyyy - 1980) >> 2) * 1000000;
         long s3 = (20843100 + temp) / 1000000;
@@ -199,17 +199,17 @@ public class JapaneseHoliday {
     
     /**
      * @param yyyy
-     * @return Žw’è‚µ‚½”N‚ÌŒŽ—j“ú‚Ì‹x“ú
+     * @return æŒ‡å®šã—ãŸå¹´ã®æœˆæ›œæ—¥ã®ä¼‘æ—¥
      */
     private int[] getMondayHoliday(int yyyy) {
         int h1 = 0;
         int h7 = 0;
         int h9 = 0;
         int h10 = 0;
-        // ¬l‚Ì“ú 1ŒŽ‘æ“ñŒŽ—j“ú int h7 = 20;
-        // ŠC‚Ì“ú 7ŒŽ‘æŽOŒŽ—j“ú(2003”N‚©‚ç) int h9 = 15;
-        // Œh˜V‚Ì“ú 9ŒŽ‘æŽOŒŽ—j“ú(2003”N‚©‚ç) int h10 = 0;
-        // ‘Ìˆç‚Ì“ú 10ŒŽ‘æ“ñŒŽ—j“ú cal.set(Calendar.YEAR, yyyy);
+        // æˆäººã®æ—¥ 1æœˆç¬¬äºŒæœˆæ›œæ—¥ int h7 = 20;
+        // æµ·ã®æ—¥ 7æœˆç¬¬ä¸‰æœˆæ›œæ—¥(2003å¹´ã‹ã‚‰) int h9 = 15;
+        // æ•¬è€ã®æ—¥ 9æœˆç¬¬ä¸‰æœˆæ›œæ—¥(2003å¹´ã‹ã‚‰) int h10 = 0;
+        // ä½“è‚²ã®æ—¥ 10æœˆç¬¬äºŒæœˆæ›œæ—¥ cal.set(Calendar.YEAR, yyyy);
         
         calendar.set(Calendar.MONTH, 0);
         calendar.set(Calendar.DAY_OF_MONTH, 1);

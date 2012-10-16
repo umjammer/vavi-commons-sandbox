@@ -20,19 +20,19 @@ import java.util.StringTokenizer;
 
 
 /**
- * ˜a—ïƒNƒ‰ƒX.
+ * å’Œæš¦ã‚¯ãƒ©ã‚¹.
  * <p>
- * GregorianCalendar‚ÍC0: 1Œ, 1: 2Œ, ... ‚Å‚ ‚é‚Ì‚ÅC
- * getMonth(), set(int, int, int) ‚ÌŒ‚ªC1: 1Œ ‚É‚È‚é‚æ‚¤‚É‚µ‚Ä‚¢‚éB
- * V—ï‚Å‚ ‚é–¾¡6”N(1873”N)ˆÚs‚ğƒTƒ|[ƒg???B
+ * GregorianCalendarã¯ï¼Œ0: 1æœˆ, 1: 2æœˆ, ... ã§ã‚ã‚‹ã®ã§ï¼Œ
+ * getMonth(), set(int, int, int) ã®æœˆãŒï¼Œ1: 1æœˆ ã«ãªã‚‹ã‚ˆã†ã«ã—ã¦ã„ã‚‹ã€‚
+ * æ–°æš¦ã§ã‚ã‚‹æ˜æ²»6å¹´(1873å¹´)ç§»è¡Œã‚’ã‚µãƒãƒ¼ãƒˆ???ã€‚
  * </p>
- * <li> TODO ‰ğÍCƒtƒH[ƒ}ƒbƒgŒn‚Ì•ª—£
- * <li> TODO –¾¡ˆÈ‘O‚ÌÀ‘•
- * <li> TODO set Œn‚ª‹@”\‚µ‚Ä‚¢‚È‚¢
+ * <li> TODO è§£æï¼Œãƒ•ã‚©ãƒ¼ãƒãƒƒãƒˆç³»ã®åˆ†é›¢
+ * <li> TODO æ˜æ²»ä»¥å‰ã®å®Ÿè£…
+ * <li> TODO set ç³»ãŒæ©Ÿèƒ½ã—ã¦ã„ãªã„
  * 
- * @author é•—•q•F
+ * @author åŸé¢¨æ•å½¦
  * @author <a href="mailto:vavivavi@yahoo.co.jp">Naohide Sano</a> (nsano)
- * @version 1.00 020620 é•— initial version <br>
+ * @version 1.00 020620 åŸé¢¨ initial version <br>
  *          2.00 021119 nsano refine <br>
  */
 public class JapaneseCalendar extends Calendar {
@@ -41,49 +41,49 @@ public class JapaneseCalendar extends Calendar {
     private CalendarUtilJa current;
 
     /**
-     * ¼—ï‚Å‚Ì‹Œ—ï‚ÌÅI“ú 1872/12/31 GregorianCalendar ‚Ìd—l‚ÅC
-     * “ú–{‚Å‚¢‚¤Œ”‚É 1 ‚ğˆø‚¢‚½’l‚ğŒ‚É“ü‚ê‚é •K—v‚ª‚ ‚é
+     * è¥¿æš¦ã§ã®æ—§æš¦ã®æœ€çµ‚æ—¥ 1872/12/31 GregorianCalendar ã®ä»•æ§˜ã§ï¼Œ
+     * æ—¥æœ¬ã§ã„ã†æœˆæ•°ã« 1 ã‚’å¼•ã„ãŸå€¤ã‚’æœˆã«å…¥ã‚Œã‚‹ å¿…è¦ãŒã‚ã‚‹
      */
     public static final Calendar lastDayOfLunar = new GregorianCalendar(1872, 11, 31);
 
-    /** Œ»‚Ì˜a—ï‚ğ¶¬‚µ‚Ü‚·D */
+    /** ç¾æ™‚åˆ»ã®å’Œæš¦ã‚’ç”Ÿæˆã—ã¾ã™ï¼ */
     public JapaneseCalendar() {
         setup(new GregorianCalendar());
     }
 
-    /** ¼—ïƒCƒ“ƒXƒ^ƒ“ƒX‚©‚ç˜a—ïƒIƒuƒWƒFƒNƒg‚ğ¶¬‚µ‚Ü‚·D */
+    /** è¥¿æš¦ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹ã‹ã‚‰å’Œæš¦ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã‚’ç”Ÿæˆã—ã¾ã™ï¼ */
     public JapaneseCalendar(GregorianCalendar calendar) {
         setup(calendar);
     }
 
     /**
-     * ”NAŒA“ú‚©‚ç˜a—ïƒIƒuƒWƒFƒNƒg‚ğ¶¬‚µ‚Ü‚·D GregorianCalendar ‚ÍC
-     * 1 Œ‚ª 0 ‚Å•\‚³‚ê‚é‚½‚ßCˆø”‚ÌŒ”‚©‚ç 1 ‚ğ
-     * ˆø‚¢‚Ä¶¬
+     * å¹´ã€æœˆã€æ—¥ã‹ã‚‰å’Œæš¦ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã‚’ç”Ÿæˆã—ã¾ã™ï¼ GregorianCalendar ã¯ï¼Œ
+     * 1 æœˆãŒ 0 ã§è¡¨ã•ã‚Œã‚‹ãŸã‚ï¼Œå¼•æ•°ã®æœˆæ•°ã‹ã‚‰ 1 ã‚’
+     * å¼•ã„ã¦ç”Ÿæˆ
      * 
-     * @param year ¼—ï‚Ì”N
-     * @param month Œ (1 ~ 12)
-     * @param day “ú
+     * @param year è¥¿æš¦ã®å¹´
+     * @param month æœˆ (1 ~ 12)
+     * @param day æ—¥
      */
     public JapaneseCalendar(int year, int month, int day) {
         setup(new GregorianCalendar(year, month - 1, day));
     }
 
     /**
-     * Œ³†A”NAŒA“ú‚©‚ç˜a—ïƒIƒuƒWƒFƒNƒg‚ğ¶¬‚µ‚Ü‚·D
+     * å…ƒå·ã€å¹´ã€æœˆã€æ—¥ã‹ã‚‰å’Œæš¦ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã‚’ç”Ÿæˆã—ã¾ã™ï¼
      * 
-     * @param gengou Œ³†‚ğ‚ ‚ç‚í‚·ƒAƒ‹ƒtƒ@ƒxƒbƒg•¶š‚Å "M", "T", "S", "H" ‚Ì‚¢‚¸‚ê‚©
-     * @param year Œ³†‚Ì”N
-     * @param month Œ (1 ~ 12)
-     * @param day “ú
+     * @param gengou å…ƒå·ã‚’ã‚ã‚‰ã‚ã™ã‚¢ãƒ«ãƒ•ã‚¡ãƒ™ãƒƒãƒˆæ–‡å­—ã§ "M", "T", "S", "H" ã®ã„ãšã‚Œã‹
+     * @param year å…ƒå·ã®å¹´
+     * @param month æœˆ (1 ~ 12)
+     * @param day æ—¥
      */
     public JapaneseCalendar(String gengou, int year, int month, int day) {
         setup(gengou, year, month, day);
     }
 
     /**
-     * •¶š—ñ‚©‚ç˜a—ïƒIƒuƒWƒFƒNƒg‚ğ¶¬‚µ‚Ü‚·D
-     * ó‚¯•t‚¯‚éŒ`®‚ÍŒ»İ‚Ì‚Æ‚±‚ëˆÈ‰º‚Ì‚Æ‚¨‚è‚Å‚·D
+     * æ–‡å­—åˆ—ã‹ã‚‰å’Œæš¦ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã‚’ç”Ÿæˆã—ã¾ã™ï¼
+     * å—ã‘ä»˜ã‘ã‚‹å½¢å¼ã¯ç¾åœ¨ã®ã¨ã“ã‚ä»¥ä¸‹ã®ã¨ãŠã‚Šã§ã™ï¼
      * 
      * <pre>
      * GYYMMDD
@@ -92,11 +92,11 @@ public class JapaneseCalendar extends Calendar {
      * YYYY-MM-DD
      * </pre>
      * 
-     * "G" ‚ÍŒ³†‚ğ‚ ‚ç‚í‚·ƒAƒ‹ƒtƒ@ƒxƒbƒg•¶š‚Å "M", "T", "S", "H" ‚Ì‚¢‚¸‚ê‚©
-     * "-" ‚Í“ú•t‹æØ‚è•¶š(‰½‚Å‚à—Ç‚¢) "MM"
-     * ‚ÍŒ‚ğ•\‚·”š‚Å 1 ` 12
+     * "G" ã¯å…ƒå·ã‚’ã‚ã‚‰ã‚ã™ã‚¢ãƒ«ãƒ•ã‚¡ãƒ™ãƒƒãƒˆæ–‡å­—ã§ "M", "T", "S", "H" ã®ã„ãšã‚Œã‹
+     * "-" ã¯æ—¥ä»˜åŒºåˆ‡ã‚Šæ–‡å­—(ä½•ã§ã‚‚è‰¯ã„) "MM"
+     * ã¯æœˆã‚’è¡¨ã™æ•°å­—ã§ 1 ã€œ 12
      * 
-     * @param dateString “ú•t•¶š—ñ
+     * @param dateString æ—¥ä»˜æ–‡å­—åˆ—
      */
     public JapaneseCalendar(String dateString) {
         int length = dateString.length();
@@ -133,13 +133,13 @@ public class JapaneseCalendar extends Calendar {
     }
 
     /**
-     * Œ³†A”NAŒA“ú‚©‚ç˜a—ïƒIƒuƒWƒFƒNƒg‚ğ¶¬‚µ‚Ü‚·D GregorianCalendar ‚ÍC1 Œ‚ª 0 ‚Å•\‚³‚ê‚é‚½‚ßCˆø”‚ÌŒ”‚©‚ç 1 ‚ğ
-     * ˆø‚¢‚Ä¶¬
+     * å…ƒå·ã€å¹´ã€æœˆã€æ—¥ã‹ã‚‰å’Œæš¦ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã‚’ç”Ÿæˆã—ã¾ã™ï¼ GregorianCalendar ã¯ï¼Œ1 æœˆãŒ 0 ã§è¡¨ã•ã‚Œã‚‹ãŸã‚ï¼Œå¼•æ•°ã®æœˆæ•°ã‹ã‚‰ 1 ã‚’
+     * å¼•ã„ã¦ç”Ÿæˆ
      * 
-     * @param gengou Œ³†‚ğ‚ ‚ç‚í‚·ƒAƒ‹ƒtƒ@ƒxƒbƒg•¶š‚Å "M", "T", "S", "H" ‚Ì‚¢‚¸‚ê‚©
-     * @param year Œ³†‚Ì”N
-     * @param month Œ (1 ~ 12)
-     * @param day “ú
+     * @param gengou å…ƒå·ã‚’ã‚ã‚‰ã‚ã™ã‚¢ãƒ«ãƒ•ã‚¡ãƒ™ãƒƒãƒˆæ–‡å­—ã§ "M", "T", "S", "H" ã®ã„ãšã‚Œã‹
+     * @param year å…ƒå·ã®å¹´
+     * @param month æœˆ (1 ~ 12)
+     * @param day æ—¥
      */
     private void setup(String gengou, int year, int month, int day) {
 
@@ -162,7 +162,7 @@ Debug.println("1: " + toFS(this));
     }
 
     /**
-     * @param calendar ¼—ï
+     * @param calendar è¥¿æš¦
      */
     private void setup(GregorianCalendar calendar) {
         for (int i = 0; i < utils.size(); i++) {
@@ -183,9 +183,9 @@ Debug.println("2: " + toFS(this));
     }
 
     /**
-     * Œ³†‚ğæ“¾‚µ‚Ü‚·D
+     * å…ƒå·ã‚’å–å¾—ã—ã¾ã™ï¼
      * 
-     * @return Œ³†‚Ì•¶š—ñ
+     * @return å…ƒå·ã®æ–‡å­—åˆ—
      */
     public String getGengou() {
         return current.shortName;
@@ -216,7 +216,7 @@ Debug.println(toFS(this));
     }
 
     /**
-     * ƒJƒŒƒ“ƒ_‚Ì‹K‘¥‚ÉŠî‚Ã‚¢‚ÄAw’è‚³‚ê‚½ (•„†•t‚«‚Ì) ŠÔ—Ê‚ğAw’è‚³‚ê‚½ ŠÔƒtƒB[ƒ‹ƒh‚É‰Á‚¦‚Ü‚·B
+     * ã‚«ãƒ¬ãƒ³ãƒ€ã®è¦å‰‡ã«åŸºã¥ã„ã¦ã€æŒ‡å®šã•ã‚ŒãŸ (ç¬¦å·ä»˜ãã®) æ™‚é–“é‡ã‚’ã€æŒ‡å®šã•ã‚ŒãŸ æ™‚é–“ãƒ•ã‚£ãƒ¼ãƒ«ãƒ‰ã«åŠ ãˆã¾ã™ã€‚
      */
     public void add(int field, int amount) {
         HackedGregorianCalendar tmp = new HackedGregorianCalendar();
@@ -225,7 +225,7 @@ Debug.println(toFS(this));
         tmp.copyInto(this);
     }
 
-    /** Calendar ‚ğƒI[ƒo[ƒ‰ƒCƒh‚µ‚Ü‚·B */
+    /** Calendar ã‚’ã‚ªãƒ¼ãƒãƒ¼ãƒ©ã‚¤ãƒ‰ã—ã¾ã™ã€‚ */
     protected void computeFields() {
         HackedGregorianCalendar tmp = new HackedGregorianCalendar();
         copyInto(tmp);
@@ -233,7 +233,7 @@ Debug.println(toFS(this));
         tmp.copyInto(this);
     }
 
-    /** Calendar ‚ğƒI[ƒo[ƒ‰ƒCƒh‚µ‚Ü‚·B */
+    /** Calendar ã‚’ã‚ªãƒ¼ãƒãƒ¼ãƒ©ã‚¤ãƒ‰ã—ã¾ã™ã€‚ */
     protected void computeTime() {
         HackedGregorianCalendar tmp = new HackedGregorianCalendar();
         copyInto(tmp);
@@ -241,7 +241,7 @@ Debug.println(toFS(this));
         tmp.copyInto(this);
     }
 
-    /** w’è‚³‚ê‚½ƒtƒB[ƒ‹ƒh‚ª•Ï‰»‚·‚éê‡A‚»‚ÌÅ‘å’l‚ğ•Ô‚µ‚Ü‚·B */
+    /** æŒ‡å®šã•ã‚ŒãŸãƒ•ã‚£ãƒ¼ãƒ«ãƒ‰ãŒå¤‰åŒ–ã™ã‚‹å ´åˆã€ãã®æœ€å¤§å€¤ã‚’è¿”ã—ã¾ã™ã€‚ */
     public int getGreatestMinimum(int field) {
         HackedGregorianCalendar tmp = new HackedGregorianCalendar();
         copyInto(tmp);
@@ -250,7 +250,7 @@ Debug.println(toFS(this));
         return min;
     }
 
-    /** w’è‚³‚ê‚½ƒtƒB[ƒ‹ƒh‚ª•Ï‰»‚·‚éê‡A‚»‚ÌÅ¬‚ÌÅ‘å’l‚ğ•Ô‚µ‚Ü‚·B */
+    /** æŒ‡å®šã•ã‚ŒãŸãƒ•ã‚£ãƒ¼ãƒ«ãƒ‰ãŒå¤‰åŒ–ã™ã‚‹å ´åˆã€ãã®æœ€å°ã®æœ€å¤§å€¤ã‚’è¿”ã—ã¾ã™ã€‚ */
     public int getLeastMaximum(int field) {
         HackedGregorianCalendar tmp = new HackedGregorianCalendar();
         copyInto(tmp);
@@ -260,7 +260,7 @@ Debug.println(toFS(this));
     }
 
     /**
-     * w’è‚³‚ê‚½ƒtƒB[ƒ‹ƒh‚ÌÅ‘å’l (‚½‚Æ‚¦‚ÎAƒOƒŒƒSƒŠƒI—ï‚Ì DAY_OF_MONTH ‚Å‚ÍA31) ‚ğ•Ô‚µ‚Ü‚·B
+     * æŒ‡å®šã•ã‚ŒãŸãƒ•ã‚£ãƒ¼ãƒ«ãƒ‰ã®æœ€å¤§å€¤ (ãŸã¨ãˆã°ã€ã‚°ãƒ¬ã‚´ãƒªã‚ªæš¦ã® DAY_OF_MONTH ã§ã¯ã€31) ã‚’è¿”ã—ã¾ã™ã€‚
      */
     public int getMaximum(int field) {
         HackedGregorianCalendar tmp = new HackedGregorianCalendar();
@@ -271,7 +271,7 @@ Debug.println(toFS(this));
     }
 
     /**
-     * w’è‚³‚ê‚½ƒtƒB[ƒ‹ƒh‚ÌÅ¬’l (‚½‚Æ‚¦‚ÎAƒOƒŒƒSƒŠƒI—ï‚Ì DAY_OF_MONTH ‚Å‚ÍA1) ‚ğ•Ô‚µ‚Ü‚·B
+     * æŒ‡å®šã•ã‚ŒãŸãƒ•ã‚£ãƒ¼ãƒ«ãƒ‰ã®æœ€å°å€¤ (ãŸã¨ãˆã°ã€ã‚°ãƒ¬ã‚´ãƒªã‚ªæš¦ã® DAY_OF_MONTH ã§ã¯ã€1) ã‚’è¿”ã—ã¾ã™ã€‚
      */
     public int getMinimum(int field) {
 Debug.println("here");
@@ -282,7 +282,7 @@ Debug.println("here");
         return min;
     }
 
-    /** w’è‚³‚ê‚½”N‚ªA‚¤‚é‚¤”N‚©‚Ç‚¤‚©‚ğ”»’è‚µ‚Ü‚·B */
+    /** æŒ‡å®šã•ã‚ŒãŸå¹´ãŒã€ã†ã‚‹ã†å¹´ã‹ã©ã†ã‹ã‚’åˆ¤å®šã—ã¾ã™ã€‚ */
     public boolean isLeapYear(int year) {
 Debug.println("here");
         HackedGregorianCalendar tmp = new HackedGregorianCalendar();
@@ -291,7 +291,7 @@ Debug.println("here");
     }
 
     /**
-     * ‘å‚«‚¢ƒtƒB[ƒ‹ƒh‚ğ•ÏX‚¹‚¸‚Éw’è‚³‚ê‚½ŠÔƒtƒB[ƒ‹ƒh‚Ì 1 ‚Â‚Ì’PˆÊ‚ÌŠÔ‚ğã‚Ü‚½‚Í‰º‚É‰ÁZ‚Ü‚½‚ÍŒ¸Z‚µ‚Ü‚·B
+     * å¤§ãã„ãƒ•ã‚£ãƒ¼ãƒ«ãƒ‰ã‚’å¤‰æ›´ã›ãšã«æŒ‡å®šã•ã‚ŒãŸæ™‚é–“ãƒ•ã‚£ãƒ¼ãƒ«ãƒ‰ã® 1 ã¤ã®å˜ä½ã®æ™‚é–“ã‚’ä¸Šã¾ãŸã¯ä¸‹ã«åŠ ç®—ã¾ãŸã¯æ¸›ç®—ã—ã¾ã™ã€‚
      */
     public void roll(int field, boolean up) {
 Debug.println("here");
@@ -309,12 +309,12 @@ Debug.println("here");
     // ----
 
     /**
-     * Œ³†C”NŒ“ú‚ğİ’è‚µ‚Ü‚·D
+     * å…ƒå·ï¼Œå¹´æœˆæ—¥ã‚’è¨­å®šã—ã¾ã™ï¼
      * 
-     * @param gengou Œ³†
-     * @param year Œ³†‚Ì”N
-     * @param month Œ (1 ~ 12)
-     * @param day “ú
+     * @param gengou å…ƒå·
+     * @param year å…ƒå·ã®å¹´
+     * @param month æœˆ (1 ~ 12)
+     * @param day æ—¥
      */
     public void set(String gengou, int year, int month, int day) {
         for (int i = 0; i < utils.size(); i++) {
@@ -328,7 +328,7 @@ Debug.println("here");
         throw new IllegalArgumentException(gengou);
     }
 
-    /** Œ³† YY ”N MM ”N DD “ú‚Ì String ‚É•ÏŠ· */
+    /** å…ƒå· YY å¹´ MM å¹´ DD æ—¥ã® String ã«å¤‰æ› */
     public String toString() {
         int year = internalGet(YEAR) - current.diff;
         String result = new String();
@@ -349,27 +349,27 @@ Debug.println("here");
 
     /** */
     private static class CalendarUtilJa {
-        /** Œ³†‚ÌÈ—ª•\‹L */
+        /** å…ƒå·ã®çœç•¥è¡¨è¨˜ */
         String shortName;
 
-        /** Œ³† */
+        /** å…ƒå· */
         String name;
 
-        /** ¼—ï‚Å‚ÌŠJn“ú */
+        /** è¥¿æš¦ã§ã®é–‹å§‹æ—¥ */
         GregorianCalendar startYear;
 
-        /** ¼—ï‚Å‚ÌÅI“ú */
+        /** è¥¿æš¦ã§ã®æœ€çµ‚æ—¥ */
         GregorianCalendar endYear;
 
-        /** ¼—ï‚Æ‚Ì·•ª */
+        /** è¥¿æš¦ã¨ã®å·®åˆ† */
         int diff;
 
         /**
-         * ‚µ‚Ü‚·D
+         * ã—ã¾ã™ï¼
          * 
-         * @param year Œ³†‚Ì”N
-         * @param month Œ (1 ~ 12)
-         * @param day “ú
+         * @param year å…ƒå·ã®å¹´
+         * @param month æœˆ (1 ~ 12)
+         * @param day æ—¥
          */
         public void check(int year, int month, int day) {
             GregorianCalendar cal = new GregorianCalendar(year + diff, month - 1, day);
@@ -379,6 +379,7 @@ Debug.println("here");
             }
         }
 
+        @SuppressWarnings("unused")
         void debug() {
             Debug.println(shortName);
             Debug.println(name);
@@ -449,54 +450,6 @@ Debug.printStackTrace(e);
     /** */
     public int compareTo(Calendar calendar) {
         return super.compareTo(calendar);
-    }
-
-    /** */
-    public static void main(String[] args) {
-
-        JapaneseCalendar jc;
-
-        if (args.length == 2 && "-d".equals(args[0])) {
-
-            jc = new JapaneseCalendar(args[1]);
-            System.err.println(jc);
-            System.exit(0);
-        }
-
-        jc = new JapaneseCalendar();
-        System.err.println("Today " + toFS(jc));
-        System.err.println("Today " + jc);
-
-        jc = new JapaneseCalendar("00010203");
-        System.err.println("00010203 " + jc);
-        System.err.println("00010203 " + toFS(jc));
-
-        jc = new JapaneseCalendar("19890203");
-        System.err.println("19890203 " + jc);
-
-        jc = new JapaneseCalendar("19890107");
-        System.err.println("19890107 " + jc);
-
-        jc = new JapaneseCalendar("S", 64, 1, 7);
-        System.err.println("S 64 1 7 " + jc);
-
-        jc = new JapaneseCalendar("H", 1, 1, 8);
-        System.err.println("H 1 1 8 " + jc);
-
-        jc = new JapaneseCalendar(1989, 1, 8);
-        System.err.println("1989 1 8 " + jc);
-
-        jc = new JapaneseCalendar("S", 20, 8, 15);
-        System.err.println("S 20 8 15 " + jc);
-        System.err.println("S 20 8 15 " + toFS(jc));
-
-        jc = new JapaneseCalendar("T111209");
-        System.err.println("T111209 " + jc);
-        System.err.println("T111209 " + toFS(jc));
-
-        jc.set(2001, 8 - 1, 11); // TODO ‹@”\‚µ‚Ä‚¢‚È‚¢
-        System.err.println("2001 8 11 " + jc);
-        System.err.println("2001 8 11 " + toFS(jc));
     }
 }
 

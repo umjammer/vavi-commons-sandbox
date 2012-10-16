@@ -14,9 +14,9 @@ import java.util.regex.Pattern;
 
 
 /**
- * ƒfƒBƒŒƒNƒgƒŠ‚ğÄ‹A“I‚ÉŒ@‚è‰º‚°‚Ä‚¢‚­ƒNƒ‰ƒX‚Å‚·B
+ * ãƒ‡ã‚£ãƒ¬ã‚¯ãƒˆãƒªã‚’å†å¸°çš„ã«æ˜ã‚Šä¸‹ã’ã¦ã„ãã‚¯ãƒ©ã‚¹ã§ã™ã€‚
  * <p> 
- * Œ@‚él
+ * æ˜ã‚‹äºº
  * </p> 
  * @author <a href="mailto:vavivavi@yahoo.co.jp">Naohide Sano</a> (nsano)
  * @version 0.00 050215 nsano initial version <br>
@@ -24,21 +24,21 @@ import java.util.regex.Pattern;
 public class RegexFileDigger implements FileDigger {
 
     /**
-     * Œ@‚è“–‚Ä‚½ƒtƒ@ƒCƒ‹‚É‘Î‚µ‚Äs‚¤ƒAƒNƒVƒ‡ƒ“
+     * æ˜ã‚Šå½“ã¦ãŸãƒ•ã‚¡ã‚¤ãƒ«ã«å¯¾ã—ã¦è¡Œã†ã‚¢ã‚¯ã‚·ãƒ§ãƒ³
      * <p>
-     * Ÿ²‚¤l
+     * æµšã†äºº
      * </p> 
      */
     private FileDredger dredger;
 
-    /** dredge ‚·‚éƒpƒ^[ƒ“ */
+    /** dredge ã™ã‚‹ãƒ‘ã‚¿ãƒ¼ãƒ³ */
     private Pattern pattern;
 
     /**
-     * –xt‚ğì¬‚µ‚Ü‚·B
-     * @param dredger Œ@‚è“–‚Ä‚½ƒtƒ@ƒCƒ‹‚É‘Î‚µ‚Äs‚¤ƒAƒNƒVƒ‡ƒ“
-     * @param pattern dredge ‚·‚éƒpƒ^[ƒ“ (’ˆÓFƒfƒBƒŒƒNƒgƒŠ•”•ª‚Íœ‚«‚Ü‚·)
-     * TODO {@link FileFilter} ‚Å‚à‚¢‚¢‚©‚à
+     * å €å¸«ã‚’ä½œæˆã—ã¾ã™ã€‚
+     * @param dredger æ˜ã‚Šå½“ã¦ãŸãƒ•ã‚¡ã‚¤ãƒ«ã«å¯¾ã—ã¦è¡Œã†ã‚¢ã‚¯ã‚·ãƒ§ãƒ³
+     * @param pattern dredge ã™ã‚‹ãƒ‘ã‚¿ãƒ¼ãƒ³ (æ³¨æ„ï¼šãƒ‡ã‚£ãƒ¬ã‚¯ãƒˆãƒªéƒ¨åˆ†ã¯é™¤ãã¾ã™)
+     * TODO {@link FileFilter} ã§ã‚‚ã„ã„ã‹ã‚‚
      */
     public RegexFileDigger(FileDredger dredger, Pattern pattern) {
         this.dredger = dredger;
@@ -46,8 +46,8 @@ public class RegexFileDigger implements FileDigger {
     }
 
     /**
-     * Œ@‚è‚Ü‚·B
-     * @param dir ƒgƒbƒvƒfƒBƒŒƒNƒgƒŠ 
+     * æ˜ã‚Šã¾ã™ã€‚
+     * @param dir ãƒˆãƒƒãƒ—ãƒ‡ã‚£ãƒ¬ã‚¯ãƒˆãƒª 
      * @throws NullPointerException dir is not found
      */
     public void dig(File dir) throws IOException {
