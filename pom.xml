@@ -21,7 +21,7 @@
         <configuration>
           <source>1.5</source>
           <target>1.5</target>
-          <encoding>Windows-31J</encoding>
+          <encoding>utf-8</encoding>
           <compilerVersion>1.5</compilerVersion>
         </configuration>
       </plugin>
