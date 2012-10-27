@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="Shift_JIS"?>
+<?xml version="1.0" encoding="UTF-8"?>
 
 <!-- ////////////////////////////////////////////////////////////////////// -->
 <!-- Copyright (c) 2002 by Naohide Sano, All rights reserved.               -->
@@ -19,19 +19,24 @@
 
   <property name="dir.build" value="target/classes" />
   <property name="dir.lib" value="lib" />
+  <xmlproperty file="pom.xml" />
+  <property name="ivy.file" value="${ivy.cache}/${project.groupId}/${project.artifactId}/ivy-${project.version}.xml" />
 
-  <!-- �N���X�p�X�̒�` -->
+  <!-- クラスパスの定義 -->
   <path id="project.class.path">
     <fileset dir="${dir.lib}">
       <include name="*.jar" />
     </fileset>
   </path>
 
-  <!-- �^�[�Q�b�g�̒�` -->
+  <!-- ターゲットの定義 -->
 
   <!-- clean -->
-  <target name="clean" description="�r���h���̃N���A">
+  <target name="clean" description="ビルド環境のクリア">
     <delete>
+      <fileset dir="${dir.lib}">
+        <include name="*" />
+      </fileset>
       <fileset dir="${dir.build}">
         <include name="**/*" />
       </fileset>
@@ -42,19 +47,19 @@
   </target>
 
   <!-- prepare -->
-  <target name="prepare" description="�r���h���̏���">
+  <target name="prepare" description="ビルド環境の準備">
     <ivy:settings file="ivy-settings.xml" />
-    <ivy:convertpom pomFile="pom.xml" ivyFile="ivy.xml" />
-    <ivy:retrieve />
+    <ivy:convertpom pomFile="pom.xml" ivyFile="${ivy.file}" />
+    <ivy:retrieve file="${ivy.file}" />
   </target>
 
   <!-- javac -->
-  <target name="compile" depends="prepare" description="�R���p�C��">
-    <javac debug="on" destdir="${dir.build}" deprecation="on" encoding="MS932">
+  <target name="compile" depends="prepare" description="コンパイル">
+    <javac debug="on" destdir="${dir.build}" deprecation="on" encoding="${encoding}">
       <classpath refid="project.class.path" />
       <include name="**/*.java" />
-      <exclude name="vavi/tools/**/*.java" />
       <src path="src/main/java" />
+      <src path="target/generated-sources/jjtree" />
     </javac>
 
     <copy todir="${dir.build}">
@@ -69,6 +74,15 @@
                   dest="${dir.build}" >
       <include name="**/*.properties" />
     </native2ascii>
+  </target>
+
+  <!-- jar -->
+  <target name="package" depends="compile" description="パッケージング">
+    <jar jarfile="target/${project.artifactId}-${project.version}.jar">
+      <fileset dir="${dir.build}">
+        <include name="**/*" />
+      </fileset>
+    </jar>
   </target>
 
   <!-- run -->

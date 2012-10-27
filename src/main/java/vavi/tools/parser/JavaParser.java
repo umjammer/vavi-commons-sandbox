@@ -183,7 +183,7 @@ public class JavaParser/*@bgen(jjtree)*/implements JavaParserTreeConstants, Java
       jj_consume_token(SEMICOLON);
     jjtree.closeNodeScope(jjtn000, true);
     jjtc000 = false;
-    jjtn000.setName(sb.toString());
+//    jjtn000.setName(sb.toString()); // TODO ???
     } catch (Throwable jjte000) {
     if (jjtc000) {
       jjtree.clearNodeScope(jjtn000);
@@ -1843,7 +1843,7 @@ public class JavaParser/*@bgen(jjtree)*/implements JavaParserTreeConstants, Java
       }
     jjtree.closeNodeScope(jjtn000, true);
     jjtc000 = false;
-      jjtn000.setName(sb.toString());
+//      jjtn000.setName(sb.toString()); // TODO ???
       {if (true) return sb.toString();}
     } finally {
     if (jjtc000) {
