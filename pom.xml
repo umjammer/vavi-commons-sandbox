@@ -57,12 +57,12 @@
       <plugin>
         <artifactId>maven-compiler-plugin</artifactId>
         <configuration>
-          <source>1.5</source>
-          <target>1.5</target>
+          <source>1.8</source>
+          <target>1.8</target>
           <encoding>utf-8</encoding>
-          <compilerVersion>1.5</compilerVersion>
           <generatedSourcesDirectory>target/generated-sources/jjtree</generatedSourcesDirectory>
         </configuration>
+        <version>3.3</version>
       </plugin>
       <plugin>
         <groupId>org.codehaus.mojo</groupId>

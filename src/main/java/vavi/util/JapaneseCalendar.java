@@ -24,7 +24,7 @@ import java.util.StringTokenizer;
  * <p>
  * GregorianCalendarは，0: 1月, 1: 2月, ... であるので，
  * getMonth(), set(int, int, int) の月が，1: 1月 になるようにしている。
- * 新暦である明治6年(1873年)移行をサポート???。
+ * 新暦である明治6年(1873年)以降をサポート???。
  * </p>
  * <li> TODO 解析，フォーマット系の分離
  * <li> TODO 明治以前の実装

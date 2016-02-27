@@ -170,10 +170,12 @@ public class Pak {
             while (l < length) {
                 int bytesRead = is.read(buf, l, length - l);
                 if (bytesRead == -1) {
+                    is.close();
                     throw new IOException(String.valueOf(file));
                 }
                 l += bytesRead;
             }
+            is.close();
 
             dos.write(buf, 0, length);
         }
@@ -189,10 +191,12 @@ public class Pak {
             while (l < length) {
                 int bytesRead = is.read(buf, l, length - l);
                 if (bytesRead == -1) {
+                    is.close();
                     throw new IOException(String.valueOf(file));
                 }
                 l += bytesRead;
             }
+            is.close();
 
             dos.write(buf, 0, length);
         }
