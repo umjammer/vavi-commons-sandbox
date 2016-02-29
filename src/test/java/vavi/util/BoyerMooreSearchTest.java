@@ -57,6 +57,7 @@ System.out.println(StringUtil.getDump(b, 128));
                 System.out.printf("found at: %08x %08x\n", is.available(), p);
             }
         }
+        is.close();
     }
 }
 
