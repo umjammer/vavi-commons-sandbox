@@ -4,7 +4,7 @@
  * Programmed by Naohide Sano
  */
 
-package vavi.util;
+package vavix.util;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -22,13 +22,11 @@ import java.nio.channels.FileChannel;
 public class FileUtil {
 
     /** */
+    @SuppressWarnings("resource")
     public static void copy(File src, File dest) throws IOException {
-        try (
-            FileChannel srcChannel = new FileInputStream(src).getChannel();
-            FileChannel destChannel = new FileOutputStream(dest).getChannel();
-        ) {
-            destChannel.transferFrom(srcChannel, 0, srcChannel.size());
-        }
+        FileChannel srcChannel = new FileInputStream(src).getChannel();
+        FileChannel destChannel = new FileOutputStream(dest).getChannel();
+        destChannel.transferFrom(srcChannel, 0, srcChannel.size());
     }
 }
 

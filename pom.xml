@@ -11,9 +11,12 @@
   <organization>
     <name></name>
   </organization>
-  <version>0.3.1</version>
-  <url>http://www.vavisoft.com/</url>
-  <description></description>
+  <version>0.3.2</version>
+  <url>https://github.com/umjammer/vavi-commons</url>
+  <description>0.3.2
+
+    move LevenshteinDistance to vavi-commons
+    add swing xml pretty printer</description>
   <distributionManagement>
     <repository>
       <id>internal.repo</id>
@@ -229,4 +232,10 @@
     <!-- github server corresponds to entry in ~/.m2/settings.xml -->
     <github.global.server>github</github.global.server>
   </properties>
+  <scm>
+    <url>https://github.com/umjammer/vavi-commons/tree/master/vavi-commons-sandbox</url>
+  </scm>
+  <issueManagement>
+    <url>https://github.com/umjammer/vavi-commons/issues</url>
+  </issueManagement>
 </project>

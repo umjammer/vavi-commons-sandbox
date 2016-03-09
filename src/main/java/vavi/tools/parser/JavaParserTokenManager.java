@@ -1205,7 +1205,7 @@ private int jjMoveNfa_0(int startState, int curPos)
       }
       else
       {
-         int hiByte = (int)(curChar >> 8);
+         int hiByte = /*(int)*/(curChar >> 8);
          int i1 = hiByte >> 6;
          long l1 = 1L << (hiByte & 077);
          int i2 = (curChar & 0xff) >> 6;
@@ -1282,6 +1282,7 @@ private int jjMoveStringLiteralDfa0_1()
 {
    return jjMoveNfa_1(0, 0);
 }
+@SuppressWarnings("unused")
 private int jjMoveNfa_1(int startState, int curPos)
 {
    int startsAt = 0;
@@ -1334,7 +1335,7 @@ private int jjMoveNfa_1(int startState, int curPos)
       }
       else
       {
-         int hiByte = (int)(curChar >> 8);
+         int hiByte = /*(int)*/(curChar >> 8);
          int i1 = hiByte >> 6;
          long l1 = 1L << (hiByte & 077);
          int i2 = (curChar & 0xff) >> 6;
@@ -1484,6 +1485,7 @@ private final int[] jjstateSet = new int[104];
 private final StringBuffer jjimage = new StringBuffer();
 private StringBuffer image = jjimage;
 private int jjimageLen;
+@SuppressWarnings("unused")
 private int lengthOfMatch;
 protected char curChar;
 /** Constructor. */

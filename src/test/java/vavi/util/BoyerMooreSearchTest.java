@@ -13,6 +13,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.regex.Pattern;
 
+import vavix.util.BoyerMooreSearch;
 import vavix.util.grep.FileDigger;
 import vavix.util.grep.RegexFileDigger;
 

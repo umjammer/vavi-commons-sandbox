@@ -1,4 +1,4 @@
-package vavi.util;
+package vavix.util;
 
 
 /**

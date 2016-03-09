@@ -369,7 +369,7 @@ public class DiffUtil {
      */
     public static String[] readLines(File file) throws IOException {
         BufferedReader r = new BufferedReader(new FileReader(file));
-        List<String> s = new ArrayList<String>();
+        List<String> s = new ArrayList<>();
         while (true) {
             String line = r.readLine();
             if (line == null) {
@@ -389,7 +389,7 @@ public class DiffUtil {
     public static String[] readLinesIgnoreWhiteSpace(File file) throws IOException {
 
         BufferedReader r = new BufferedReader(new FileReader(file));
-        List<String> s = new ArrayList<String>();
+        List<String> s = new ArrayList<>();
 
         //
         boolean isStringLiteral = false;

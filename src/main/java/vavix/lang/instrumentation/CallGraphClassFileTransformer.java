@@ -4,7 +4,7 @@
  * Programmed by Naohide Sano
  */
 
-package vavix.util;
+package vavix.lang.instrumentation;
 
 import java.io.ByteArrayInputStream;
 import java.lang.instrument.IllegalClassFormatException;
@@ -50,7 +50,7 @@ public class CallGraphClassFileTransformer implements VaviClassFileTransformer {
 
     /**
      * <pre>
-     * vavix.util.CallGraphClassFileTransformer.${key}.pattern ... class name matcher in regex
+     * vavix.lang.instrumentation.CallGraphClassFileTransformer.${key}.pattern ... class name matcher in regex
      * </pre>
      */
     public byte[] transform(ClassLoader loader, String className, Class<?> classBeingRedefined, ProtectionDomain protectionDomain, byte[] classfileBuffer) throws IllegalClassFormatException {
@@ -73,11 +73,11 @@ System.err.println("CallGraphClassFileTransformer::transform: pattern: " + patte
                 for (int i = 0; i < ctMethods.length; i++) {
                     key = getKey(ctClass, ctMethods[i]);
                     ctMethods[i].insertBefore("{" +
-                                              "    vavix.util.CallGraphClassFileTransformer.CallLogger.INSTANCE.pushMethod(\"" + key + "\");" +
-                                              "    vavix.util.CallGraphClassFileTransformer.CallLogger.INSTANCE.logCall();" +
+                                              "    vavix.lang.instrumentation.CallGraphClassFileTransformer.CallLogger.INSTANCE.pushMethod(\"" + key + "\");" +
+                                              "    vavix.lang.instrumentation.CallGraphClassFileTransformer.CallLogger.INSTANCE.logCall();" +
                                               "}");
                     ctMethods[i].insertAfter("{" +
-                                             "    vavix.util.CallGraphClassFileTransformer.CallLogger.INSTANCE.popMethod();" +
+                                             "    vavix.lang.instrumentation.CallGraphClassFileTransformer.CallLogger.INSTANCE.popMethod();" +
                                              "}");
                 }
 
@@ -92,7 +92,7 @@ System.err.println("CallGraphClassFileTransformer::transform: " + key + ": " + e
     }
 
     /** */
-    public static Set<String> signatures = new HashSet<String>();
+    public static Set<String> signatures = new HashSet<>();
     
     /** */
     public static String getKey(CtClass ctClass, CtMethod ctMethod) {
@@ -103,8 +103,8 @@ System.err.println("CallGraphClassFileTransformer::transform: " + key + ": " + e
 
         public static CallLogger INSTANCE = new CallLogger();
 
-        private Stack<String> callStack = new Stack<String>();
-        private Set<String> callLog = new HashSet<String>();
+        private Stack<String> callStack = new Stack<>();
+        private Set<String> callLog = new HashSet<>();
 
         public void pushMethod(String s) {
             callStack.push(s);

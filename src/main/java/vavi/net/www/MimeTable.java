@@ -43,10 +43,10 @@ import java.util.StringTokenizer;
 public class MimeTable implements FileNameMap {
 
     /** Keyed by content type, returns MimeEntries */
-    private Map<String, MimeEntry> entries = new HashMap<String, MimeEntry>();
+    private Map<String, MimeEntry> entries = new HashMap<>();
 
     /** Keyed by file extension (with the .), returns MimeEntries */
-    private Map<String, MimeEntry> extensionMap = new HashMap<String, MimeEntry>();
+    private Map<String, MimeEntry> extensionMap = new HashMap<>();
 
     /** */
 //  private static final String filePreamble = "vavi.net.www MIME content-types table";

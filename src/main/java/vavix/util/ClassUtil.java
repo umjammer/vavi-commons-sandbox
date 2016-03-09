@@ -4,7 +4,7 @@
  * Programmed by Naohide Sano
  */
 
-package vavi.util;
+package vavix.util;
 
 import java.lang.reflect.Array;
 import java.lang.reflect.Constructor;

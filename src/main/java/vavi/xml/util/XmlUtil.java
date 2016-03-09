@@ -4,7 +4,7 @@
  * Programmed by Naohide Sano
  */
 
-package vavix.util;
+package vavi.xml.util;
 
 import java.util.Properties;
 

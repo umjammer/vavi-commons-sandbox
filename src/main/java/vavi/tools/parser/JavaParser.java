@@ -60,7 +60,8 @@ public class JavaParser/*@bgen(jjtree)*/implements JavaParserTreeConstants, Java
 /*
  * Program structuring syntax follows.
  */
-  final public ASTCompilationUnit CompilationUnit() throws ParseException {
+  @SuppressWarnings("unused")
+final public ASTCompilationUnit CompilationUnit() throws ParseException {
  /*@bgen(jjtree) CompilationUnit */
   ASTCompilationUnit jjtn000 = new ASTCompilationUnit(this, JJTCOMPILATIONUNIT);
   boolean jjtc000 = true;
@@ -1820,7 +1821,8 @@ public class JavaParser/*@bgen(jjtree)*/implements JavaParserTreeConstants, Java
     }
   }
 
-  final public String Name() throws ParseException {
+  @SuppressWarnings("unused")
+final public String Name() throws ParseException {
  /*@bgen(jjtree) Name */
   ASTName jjtn000 = new ASTName(this, JJTNAME);
   boolean jjtc000 = true;
@@ -7238,7 +7240,7 @@ public class JavaParser/*@bgen(jjtree)*/implements JavaParserTreeConstants, Java
       return (jj_ntk = jj_nt.kind);
   }
 
-  private java.util.List jj_expentries = new java.util.ArrayList();
+  private java.util.List<int[]> jj_expentries = new java.util.ArrayList<>();
   private int[] jj_expentry;
   private int jj_kind = -1;
   private int[] jj_lasttokens = new int[100];
@@ -7253,7 +7255,7 @@ public class JavaParser/*@bgen(jjtree)*/implements JavaParserTreeConstants, Java
       for (int i = 0; i < jj_endpos; i++) {
         jj_expentry[i] = jj_lasttokens[i];
       }
-      jj_entries_loop: for (java.util.Iterator it = jj_expentries.iterator(); it.hasNext();) {
+      jj_entries_loop: for (java.util.Iterator<?> it = jj_expentries.iterator(); it.hasNext();) {
         int[] oldentry = (int[])(it.next());
         if (oldentry.length == jj_expentry.length) {
           for (int i = 0; i < jj_expentry.length; i++) {
@@ -7307,7 +7309,7 @@ public class JavaParser/*@bgen(jjtree)*/implements JavaParserTreeConstants, Java
     jj_add_error_token(0, 0);
     int[][] exptokseq = new int[jj_expentries.size()][];
     for (int i = 0; i < jj_expentries.size(); i++) {
-      exptokseq[i] = (int[])jj_expentries.get(i);
+      exptokseq[i] = /*(int[])*/jj_expentries.get(i);
     }
     return new ParseException(token, exptokseq, tokenImage);
   }

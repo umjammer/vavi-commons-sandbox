@@ -4,7 +4,7 @@
  * Programmed by Naohide Sano
  */
 
-package vavi.util;
+package vavix.util;
 
 import java.util.Enumeration;
 import java.util.NoSuchElementException;

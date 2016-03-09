@@ -393,7 +393,7 @@ Debug.println("here");
     private static final ResourceBundle rb = ResourceBundle.getBundle("vavi.util.JapaneseCalendar", Locale.JAPAN);
 
     /** */
-    private static final List<CalendarUtilJa> utils = new ArrayList<CalendarUtilJa>();
+    private static final List<CalendarUtilJa> utils = new ArrayList<>();
 
     /** */
     static {

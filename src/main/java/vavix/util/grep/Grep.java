@@ -67,7 +67,7 @@ public class Grep {
     }
     
     /** 濾したのを溜める */
-    private List<ResultSet> results = new ArrayList<ResultSet>();
+    private List<ResultSet> results = new ArrayList<>();
     
     /** ひとつ濾します */
     private void grep(CharBuffer cb) {
@@ -107,6 +107,8 @@ public class Grep {
         // Perform the search
         grep(cb);
         
+        fis.close();
+
         return results;
     }
 

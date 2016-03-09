@@ -46,9 +46,9 @@ public class ObjectUtil {
             ObjectInputStream in = new ObjectInputStream(fbaos.getInputStream());
             object = (T) in.readObject();
         } catch (IOException e) {
-            throw (RuntimeException) new IllegalStateException().initCause(e);
+            throw new IllegalStateException(e);
         } catch (ClassNotFoundException e) {
-            throw (RuntimeException) new IllegalStateException().initCause(e);
+            throw new IllegalStateException(e);
         }
         return object;
     }

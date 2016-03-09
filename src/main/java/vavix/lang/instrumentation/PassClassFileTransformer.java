@@ -4,12 +4,14 @@
  * Programmed by Naohide Sano
  */
 
-package vavix.util;
+package vavix.lang.instrumentation;
 
 import java.io.ByteArrayInputStream;
 import java.lang.instrument.IllegalClassFormatException;
 import java.security.ProtectionDomain;
+import java.util.HashSet;
 import java.util.Properties;
+import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -19,18 +21,18 @@ import javassist.CtMethod;
 
 
 /**
- * EnterExitClassFileTransformer.
+ * PassClassFileTransformer.
  * 
  * @author <a href="mailto:vavivavi@yahoo.co.jp">Naohide Sano</a> (nsano)
- * @version 0.00 050320 nsano initial version <br>
+ * @version 0.00 110823 nsano initial version <br>
  */
-public class EnterExitClassFileTransformer implements VaviClassFileTransformer {
+public class PassClassFileTransformer implements VaviClassFileTransformer {
 
     /** */
     private static Pattern pattern; 
 
     /** */
-    private static final String prefix = EnterExitClassFileTransformer.class.getName();
+    private static final String prefix = PassClassFileTransformer.class.getName();
 
     /** */
     private String key; 
@@ -43,12 +45,11 @@ public class EnterExitClassFileTransformer implements VaviClassFileTransformer {
     /** */
     public void setKey(String key) {
         this.key = key;
-//System.err.println("EnterExitClassFileTransformer::setKey: key: " + key);
     }
 
     /**
      * <pre>
-     * vavix.util.EnterExitClassFileTransformer.${key}.pattern ... class name matcher in regex
+     * vavix.lang.instrumentation.PassClassFileTransformer.${key}.pattern ... class name matcher in regex
      * </pre>
      */
     public byte[] transform(ClassLoader loader, String className, Class<?> classBeingRedefined, ProtectionDomain protectionDomain, byte[] classfileBuffer) throws IllegalClassFormatException {
@@ -57,33 +58,51 @@ public class EnterExitClassFileTransformer implements VaviClassFileTransformer {
         if (pattern == null) {
             Properties props = System.getProperties();
             pattern = Pattern.compile(props.getProperty(prefix + "." + key + "." + "pattern"));
-System.err.println("EnterExitClassFileTransformer::transform: pattern: " + pattern.pattern());
+System.err.println("PassClassFileTransformer::transform: pattern: " + pattern.pattern());
         }
 
-//System.err.println("EnterExitClassFileTransformer::transform: format: " + className);
         Matcher matcher = pattern.matcher(className);
         if (matcher.matches()) {
-//System.err.println("EnterExitClassFileTransformer::transform: format: " + className);
             try {
                 ByteArrayInputStream stream = new ByteArrayInputStream(classfileBuffer);
                 CtClass ctClass = classPool.makeClass(stream);
 
                 CtMethod[] ctMethods = ctClass.getDeclaredMethods();
                 for (int i = 0; i < ctMethods.length; i++) {
-                    ctMethods[i].insertBefore("{System.err.println(\"Enter " + ctClass.getName() + "#" + ctMethods[i].getName() + ctMethods[i].getSignature() + "\");}");
-                    ctMethods[i].insertAfter("{System.err.println(\"Exit " + ctClass.getName() + "#" + ctMethods[i].getName() + ctMethods[i].getSignature() + "\");}");
+                    String key = getKey(ctClass, ctMethods[i]);
+                    ctMethods[i].insertBefore("{" +
+                                              "    if (!vavix.lang.instrumentation.PassClassFileTransformer.signatures.contains(\"" + key + "\")) {" +
+                                              "        System.err.println(\"" + key + "\");" +
+                                              "        vavix.lang.instrumentation.PassClassFileTransformer.signatures.add(\"" + key + "\");" +
+                                              "    }" + 
+                                              "}");
                 }
 
                 return ctClass.toBytecode();
             } catch (Exception e) {
-//e.printStackTrace(System.err);
-System.err.println("EnterExitClassFileTransformer::transform: " + className + ": " + e);
-//                throw (IllegalClassFormatException) new IllegalClassFormatException().initCause(e);
+System.err.println("PassClassFileTransformer::transform: " + className + ": " + e);
                 return null;
             }
         } else {
-//System.err.println("ignore: " + className);
             return null;
+        }
+    }
+    
+    /** */
+    public static Set<String> signatures = new HashSet<>();
+    
+    /** */
+    public static String getKey(CtClass ctClass, CtMethod ctMethod) {
+        return normalize(ctClass.getName()) + "#" + ctMethod.getName() + ctMethod.getSignature();
+    }
+    
+    static String normalize(String name) {
+        if (name.indexOf('.') > 0 && name.lastIndexOf('$') > 0) {
+            String packageName = name.substring(0, name.lastIndexOf('.'));
+            String simpleName = name.substring(name.lastIndexOf('$') + 1);
+            return packageName + '.' + simpleName;
+        } else {
+            return name;
         }
     }
 }

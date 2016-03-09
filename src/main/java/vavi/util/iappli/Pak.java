@@ -103,13 +103,13 @@ public class Pak {
         if (imageListFilename != null) {
             imageFileList = getFileList(new File(imageListFilename));
         } else {
-            imageFileList = new ArrayList<File>();
+            imageFileList = new ArrayList<>();
         }
         List<File> soundFileList = null;
         if (soundListFilename != null) {
             soundFileList = getFileList(new File(soundListFilename));
         } else {
-            soundFileList = new ArrayList<File>();
+            soundFileList = new ArrayList<>();
         }
 
         int p = 0;
@@ -207,7 +207,7 @@ public class Pak {
 
     /** */
     private List<String> getStringList(File messagesFile) throws IOException {
-        List<String> list = new ArrayList<String>();
+        List<String> list = new ArrayList<>();
         BufferedReader r = new BufferedReader(new FileReader(messagesFile));
         while (r.ready()) {
             String line = r.readLine();
@@ -223,7 +223,7 @@ public class Pak {
 
     /** */
     private List<File> getFileList(File listFile) throws IOException {
-        List<File> list = new ArrayList<File>();
+        List<File> list = new ArrayList<>();
         String cwd = listFile.getParent();
         BufferedReader r = new BufferedReader(new FileReader(listFile));
         while (r.ready()) {

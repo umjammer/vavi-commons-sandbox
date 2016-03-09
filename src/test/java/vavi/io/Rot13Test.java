@@ -54,6 +54,8 @@ System.err.println(new String(baos.toByteArray()));
         Rot13.InputStream ris = new Rot13.InputStream(bais);
         byte[] b = new byte[256];
         int r = ris.read(b, 0, b.length);
+        ris.close();
+        ros.close();
 System.err.println(new String(b, 0, r));
         assertEquals("Naohide Sano 1970", new String(b, 0, r));
     }

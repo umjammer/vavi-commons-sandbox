@@ -39,7 +39,8 @@ public class PasswordField {
         int offset = 0;
         int c;
 
-        loop: while (true) {
+loop:
+        while (true) {
             switch (c = in.read()) {
             case -1:
             case '\n':
@@ -76,21 +77,6 @@ public class PasswordField {
         System.arraycopy(buf, 0, ret, 0, offset);
         Arrays.fill(buf, ' ');
         return ret;
-    }
-
-    /** */
-    public static void main(String[] argv) {
-        char[] password = null;
-        try {
-            password = PasswordField.getPassword(System.in, "Enter your password:#");
-        } catch (IOException ioe) {
-            ioe.printStackTrace();
-        }
-        if (password == null) {
-            System.out.println("No password entered");
-        } else {
-            System.out.println("The password entered is: " + String.valueOf(password));
-        }
     }
 }
 

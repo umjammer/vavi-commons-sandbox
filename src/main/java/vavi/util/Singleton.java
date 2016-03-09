@@ -10,7 +10,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 
-
 /**
  * Singleton.
  * <p>
@@ -32,7 +31,7 @@ Debug.println("class: " + this.getClass());
     }
 
     /** */
-    protected static Map<Class<? extends Singleton>, Singleton> singletons = new HashMap<Class<? extends Singleton>, Singleton>();
+    protected static Map<Class<? extends Singleton>, Singleton> singletons = new HashMap<>();
 
     /**
      * @return このクラスの唯一のインスタンス
@@ -50,7 +49,7 @@ Debug.println("class: " + this.getClass());
             }
             return instance;
         } catch (Exception e) {
-            throw (RuntimeException) new IllegalStateException().initCause(e);
+            throw new IllegalStateException(e);
         }
     }
 

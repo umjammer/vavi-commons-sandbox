@@ -74,6 +74,7 @@ public class Test1 {
             }
             l += r;
         }
+        gis.close();
         String r = new String(b, 0, l);
 System.err.println(r);
         assertEquals(s.substring(1), r);
@@ -119,6 +120,7 @@ System.err.println(baos.getByteArray().length);
             }
             l += r;
         }
+        is.close();
 System.err.println(l);
         String r = new String(b, 0, l);
 System.err.println(r);
@@ -141,16 +143,17 @@ System.err.println(r);
         byte[] bytes = s.getBytes();
         InputStream in = new AdvancedByteArrayInputStream(bytes);
         InputStream is = new OutputEngineInputStream(new IOStreamOutputEngine(in, new Rot13OutputStreamFactory()));
-        Rot13.InputStream gis = new Rot13.InputStream(is);
+        Rot13.InputStream ris = new Rot13.InputStream(is);
         int l = 0;
         byte[] b = new byte[100];
         while (true) {
-            int r = gis.read(b);
+            int r = ris.read(b);
             if (r < 0) {
                 break;
             }
             l += r;
         }
+        ris.close();
         String r = new String(b, 0, l);
 System.err.println(r);
         assertEquals(s, r);
@@ -190,6 +193,7 @@ System.err.println(r);
             }
             l += r;
         }
+        is.close();
 System.err.println(l);
         String r = new String(b, 0, l);
 System.err.println(r);
@@ -262,6 +266,7 @@ Debug.println(inFile.length());
         };
         thread.start();
         thread.join();
+        source.close();
         
 Debug.println(inFile.length() + ", " + outFile.length());
         assertEquals(Checksum.getChecksum(inFile), Checksum.getChecksum(outFile));

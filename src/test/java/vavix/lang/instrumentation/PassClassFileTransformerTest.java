@@ -4,11 +4,13 @@
  * Programmed by Naohide Sano
  */
 
-package vavix.util;
+package vavix.lang.instrumentation;
 
 import org.junit.Test;
 
 import static org.junit.Assert.*;
+
+import vavix.lang.instrumentation.PassClassFileTransformer;
 
 
 /**

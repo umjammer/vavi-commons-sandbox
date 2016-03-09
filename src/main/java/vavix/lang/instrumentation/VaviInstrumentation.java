@@ -4,7 +4,7 @@
  * Programmed by Naohide Sano
  */
 
-package vavix.util;
+package vavix.lang.instrumentation;
 
 import java.lang.instrument.Instrumentation;
 import java.util.Enumeration;

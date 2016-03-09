@@ -4,7 +4,7 @@
  * Programmed by Naohide Sano
  */
 
-package vavix.util;
+package vavix.lang.instrumentation;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
@@ -30,7 +30,7 @@ public class PropertiesClassFileTransformer implements VaviClassFileTransformer 
     private static Properties props; 
 
     /** */
-    private static final String prefix = "vavix.util.PropertiesClassFileTransformer";
+    private static final String prefix = "vavix.lang.instrumentation.PropertiesClassFileTransformer";
 
     /** */
     private String key; 
@@ -48,11 +48,11 @@ public class PropertiesClassFileTransformer implements VaviClassFileTransformer 
     /**
      * "VaviInstrumentation.properties" をクラスパスが通った場所においてください。
      * <pre>
-     * vavix.util.PropertiesClassFileTransformer.class ... package/name/ClassName
-     * vavix.util.PropertiesClassFileTransformer.method ... method name ("*" means for all methods)
-     * vavix.util.PropertiesClassFileTransformer.constructor ... constructor name ("vavix.util.PropertiesClassFileTransformer.method" の方が優先する)
-     * vavix.util.PropertiesClassFileTransformer.inserBefore ... ex. {System.err.println("args: " + $$);}
-     * vavix.util.PropertiesClassFileTransformer.insertAfter ... ex. {System.err.println("result: " + $_);}
+     * vavix.lang.instrumentation.PropertiesClassFileTransformer.class ... package/name/ClassName
+     * vavix.lang.instrumentation.PropertiesClassFileTransformer.method ... method name ("*" means for all methods)
+     * vavix.lang.instrumentation.PropertiesClassFileTransformer.constructor ... constructor name ("vavix.lang.instrumentation.PropertiesClassFileTransformer.method" の方が優先する)
+     * vavix.lang.instrumentation.PropertiesClassFileTransformer.inserBefore ... ex. {System.err.println("args: " + $$);}
+     * vavix.lang.instrumentation.PropertiesClassFileTransformer.insertAfter ... ex. {System.err.println("result: " + $_);}
      * </pre>
      */
     public byte[] transform(ClassLoader loader, String className, Class<?> classBeingRedefined, ProtectionDomain protectionDomain, byte[] classfileBuffer) throws IllegalClassFormatException {
@@ -66,7 +66,7 @@ public class PropertiesClassFileTransformer implements VaviClassFileTransformer 
 e.printStackTrace(System.err);
                 throw (IllegalClassFormatException) new IllegalClassFormatException().initCause(e);
             }
-//System.err.println("class: " + props.getProperty("vavix.util.PropertiesClassFileTransformer.class"));
+//System.err.println("class: " + props.getProperty("vavix.lang.instrumentation.PropertiesClassFileTransformer.class"));
         }
 
 //System.err.println("className: " + className);
