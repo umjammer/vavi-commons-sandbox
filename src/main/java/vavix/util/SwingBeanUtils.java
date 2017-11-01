@@ -28,12 +28,12 @@ public class SwingBeanUtils extends AdvancedBeanUtils {
 
     /**
      * <pre>
-     * 
-     *  JTextField	setText, getText
-     *  JLabel		n/a, getText
-     *  
+     *
+     *  JTextField  setText, getText
+     *  JLabel      n/a, getText
+     *
      * </pre>
-     * 
+     *
      * @param swingBean
      * @param bean
      * @throws NoSuchMethodException

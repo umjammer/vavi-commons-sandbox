@@ -25,29 +25,29 @@ import java.util.List;
  * <pre>
  * offset
  * [BOF]
- * 00		version. 1
- * 01		number of messages
- * 02 ~		messages
- * xx		number of images
- * xx xx	index of image 1
- * xx xx	index of image 2
+ * 00       version. 1
+ * 01       number of messages
+ * 02 ~     messages
+ * xx       number of images
+ * xx xx    index of image 1
+ * xx xx    index of image 2
  *
- * xx xx	index of image n
- * xx		number of sounds
- * xx xx	index of sound 1
- * xx xx	index of sound 2
+ * xx xx    index of image n
+ * xx       number of sounds
+ * xx xx    index of sound 1
+ * xx xx    index of sound 2
  *
- * xx xx	index of sound n
- * yy ~		image 1
- * yy ~		image n
- * yy ~		sound 1
- * yy ~		sound n
+ * xx xx    index of sound n
+ * yy ~     image 1
+ * yy ~     image n
+ * yy ~     sound 1
+ * yy ~     sound n
  * [EOF]
  *
  * message
  *
- * 00		length of message
- * 01 ~		message
+ * 00       length of message
+ * 01 ~     message
  *
  * @author <a href="mailto:vavivavi@yahoo.co.jp">Naohide Sano</a> (nsano)
  * @version 0.00 040125 nsano initial version <br>

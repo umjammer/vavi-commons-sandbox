@@ -11,6 +11,7 @@ import java.util.Calendar;
 
 /**
  * 日本における国民の祝日を取得するクラスです。
+ *
  * <pre>
  * 1月1日          元旦
  * 1月第2月曜日    成人の日
@@ -29,8 +30,8 @@ import java.util.Calendar;
  * 12月23日        天皇誕生日
  * </pre>
  *
- * @author	<a href="mailto:vavivavi@yahoo.co.jp">Naohide Sano</a> (nsano)
- * @version	0.00	021119	nsano	port <br>
+ * @author <a href="mailto:vavivavi@yahoo.co.jp">Naohide Sano</a> (nsano)
+ * @version 0.00 021119 nsano port <br>
  */
 public class JapaneseHoliday {
 
@@ -63,7 +64,6 @@ public class JapaneseHoliday {
         return isHoliday(calendar.get(Calendar.YEAR),
                          calendar.get(Calendar.MONTH),
                          calendar.get(Calendar.DAY_OF_MONTH));
-        
     }
 
     /**
@@ -76,7 +76,7 @@ public class JapaneseHoliday {
      */
     public boolean isHoliday(int yyyy, int mm, int dd) {
         int[] equinox = getEquinoxDays(yyyy);
-        
+
         int[] monday = getMondayHoliday(yyyy);
         mm++;
         // わかりやすく cal.set(Calendar.YEAR, yyyy);
@@ -87,7 +87,7 @@ public class JapaneseHoliday {
         } else if (saturdayHoliday && calendar.get(Calendar.DAY_OF_WEEK) == Calendar.SATURDAY) {
             return true;
         }
-        
+
         if ((mm == 1 && (dd == 1 || dd == monday[0])) ||
             (mm == 2 && (dd == 11)) ||
             (mm == 3 && (dd == equinox[0])) ||
@@ -103,14 +103,14 @@ public class JapaneseHoliday {
             if (mm == 2 && dd == 12) {
                 calendar.set(Calendar.MONTH, 1);
                 calendar.set(Calendar.DAY_OF_MONTH, 11);
-                
+
                 if (calendar.get(Calendar.DAY_OF_WEEK) == Calendar.SUNDAY) {
                     return true;
                 }
             } else if
                 (mm == 3 && dd == (equinox[0] + 1)) {
                 calendar.set(Calendar.MONTH, 2);
-                
+
                 calendar.set(Calendar.DAY_OF_MONTH, equinox[0]);
                 if (calendar.get(Calendar.DAY_OF_WEEK) == Calendar.SUNDAY) {
                     return true;
@@ -180,10 +180,10 @@ public class JapaneseHoliday {
     private int[] getEquinoxDays(int yyyy) {
         long temp = 0;
         // 一時的な変数 temp = (242194 * (yyyy - 1980));
-        
+
         temp -= ((yyyy - 1980) >> 2) * 1000000;
         long s3 = (20843100 + temp) / 1000000;
-        
+
         long s9 = (23248800 + temp) / 1000000;
         String s3s = String.valueOf(s3);
         // s3s =
@@ -196,7 +196,7 @@ public class JapaneseHoliday {
             Integer.parseInt(s9s)
         };
     }
-    
+
     /**
      * @param yyyy
      * @return 指定した年の月曜日の休日
@@ -210,7 +210,7 @@ public class JapaneseHoliday {
         // 海の日 7月第三月曜日(2003年から) int h9 = 15;
         // 敬老の日 9月第三月曜日(2003年から) int h10 = 0;
         // 体育の日 10月第二月曜日 cal.set(Calendar.YEAR, yyyy);
-        
+
         calendar.set(Calendar.MONTH, 0);
         calendar.set(Calendar.DAY_OF_MONTH, 1);
         int week = calendar.get(Calendar.DAY_OF_WEEK);
@@ -237,7 +237,7 @@ public class JapaneseHoliday {
             h1 = 10;
             break;
         }
-        
+
         calendar.set(Calendar.MONTH, 9);
         week = calendar.get(Calendar.DAY_OF_WEEK);
         switch (week) {
@@ -263,7 +263,7 @@ public class JapaneseHoliday {
             h10 = 10;
             break;
         }
-        
+
         if (yyyy >= 2003) {
             calendar.set(Calendar.MONTH, 6);
             week = calendar.get(Calendar.DAY_OF_WEEK);
@@ -290,7 +290,7 @@ public class JapaneseHoliday {
                 h7 = 17;
                 break;
             }
-            
+
             calendar.set(Calendar.MONTH, 8);
             week = calendar.get(Calendar.DAY_OF_WEEK);
             switch (week) {
@@ -317,7 +317,7 @@ public class JapaneseHoliday {
                 break;
             }
         }
-        
+
         return new int[] { h1, h7, h9, h10 };
     }
 }

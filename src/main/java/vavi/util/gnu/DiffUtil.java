@@ -56,32 +56,32 @@ public class DiffUtil {
     public static abstract class BasicPrinter {
 
         /** */
-    	protected BasicPrinter(Object[] a, Object[] b) {
+        protected BasicPrinter(Object[] a, Object[] b) {
             out = new PrintWriter(new OutputStreamWriter(System.out));
             file0 = a;
             file1 = b;
         }
-    
-    	/**
-    	 * Set to ignore certain kinds of lines when printing
-    	 * an edit script. For example, ignoring blank lines or comments.
-    	 */
-    	protected UnaryPredicate ignore = null;
-    
-    	/**
-    	 * Set to the lines of the files being compared.
-    	 */
-    	protected Object[] file0, file1;
-    
-    	/**
-    	 * Divide SCRIPT into pieces by calling HUNKFUN and
-    	 * print each piece with PRINTFUN.
-    	 * Both functions take one arg, an edit script.
-    	 *
-    	 * PRINTFUN takes a subscript which belongs together (with a null
-    	 * link at the end) and prints it.
-    	 */
-    	public void print(Diff.Change script) {
+
+        /**
+         * Set to ignore certain kinds of lines when printing
+         * an edit script. For example, ignoring blank lines or comments.
+         */
+        protected UnaryPredicate ignore = null;
+
+        /**
+         * Set to the lines of the files being compared.
+         */
+        protected Object[] file0, file1;
+
+        /**
+         * Divide SCRIPT into pieces by calling HUNKFUN and
+         * print each piece with PRINTFUN.
+         * Both functions take one arg, an edit script.
+         *
+         * PRINTFUN takes a subscript which belongs together (with a null
+         * link at the end) and prints it.
+         */
+        public void print(Diff.Change script) {
             Diff.Change next = script;
 
             while (next != null) {
@@ -151,25 +151,25 @@ public class DiffUtil {
         }
 
         /** */
-    	protected PrintWriter out;
-    
-    	/**
-    	 * Look at a hunk of edit script and report the range of lines
-    	 * in each file
-    	 * that it applies to. HUNK is the start of the hunk, which is a chain
-    	 * of `struct change'. The first and last line numbers of file 0 are
-    	 * stored in *FIRST0 and *LAST0, and likewise for file 1
-    	 * in *FIRST1 and *LAST1.
-    	 * Note that these are internal line numbers that count from 0.
-    	 *
-    	 * If no lines from file 0 are deleted, then FIRST0 is LAST0+1.
-    	 *
-    	 * Also set *DELETES nonzero if any lines of file 0 are deleted
-    	 * and set *INSERTS nonzero if any lines of file 1 are inserted.
-    	 * If only ignorable lines are inserted or deleted, both are
-    	 * set to 0.
-    	 */
-    	protected void analyzeHunk(Diff.Change hunk) {
+        protected PrintWriter out;
+
+        /**
+         * Look at a hunk of edit script and report the range of lines
+         * in each file
+         * that it applies to. HUNK is the start of the hunk, which is a chain
+         * of `struct change'. The first and last line numbers of file 0 are
+         * stored in *FIRST0 and *LAST0, and likewise for file 1
+         * in *FIRST1 and *LAST1.
+         * Note that these are internal line numbers that count from 0.
+         *
+         * If no lines from file 0 are deleted, then FIRST0 is LAST0+1.
+         *
+         * Also set *DELETES nonzero if any lines of file 0 are deleted
+         * and set *INSERTS nonzero if any lines of file 1 are inserted.
+         * If only ignorable lines are inserted or deleted, both are
+         * set to 0.
+         */
+        protected void analyzeHunk(Diff.Change hunk) {
 
             int l0 = 0, l1 = 0;
             boolean nontrivial = (ignore == null);
@@ -221,14 +221,14 @@ public class DiffUtil {
             out.println(pre + linbuf.toString());
         }
 
-    	/**
-    	 * Print a pair of line numbers with SEPCHAR, translated for file FILE.
-    	 * If the two numbers are identical, print just one number.
-    	 *
-    	 * Args A and B are internal line numbers.
-    	 * We print the translated (real) line numbers.
-    	 */
-	    protected void printNumberRange(char sepchar, int a, int b) {
+        /**
+         * Print a pair of line numbers with SEPCHAR, translated for file FILE.
+         * If the two numbers are identical, print just one number.
+         *
+         * Args A and B are internal line numbers.
+         * We print the translated (real) line numbers.
+         */
+        protected void printNumberRange(char sepchar, int a, int b) {
             // Note: we can have B < A in the case of a range of no lines.
             // In this case, we should print the line number before the range,
             // which is B.
@@ -240,7 +240,7 @@ public class DiffUtil {
         }
 
         /** */
-	    public static char changeLetter(boolean inserts, boolean deletes) {
+        public static char changeLetter(boolean inserts, boolean deletes) {
             if (inserts) {
                 return 'd';
             } else if (deletes) {
@@ -256,19 +256,19 @@ public class DiffUtil {
      */
     public static class NormalPrinter extends BasicPrinter {
 
-    	public NormalPrinter(Object[] a, Object[] b) {
-    	    super(a, b);
-    	}
+        public NormalPrinter(Object[] a, Object[] b) {
+            super(a, b);
+        }
 
-    	/**
+        /**
          * Print a hunk of a normal diff.
          * This is a contiguous portion of a complete edit script,
          * describing changes in consecutive lines.
          */
-    	protected void printHunk(Diff.Change hunk) {
+        protected void printHunk(Diff.Change hunk) {
 
-    	    /* Determine range of line numbers involved in each file. */
-    	    analyzeHunk(hunk);
+            /* Determine range of line numbers involved in each file. */
+            analyzeHunk(hunk);
             if (!hasDiff()) {
                 return;
             }
@@ -306,15 +306,15 @@ public class DiffUtil {
      */
     public static class EdPrinter extends BasicPrinter {
 
-    	public EdPrinter(Object[] a, Object[] b) {
-    	    super(a, b);
-    	}
-    
-    	/** Print a hunk of an ed diff */
-    	protected void printHunk(Diff.Change hunk) {
+        public EdPrinter(Object[] a, Object[] b) {
+            super(a, b);
+        }
 
-    	    // Determine range of line numbers involved in each file.
-    	    analyzeHunk(hunk);
+        /** Print a hunk of an ed diff */
+        protected void printHunk(Diff.Change hunk) {
+
+            // Determine range of line numbers involved in each file.
+            analyzeHunk(hunk);
             if (!hasDiff()) {
                 return;
             }

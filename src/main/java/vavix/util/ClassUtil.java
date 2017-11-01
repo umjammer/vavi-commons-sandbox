@@ -41,13 +41,13 @@ public final class ClassUtil {
             clazz = Boolean.TYPE;
         } else if ("byte".equals(className)) {
             clazz = Byte.TYPE;
-    	} else if ("char".equals(className)) {
+        } else if ("char".equals(className)) {
             clazz = Character.TYPE;
-    	} else if ("double".equals(className)) {
+        } else if ("double".equals(className)) {
             clazz = Double.TYPE;
-    	} else if ("float".equals(className)) {
+        } else if ("float".equals(className)) {
             clazz = Float.TYPE;
-    	} else if ("int".equals(className)) {
+        } else if ("int".equals(className)) {
             clazz = Integer.TYPE;
         } else if ("long".equals(className)) {
             clazz = Long.TYPE;
@@ -64,8 +64,9 @@ public final class ClassUtil {
 
     /**
      * 文字列からコンストラクタ用の引数型のクラスのリストを取得します．
-     * @param	line	デリミタは { ',', '\t', ' ' }
-     *			プリミティブ型はそのまま書く． int, long ...
+     *
+     * @param line デリミタは { ',', '\t', ' ' }
+     *            プリミティブ型はそのまま書く． int, long ...
      */
     public static Class<?>[] getArgumentTypes(String line)
         throws ClassNotFoundException {
@@ -81,8 +82,9 @@ public final class ClassUtil {
 
     /**
      * 文字列からコンストラクタ用の引数のオブジェクトのリストを取得します．
-     * @param	line	デリミタは { ',', '\t', ' ' }
-     *			null はそのまま書く． null
+     *
+     * @param line デリミタは { ',', '\t', ' ' }
+     *            null はそのまま書く． null
      */
     static Object[] getArguments(String line, Class<?>[] argTypes)
         throws InstantiationException,
@@ -129,11 +131,12 @@ public final class ClassUtil {
 
     /**
      * 新しいインスタンスを取得します．
-     * @param	className	プリミティブ型もそのまま指定できます．
-     * @param	argTypes	デリミタは { ',', '\t', ' ' }
-     *				プリミティブ型はそのまま書く． int, long ...
-     * @param	args		デリミタは { ',', '\t', ' ' }
-     *				null はそのまま書く． null
+     *
+     * @param className プリミティブ型もそのまま指定できます．
+     * @param argTypes デリミタは { ',', '\t', ' ' }
+     *            プリミティブ型はそのまま書く． int, long ...
+     * @param args デリミタは { ',', '\t', ' ' }
+     *            null はそのまま書く． null
      */
     public static Object newInstance(String className,
                                      String argTypes,

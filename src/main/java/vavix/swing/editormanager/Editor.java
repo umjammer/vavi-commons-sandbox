@@ -21,13 +21,15 @@ public interface Editor {
 
     /**
      * Adds an editor listener.
-     * @param	l	the editor listener
+     *
+     * @param l the editor listener
      */
     void addEditorListener(EditorListener l);
 
     /**
      * Removes an editor listener.
-     * @param	l	the editor listener
+     *
+     * @param l the editor listener
      */
     void removeEditorListener(EditorListener l);
 

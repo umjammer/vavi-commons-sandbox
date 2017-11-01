@@ -20,13 +20,13 @@ import vavi.util.Debug;
 public final class ComUtil {
     /** */
     private ComUtil() {}
-    
+
     /** */
     public static Object toObject(Variant variant) {
 Debug.println("variant: " + variant + ", " + Debug.getCallerMethod(1));
-    	if (variant == null) {
-    	    return null;
-    	}
+        if (variant == null) {
+            return null;
+        }
         short type = variant.getvt();
         String name = null;
         Object value = null;

@@ -132,24 +132,24 @@ public class Diff {
      * It cannot cause incorrect diff output.
      */
     private int diag(int xoff, int xlim, int yoff, int ylim) {
-    	final int[] fd = fdiag;	// Give the compiler a chance.
-    	final int[] bd = bdiag;	// Additional help for the compiler.
-    	final int[] xv = xvec;		// Still more help for the compiler.
-    	final int[] yv = yvec;		// And more and more . . .
-    	final int dmin = xoff - ylim;	// Minimum valid diagonal.
-    	final int dmax = xlim - yoff;	// Maximum valid diagonal.
-    	final int fmid = xoff - yoff;	// Center diagonal of top-down search.
-    	final int bmid = xlim - ylim;	// Center diagonal of bottom-up search.
-    	int fmin = fmid, fmax = fmid;	// Limits of top-down search.
-    	int bmin = bmid, bmax = bmid;	// Limits of bottom-up search.
-    	// True if southeast corner is on an odd
-    	// diagonal with respect to the northwest.
-    	final boolean odd = (fmid - bmid & 1) != 0;	
-    
-    	fd[fdiagoff + fmid] = xoff;
-    	bd[bdiagoff + bmid] = xlim;
-    
-    	for (int c = 1;; ++c) {
+        final int[] fd = fdiag; // Give the compiler a chance.
+        final int[] bd = bdiag; // Additional help for the compiler.
+        final int[] xv = xvec; // Still more help for the compiler.
+        final int[] yv = yvec; // And more and more . . .
+        final int dmin = xoff - ylim; // Minimum valid diagonal.
+        final int dmax = xlim - yoff; // Maximum valid diagonal.
+        final int fmid = xoff - yoff; // Center diagonal of top-down search.
+        final int bmid = xlim - ylim; // Center diagonal of bottom-up search.
+        int fmin = fmid, fmax = fmid; // Limits of top-down search.
+        int bmin = bmid, bmax = bmid; // Limits of bottom-up search.
+        // True if southeast corner is on an odd
+        // diagonal with respect to the northwest.
+        final boolean odd = (fmid - bmid & 1) != 0;
+
+        fd[fdiagoff + fmid] = xoff;
+        bd[bdiagoff + bmid] = xlim;
+
+        for (int c = 1;; ++c) {
             int d; // Active diagonal.
             boolean big_snake = false;
 
@@ -454,7 +454,7 @@ public class Diff {
 
     /**
      * Report the differences of two objects.
-     * @param	reverse
+     * @param reverse
      */
     public Change getChange(final boolean reverse) {
 
@@ -523,7 +523,7 @@ public class Diff {
         public final int line0;
 
         /** Line number of 1st inserted line. */
-        public final int line1;		
+        public final int line1;
 
         /**
          * Cons an additional entry onto the front of an edit script OLD.
@@ -541,7 +541,10 @@ public class Diff {
             this.inserted = inserted;
             this.deleted = deleted;
             this.link = old;
-            // System.err.println(line0+","+line1+","+inserted+","+deleted);
+        }
+
+        public String toString() {
+            return "line0: " + line0 + ", line1: " + line1 + ", inserted: " + inserted + ", deleted: " + deleted;
         }
     }
 
@@ -550,79 +553,82 @@ public class Diff {
      */
     private class FileData {
 
-    	/** Allocate changed array for the results of comparison. */
-    	void clear() {
-    	    // Allocate a flag for each line of each file, saying whether that
-    	    // line is an insertion or deletion.
-    	    // Allocate an extra element, always zero, at each end of each
-    	    // vector.
-    	    changed_flag = new boolean[buffered_lines + 2];
-    	}
-    
-    	/**
-    	 * Return equiv_count[I] as the number of lines in this file
-    	 * that fall in equivalence class I.
-    	 * @return the array of equivalence class counts.
-    	 */
-    	int[] equivCount() {
-    	    int[] equiv_count = new int[equiv_max];
+        /** Allocate changed array for the results of comparison. */
+        void clear() {
+            // Allocate a flag for each line of each file, saying whether that
+            // line is an insertion or deletion.
+            // Allocate an extra element, always zero, at each end of each
+            // vector.
+            changed_flag = new boolean[buffered_lines + 2];
+        }
+
+        /**
+         * Return equiv_count[I] as the number of lines in this file
+         * that fall in equivalence class I.
+         * 
+         * @return the array of equivalence class counts.
+         */
+        int[] equivCount() {
+            int[] equiv_count = new int[equiv_max];
             for (int i = 0; i < buffered_lines; i++) {
                 equiv_count[equivs[i]]++;
             }
             return equiv_count;
         }
 
-    	/**
-    	 * Discard lines that have no matches in another file.
-    	 *
-    	 * A line which is discarded will not be considered by the actual
-    	 * comparison algorithm; it will be as if that line were not in the
-    	 * file.
-    	 * The file's `realindexes' table maps virtual line numbers
-    	 * (which don't count the discarded lines) into real line numbers;
-    	 * this is how the actual comparison algorithm produces results
-    	 * that are comprehensible when the discarded lines are counted.
-    	 * <p>
-    	 * When we discard a line, we also mark it as a deletion or insertion
-    	 * so that it will be printed in the output.
-    	 * @param f the other file
-    	 */
-    	void discard_confusing_lines(FileData f) {
-    	    clear();
-    	    // Set up table of which lines are going to be discarded.
-    	    final byte[] discarded = discardable(f.equivCount());
-    
-    	    // Don't really discard the provisional lines except when they
-    	    // occur in a run of discardables, with nonprovisionals at the
-    	    // beginning and end.
-    	    filterDiscards(discarded);
-    
-    	    // Actually discard the lines.
-    	    discard(discarded);
-    	}
-    
-    	/**
-    	 * Mark to be discarded each line that matches no line of another file.
-    	 * If a line matches many lines, mark it as provisionally discardable.
-    	 * @see #equivCount()
-    	 * @param counts The count of each equivalence number for the other
-    	 *	       file.
-    	 * @return 0=nondiscardable, 1=discardable or 2=provisionally
-    	 *	 discardable for each line
-    	 */
-    	private byte[] discardable(final int[] counts) {
-    	    final int end = buffered_lines;
+        /**
+         * Discard lines that have no matches in another file.
+         *
+         * A line which is discarded will not be considered by the actual
+         * comparison algorithm; it will be as if that line were not in the
+         * file.
+         * The file's `realindexes' table maps virtual line numbers
+         * (which don't count the discarded lines) into real line numbers;
+         * this is how the actual comparison algorithm produces results
+         * that are comprehensible when the discarded lines are counted.
+         * <p>
+         * When we discard a line, we also mark it as a deletion or insertion
+         * so that it will be printed in the output.
+         *
+         * @param f the other file
+         */
+        void discard_confusing_lines(FileData f) {
+            clear();
+            // Set up table of which lines are going to be discarded.
+            final byte[] discarded = discardable(f.equivCount());
+
+            // Don't really discard the provisional lines except when they
+            // occur in a run of discardables, with nonprovisionals at the
+            // beginning and end.
+            filterDiscards(discarded);
+
+            // Actually discard the lines.
+            discard(discarded);
+        }
+
+        /**
+         * Mark to be discarded each line that matches no line of another file.
+         * If a line matches many lines, mark it as provisionally discardable.
+         *
+         * @see #equivCount()
+         * @param counts The count of each equivalence number for the other
+         *            file.
+         * @return 0=nondiscardable, 1=discardable or 2=provisionally
+         *         discardable for each line
+         */
+        private byte[] discardable(final int[] counts) {
+            final int end = buffered_lines;
             final byte[] discards = new byte[end];
             final int[] equivs = this.equivs;
             int many = 5;
             int tem = end / 64;
-    
+
             // Multiply MANY by approximate square root of number of lines.
             // That is the threshold for provisionally discardable lines.
             while ((tem = tem >> 2) > 0) {
                 many *= 2;
             }
-    
+
             for (int i = 0; i < end; i++) {
                 int nmatch;
                 if (equivs[i] == 0) {
@@ -636,16 +642,16 @@ public class Diff {
                 }
             }
             return discards;
-    	}
-    
-    	/**
-    	 * Don't really discard the provisional lines except when they occur
-    	 * in a run of discardables, with nonprovisionals at the beginning
-    	 * and end.
-    	 */
-    	private void filterDiscards(final byte[] discards) {
+        }
+
+        /**
+         * Don't really discard the provisional lines except when they occur
+         * in a run of discardables, with nonprovisionals at the beginning
+         * and end.
+         */
+        private void filterDiscards(final byte[] discards) {
             final int end = buffered_lines;
-    
+
             for (int i = 0; i < end; i++) {
                 // Cancel provisional discards not
                 // in middle of run of discards.
@@ -656,7 +662,7 @@ public class Diff {
                     int j;
                     int length;
                     int provisional = 0;
-    
+
                     // Find end of this run of discardable lines.
                     // Count how many are provisionally discardable.
                     for (j = i; j < end; j++) {
@@ -667,18 +673,18 @@ public class Diff {
                             provisional++;
                         }
                     }
-    
+
                     // Cancel provisional discards at end,
                     // and shrink the run.
                     while (j > i && discards[j - 1] == 2) {
                         discards[--j] = 0;
                         provisional--;
                     }
-    
+
                     // Now we have the length of a run of discardable lines
                     // whose first and last are not provisional.
                     length = j - i;
-    
+
                     // If 1/4 of the lines in the run are provisional,
                     // cancel discarding of all provisional lines
                     // in the run.
@@ -692,7 +698,7 @@ public class Diff {
                         int consec;
                         int minimum = 1;
                         int tem = length / 4;
-    
+
                         // MINIMUM is approximate square root of LENGTH / 4.
                         // A subrun of two or more provisionals can stand
                         // when LENGTH is at least 16.
@@ -702,7 +708,7 @@ public class Diff {
                             minimum *= 2;
                         }
                         minimum++;
-    
+
                         // Cancel any subrun of MINIMUM or more
                         // provisionals within the larger run.
                         for (j = 0, consec = 0; j < length; j++)
@@ -715,7 +721,7 @@ public class Diff {
                             } else if (minimum < consec) {
                                 discards[i + j] = 0;
                             }
-    
+
                         // Scan from beginning of run
                         // until we find 3 or more nonprovisionals in a row
                         // or until the first nonprovisional
@@ -736,10 +742,10 @@ public class Diff {
                                 break;
                             }
                         }
-    
+
                         // I advances to the last line of the run.
                         i += length - 1;
-    
+
                         // Same thing, from end.
                         for (j = 0, consec = 0; j < length; j++) {
                             if (j >= 8 && discards[i - j] == 1) {
@@ -760,75 +766,77 @@ public class Diff {
                     }
                 }
             }
-    	}
-    
-    	/**
-    	 * Actually discard the lines.
-    	 * @param discards flags lines to be discarded
-    	 */
-    	private void discard(final byte[] discards) {
-    	    final int end = buffered_lines;
-                int j = 0;
-                for (int i = 0; i < end; ++i) {
-                    if (no_discards || discards[i] == 0) {
-                        undiscarded[j] = equivs[i];
-                        realindexes[j++] = i;
-                    } else {
-                        changed_flag[1 + i] = true;
-                    }
-                }
-                nondiscarded_lines = j;
-            }
-    
-    	/**
-    	 */
-    	public FileData(Object[] data, Map<Object,Integer> h) {
-    	    buffered_lines = data.length;
-    
-                equivs = new int[buffered_lines];
-                undiscarded = new int[buffered_lines];
-                realindexes = new int[buffered_lines];
-    
-                for (int i = 0; i < data.length; ++i) {
-                    Integer ir = h.get(data[i]);
-                    if (ir == null) {
-                        h.put(data[i], new Integer(equivs[i] = equiv_max++));
-                    } else {
-                        equivs[i] = ir.intValue();
-                    }
+        }
+
+        /**
+         * Actually discard the lines.
+         *
+         * @param discards flags lines to be discarded
+         */
+        private void discard(final byte[] discards) {
+            final int end = buffered_lines;
+            int j = 0;
+            for (int i = 0; i < end; ++i) {
+                if (no_discards || discards[i] == 0) {
+                    undiscarded[j] = equivs[i];
+                    realindexes[j++] = i;
+                } else {
+                    changed_flag[1 + i] = true;
                 }
             }
-    
-    	/**
-    	 * Adjust inserts/deletes of blank lines to join changes
-    	 * as much as possible.
-    	 *
-    	 * We do something when a run of changed lines include a blank
-    	 * line at one end and have an excluded blank line at the other.
-    	 * We are free to choose which blank line is included.
-    	 * `compareseq' always chooses the one at the beginning,
-    	 * but usually it is cleaner to consider the following blank line
-    	 * to be the "change".
-    	 * The only exception is if the preceding blank line
-    	 * would join this change to other changes.
-    	 * @param f the file being compared against
-    	 */
-    	void shift_boundaries(FileData f) {
-    	    final boolean[] changed = changed_flag;
+            nondiscarded_lines = j;
+        }
+
+        /**
+         */
+        public FileData(Object[] data, Map<Object, Integer> h) {
+            buffered_lines = data.length;
+
+            equivs = new int[buffered_lines];
+            undiscarded = new int[buffered_lines];
+            realindexes = new int[buffered_lines];
+
+            for (int i = 0; i < data.length; ++i) {
+                Integer ir = h.get(data[i]);
+                if (ir == null) {
+                    h.put(data[i], new Integer(equivs[i] = equiv_max++));
+                } else {
+                    equivs[i] = ir.intValue();
+                }
+            }
+        }
+
+        /**
+         * Adjust inserts/deletes of blank lines to join changes
+         * as much as possible.
+         *
+         * We do something when a run of changed lines include a blank
+         * line at one end and have an excluded blank line at the other.
+         * We are free to choose which blank line is included.
+         * `compareseq' always chooses the one at the beginning,
+         * but usually it is cleaner to consider the following blank line
+         * to be the "change".
+         * The only exception is if the preceding blank line
+         * would join this change to other changes.
+         *
+         * @param f the file being compared against
+         */
+        void shift_boundaries(FileData f) {
+            final boolean[] changed = changed_flag;
             final boolean[] other_changed = f.changed_flag;
             int i = 0;
             int j = 0;
             int i_end = buffered_lines;
             int preceding = -1;
             int other_preceding = -1;
-    
+
             while (true) {
                 int start, end, other_start;
-    
+
                 // Scan forwards to find beginning of another run of changes.
                 // Also keep track of the corresponding point in the other
                 // file.
-    
+
                 while (i < i_end && !changed[1 + i]) {
                     while (other_changed[1 + j++]) {
                         // Non-corresponding lines in the other file
@@ -837,32 +845,32 @@ public class Diff {
                     }
                     i++;
                 }
-    
+
                 if (i == i_end) {
                     break;
                 }
-    
+
                 start = i;
                 other_start = j;
-    
+
                 while (true) {
                     // Now find the end of this run of changes.
-    
+
                     while (i < i_end && changed[1 + i])
                         i++;
                     end = i;
-    
+
                     // If the first changed line matches the following
                     // unchanged one,
                     // and this run does not follow right after a previous run,
                     // and there are no lines deleted from the other file here,
                     // then classify the first changed line as unchanged
                     // and the following line as changed in its place.
-    
+
                     // You might ask, how could this run follow right after
                     // another?
                     // Only because the previous run was shifted here.
-    
+
                     if (end != i_end && equivs[start] == equivs[end] && !other_changed[1 + j] && end != i_end && !((preceding >= 0 && start == preceding) || (other_preceding >= 0 && other_start == other_preceding))) {
                         changed[1 + end++] = true;
                         changed[1 + start++] = false;
@@ -875,45 +883,45 @@ public class Diff {
                         break;
                     }
                 }
-    
+
                 preceding = i;
                 other_preceding = j;
             }
         }
-    
-    	/** Number of elements (lines) in this file. */
-    	final int buffered_lines;
-    
-    	/**
-    	 * Vector, indexed by line number, containing an equivalence code for
-    	 * each line.  It is this vector that is actually compared with that
-    	 * of another file to generate differences.
-    	 */
-    	private final int[] equivs;
-    
-    	/**
-    	 * Vector, like the previous one except that
-    	 * the elements for discarded lines have been squeezed out.
-    	 */
-    	final int[] undiscarded;
-    
-    	/**
-    	 * Vector mapping virtual line numbers (not counting discarded lines)
-    	 * to real ones (counting those lines).  Both are origin-0.
-    	 */
-    	final int[] realindexes;
-    
-    	/**
-    	 * Total number of nondiscarded lines.
-    	 */
-    	int nondiscarded_lines;
-    
-    	/**
-    	 * Array, indexed by real origin-1 line number,
-    	 * containing true for a line that is an insertion or a deletion.
-    	 * The results of comparison are stored here.
-    	 */
-    	boolean[] changed_flag;
+
+        /** Number of elements (lines) in this file. */
+        final int buffered_lines;
+
+        /**
+         * Vector, indexed by line number, containing an equivalence code for
+         * each line. It is this vector that is actually compared with that
+         * of another file to generate differences.
+         */
+        private final int[] equivs;
+
+        /**
+         * Vector, like the previous one except that
+         * the elements for discarded lines have been squeezed out.
+         */
+        final int[] undiscarded;
+
+        /**
+         * Vector mapping virtual line numbers (not counting discarded lines)
+         * to real ones (counting those lines). Both are origin-0.
+         */
+        final int[] realindexes;
+
+        /**
+         * Total number of nondiscarded lines.
+         */
+        int nondiscarded_lines;
+
+        /**
+         * Array, indexed by real origin-1 line number,
+         * containing true for a line that is an insertion or a deletion.
+         * The results of comparison are stored here.
+         */
+        boolean[] changed_flag;
     }
 
     /**
@@ -921,7 +929,7 @@ public class Diff {
      * usage: Diff [-e] file1 file2
      */
     public static void main(String[] argv) throws IOException {
-    	String[] a = DiffUtil.readLines(new File(argv[argv.length - 2]));
+        String[] a = DiffUtil.readLines(new File(argv[argv.length - 2]));
         String[] b = DiffUtil.readLines(new File(argv[argv.length - 1]));
         Diff d = new Diff(a, b);
         boolean edstyle = "-e".equals(argv[0]);

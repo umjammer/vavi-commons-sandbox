@@ -9,8 +9,8 @@ package vavi.tools.fixed;
 /**
  * JavaParserVisitorAdapter.
  *
- * @author	<a href="mailto:vavivavi@yahoo.co.jp">Naohide Sano</a> (nsano)
- * @version	0.00	020519	vavi	initial version <br>
+ * @author <a href="mailto:vavivavi@yahoo.co.jp">Naohide Sano</a> (nsano)
+ * @version 0.00 020519 vavi initial version <br>
  */
 public abstract class JavaParserVisitorAdapter implements JavaParserVisitor
 {

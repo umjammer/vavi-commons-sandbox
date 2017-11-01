@@ -14,9 +14,9 @@ import java.util.NoSuchElementException;
  * 1 行の CSV 形式のデータを解析し、それぞれの項目に分解するクラス。
  * CSV 形式に対応した java.util.StringTokenizer のようなもの。
  *
- * @author	<a href="mailto:kent@muraoka.info.waseda.ac.jp">TAMURA Kent</a>
- * @author	<a href="mailto:tomoharu@wakhok.ac.jp">ANDOH Tomoharu</a>
- * @version	1.01	990406	tandoh	tandoh version <br>
+ * @author <a href="mailto:kent@muraoka.info.waseda.ac.jp">TAMURA Kent</a>
+ * @author <a href="mailto:tomoharu@wakhok.ac.jp">ANDOH Tomoharu</a>
+ * @version 1.01 990406 tandoh tandoh version <br>
  */
 public class CSVTokenizer implements Enumeration<Object> {
     /** 対象となる文字列 */
@@ -96,7 +96,7 @@ public class CSVTokenizer implements Enumeration<Object> {
         while (st < currentPosition) {
             char ch = source.charAt(st++);
             if (ch == '"') {
-		// "が単独で現れたときは何もしない
+                // "が単独で現れたときは何もしない
                 if ((st < currentPosition) && (source.charAt(st) == '"')) {
                     strb.append(ch);
                     st ++;
