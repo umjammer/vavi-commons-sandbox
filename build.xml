@@ -7,12 +7,12 @@
 <!--                                                                        -->
 <!-- vavi-commons-sandbox                                                   -->
 <!--                                                                        -->
-<!-- @author	Naohide Sano                                                -->
-<!-- @version	0.00	021018	nsano	initial version                     -->
+<!-- @author Naohide Sano                                                   -->
+<!-- @version 0.00 021018 nsano initial version                             -->
 <!--                                                                        -->
 <!-- ////////////////////////////////////////////////////////////////////// -->
 
-<project name="vavi-commons-sandbox" default="compile" basedir="."
+<project name="vavi-commons-sandbox" default="run" basedir="."
   xmlns:artifact="urn:maven-artifact-ant">
 
   <path id="maven-ant-tasks.classpath">
@@ -31,20 +31,10 @@
 
   <!-- Path Definitions -->
   <path id="project.class.path">
+    <pathelement location="${javac.dest.test}" />
+    <pathelement location="${javac.dest}" />
     <fileset refid="maven-ant-tasks.dependency.fileset" />
   </path>
-
-  <!-- clean -->
-  <target name="clean" description="Cleaning">
-    <delete>
-      <fileset dir="${javac.dest}">
-        <include name="**/*" />
-      </fileset>
-      <fileset dir="${javac.dest.test}">
-        <include name="**/*" />
-      </fileset>
-    </delete>
-  </target>
 
   <!-- prepare -->
   <target name="prepare" description="Preparing">
@@ -52,63 +42,18 @@
     <artifact:dependencies fileSetId="maven-ant-tasks.dependency.fileset">
       <pom refid="maven.project" />
     </artifact:dependencies>
-  </target>
-
-  <!-- javac -->
-  <target name="compile" depends="prepare" description="Compiling">
-    <javac debug="on"
-           destdir="${javac.dest}"
-           source="${project.build.plugins.plugin.configuration.source}"
-           target="${project.build.plugins.plugin.configuration.target}"
-           encoding="${project.build.plugins.plugin.configuration.encoding}">
-      <classpath refid="project.class.path" />
-      <include name="**/*.java" />
-      <src path="${javac.source}" />
-    </javac>
-
-    <copy todir="${javac.dest}">
-      <fileset dir="${javac.resource}">
-        <include name="**/*" />
-      </fileset>
-    </copy>
-
-    <javac debug="on"
-           destdir="${javac.dest.test}"
-           source="${project.build.plugins.plugin.configuration.source}"
-           target="${project.build.plugins.plugin.configuration.target}"
-           encoding="${project.build.plugins.plugin.configuration.encoding}">
-      <classpath>
-        <path refid="project.class.path" />
-        <pathelement location="${javac.dest}" />
-      </classpath>
-      <include name="**/*.java" />
-      <src path="${javac.source.test}" />
-    </javac>
-
-    <copy todir="${javac.dest.test}">
-      <fileset dir="${javac.resource.test}">
-        <include name="**/*" />
-      </fileset>
-    </copy>
-  </target>
-
-  <!-- jar -->
-  <target name="package" depends="compile" description="パッケージング">
-    <jar jarfile="target/${project.artifactId}-${project.version}.jar">
-      <fileset dir="${dir.build}">
-        <include name="**/*" />
-      </fileset>
-    </jar>
+    <artifact:mvn pom="pom.xml">
+      <arg value="package"/>
+      <arg value="-Dmaven.test.skip=true"/>
+    </artifact:mvn>
   </target>
 
   <!-- run -->
-  <target name="run" depends="compile" description="Run">
+  <target name="run" depends="prepare" description="Run">
     <java classname="vavi.util.JapaneseCalendarTest" fork="yes">
-      <jvmarg value="-Dfile.encoding=UTF-8" />
+      <jvmarg value="-Dfile.encoding=${project.build.plugins.plugin.configuration.encoding}" />
       <classpath>
         <path refid="project.class.path" />
-        <pathelement location="${dir.build}" />
-        <pathelement location="target/test-classes" />
       </classpath>
       <arg line="${args}" />
     </java>
