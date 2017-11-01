@@ -13,67 +13,83 @@
 <!-- ////////////////////////////////////////////////////////////////////// -->
 
 <project name="vavi-commons-sandbox" default="compile" basedir="."
-         xmlns:ivy="antlib:org.apache.ivy.ant">
+  xmlns:artifact="urn:maven-artifact-ant">
 
-  <property file="local.properties" />
-
-  <property name="dir.build" value="target/classes" />
-  <property name="dir.lib" value="lib" />
-  <xmlproperty file="pom.xml" />
-  <property name="ivy.file" value="${ivy.cache}/${project.groupId}/${project.artifactId}/ivy-${project.version}.xml" />
-
-  <!-- クラスパスの定義 -->
-  <path id="project.class.path">
-    <fileset dir="${dir.lib}">
+  <path id="maven-ant-tasks.classpath">
+    <fileset dir="${user.home}/lib/java/maven-ant-tasks">
       <include name="*.jar" />
     </fileset>
   </path>
+  <typedef resource="org/apache/maven/artifact/ant/antlib.xml"
+           uri="urn:maven-artifact-ant"
+           classpathref="maven-ant-tasks.classpath" />
 
-  <!-- ターゲットの定義 -->
+  <property environment="env" />
+  <property file="local.properties" />
+
+  <xmlproperty file="pom.xml" />
+
+  <!-- Path Definitions -->
+  <path id="project.class.path">
+    <fileset refid="maven-ant-tasks.dependency.fileset" />
+  </path>
 
   <!-- clean -->
-  <target name="clean" description="ビルド環境のクリア">
+  <target name="clean" description="Cleaning">
     <delete>
-      <fileset dir="${dir.lib}">
-        <include name="*" />
-      </fileset>
-      <fileset dir="${dir.build}">
+      <fileset dir="${javac.dest}">
         <include name="**/*" />
       </fileset>
-      <fileset dir="target/test-classes">
+      <fileset dir="${javac.dest.test}">
         <include name="**/*" />
       </fileset>
     </delete>
   </target>
 
   <!-- prepare -->
-  <target name="prepare" description="ビルド環境の準備">
-    <ivy:settings file="ivy-settings.xml" />
-    <ivy:convertpom pomFile="pom.xml" ivyFile="${ivy.file}" />
-    <ivy:retrieve file="${ivy.file}" />
+  <target name="prepare" description="Preparing">
+    <artifact:pom file="pom.xml" id="maven.project" />
+    <artifact:dependencies fileSetId="maven-ant-tasks.dependency.fileset">
+      <pom refid="maven.project" />
+    </artifact:dependencies>
   </target>
 
   <!-- javac -->
-  <target name="compile" depends="prepare" description="コンパイル">
-    <javac debug="on" destdir="${dir.build}" deprecation="on" encoding="${encoding}">
+  <target name="compile" depends="prepare" description="Compiling">
+    <javac debug="on"
+           destdir="${javac.dest}"
+           source="${project.build.plugins.plugin.configuration.source}"
+           target="${project.build.plugins.plugin.configuration.target}"
+           encoding="${project.build.plugins.plugin.configuration.encoding}">
       <classpath refid="project.class.path" />
       <include name="**/*.java" />
-      <src path="src/main/java" />
-      <src path="target/generated-sources/jjtree" />
+      <src path="${javac.source}" />
     </javac>
 
-    <copy todir="${dir.build}">
-      <fileset dir="src/main/resources">
+    <copy todir="${javac.dest}">
+      <fileset dir="${javac.resource}">
         <include name="**/*" />
       </fileset>
     </copy>
 
-  	<native2ascii encoding="Windows-31J"
-                  ext=".properties"
-                  src="src/main/native2ascii"
-                  dest="${dir.build}" >
-      <include name="**/*.properties" />
-    </native2ascii>
+    <javac debug="on"
+           destdir="${javac.dest.test}"
+           source="${project.build.plugins.plugin.configuration.source}"
+           target="${project.build.plugins.plugin.configuration.target}"
+           encoding="${project.build.plugins.plugin.configuration.encoding}">
+      <classpath>
+        <path refid="project.class.path" />
+        <pathelement location="${javac.dest}" />
+      </classpath>
+      <include name="**/*.java" />
+      <src path="${javac.source.test}" />
+    </javac>
+
+    <copy todir="${javac.dest.test}">
+      <fileset dir="${javac.resource.test}">
+        <include name="**/*" />
+      </fileset>
+    </copy>
   </target>
 
   <!-- jar -->
