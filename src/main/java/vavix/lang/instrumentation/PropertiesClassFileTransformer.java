@@ -27,13 +27,13 @@ import javassist.CtMethod;
 public class PropertiesClassFileTransformer implements VaviClassFileTransformer {
 
     /** */
-    private static Properties props; 
+    private static Properties props;
 
     /** */
     private static final String prefix = "vavix.lang.instrumentation.PropertiesClassFileTransformer";
 
     /** */
-    private String key; 
+    private String key;
 
     /** */
     public String getKey() {

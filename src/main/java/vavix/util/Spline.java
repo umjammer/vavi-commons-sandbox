@@ -4,9 +4,9 @@ package vavix.util;
 
 /**
  * cubic spline interpolation
- * 
+ *
  * @autor olivier gaumann, neuchatel (switzerland)
- * 
+ *
  * @version 28.07.01 first draft oli4 <br>
  *          01.12.01 bugfix wrong offset of first point oli4 <br>
  */

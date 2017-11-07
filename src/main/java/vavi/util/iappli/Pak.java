@@ -137,12 +137,12 @@ public class Pak {
         if (imageFileList.size() > 0) {
             dos.writeByte((byte )imageFileList.size());
             p += 1;
-            p += imageFileList.size() * 2; 
+            p += imageFileList.size() * 2;
         }
         if (soundFileList.size() > 0) {
             dos.writeByte((byte )soundFileList.size());
             p += 1;
-            p += soundFileList.size() * 2; 
+            p += soundFileList.size() * 2;
         }
 
         for (int i = 0; i < imageFileList.size(); i++) {

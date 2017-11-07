@@ -15,9 +15,9 @@ import java.util.regex.Pattern;
 
 /**
  * ディレクトリを再帰的に掘り下げていくクラスです。
- * <p> 
+ * <p>
  * 掘る人
- * </p> 
+ * </p>
  * @author <a href="mailto:vavivavi@yahoo.co.jp">Naohide Sano</a> (nsano)
  * @version 0.00 050215 nsano initial version <br>
  */
@@ -27,7 +27,7 @@ public class RegexFileDigger implements FileDigger {
      * 掘り当てたファイルに対して行うアクション
      * <p>
      * 浚う人
-     * </p> 
+     * </p>
      */
     private FileDredger dredger;
 
@@ -47,7 +47,7 @@ public class RegexFileDigger implements FileDigger {
 
     /**
      * 掘ります。
-     * @param dir トップディレクトリ 
+     * @param dir トップディレクトリ
      * @throws NullPointerException dir is not found
      */
     public void dig(File dir) throws IOException {

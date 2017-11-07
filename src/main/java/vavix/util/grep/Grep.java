@@ -30,22 +30,22 @@ public class Grep {
     private static Charset charset = Charset.forName(System.getProperty("file.encoding"));
     /** */
     private static CharsetDecoder decoder = charset.newDecoder();
-    
+
     /** Pattern used to parse lines */
     private static final Pattern linePattern = Pattern.compile(".*\r?\n");
-    
+
     /** 濾すパターン */
     private Pattern pattern;
-    
+
     /** 濾す対象 */
     private File file;
-    
+
     /** 濾し器作成 */
     public Grep(File file, Pattern pattern) {
         this.file = file;
         this.pattern = pattern;
     }
-    
+
     /**
      * grep で引っかかった行を表すクラスです。
      * <p>
@@ -65,10 +65,10 @@ public class Grep {
         /** grep で引っかかった行 */
         String line;
     }
-    
+
     /** 濾したのを溜める */
     private List<ResultSet> results = new ArrayList<>();
-    
+
     /** ひとつ濾します */
     private void grep(CharBuffer cb) {
         Matcher lm = linePattern.matcher(cb); // Line matcher
@@ -90,23 +90,23 @@ public class Grep {
             }
         }
     }
-    
+
     /** 濾します */
     public List<ResultSet> exec() throws IOException {
         // Open the file and then get a channel from the stream
         FileInputStream fis = new FileInputStream(file);
         FileChannel fc = fis.getChannel();
-        
+
         // Get the file's size and then map it into memory
         int size = (int) fc.size();
         MappedByteBuffer bb = fc.map(FileChannel.MapMode.READ_ONLY, 0, size);
-        
+
         // Decode the file into a char buffer
         CharBuffer cb = decoder.decode(bb);
 
         // Perform the search
         grep(cb);
-        
+
         fis.close();
 
         return results;

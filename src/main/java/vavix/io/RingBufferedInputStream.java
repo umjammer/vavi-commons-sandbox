@@ -33,7 +33,7 @@ import vavix.util.RingBuffer;
  * from the underlying inputstream until sufficient data for transcoding is
  * present. A second byte array can hold the transcoded audio data, ready to be
  * read out by the stream user.
- * 
+ *
  * @author Marc Gimpel, Wimba S.A. (marc@wimba.com)
  * @version $Revision: 1.3 $
  */
@@ -52,7 +52,7 @@ public abstract class RingBufferedInputStream extends FilterInputStream {
 
     /**
      * Check to make sure that this stream has not been closed.
-     * 
+     *
      * @exception IOException
      */
     private void checkIfStillOpen() throws IOException {
@@ -65,7 +65,7 @@ public abstract class RingBufferedInputStream extends FilterInputStream {
      * Creates a <code>FilteredAudioInputStream</code> and saves its argument,
      * the input stream <code>in</code>, for later use. An internal buffer
      * array is created and stored in <code>buf</code>.
-     * 
+     *
      * @param in the underlying input stream.
      * @param length the length in sample frames of the data in this stream.
      */
@@ -79,7 +79,7 @@ public abstract class RingBufferedInputStream extends FilterInputStream {
      * buffer size, and saves its argument, the inputstream <code>in</code>
      * for later use. An internal buffer array of length <code>size</code> is
      * created and stored in <code>buf</code>.
-     * 
+     *
      * @param in the underlying input stream.
      */
     public RingBufferedInputStream(InputStream in) {
@@ -91,7 +91,7 @@ public abstract class RingBufferedInputStream extends FilterInputStream {
      * tricks for dealing with marks. Assumes that it is being called by a
      * synchronized method. This method also assumes that all data has already
      * been read in, hence pos > count.
-     * 
+     *
      * @exception IOException
      */
     protected abstract void fill() throws IOException;
@@ -99,7 +99,7 @@ public abstract class RingBufferedInputStream extends FilterInputStream {
     /**
      * See the general contract of the <code>read</code> method of
      * <code>InputStream</code>.
-     * 
+     *
      * @return the next byte of data, or <code>-1</code> if the end of the
      *         stream is reached.
      * @exception IOException if an I/O error occurs.
@@ -117,7 +117,7 @@ public abstract class RingBufferedInputStream extends FilterInputStream {
     /**
      * Reads bytes from this byte-input stream into the specified byte array,
      * starting at the given offset.
-     * 
+     *
      * <p>
      * This method implements the general contract of the corresponding
      * <code>{@link InputStream#read(byte[], int, int) read}</code> method of
@@ -127,25 +127,25 @@ public abstract class RingBufferedInputStream extends FilterInputStream {
      * iterated <code>read</code> continues until one of the following
      * conditions becomes true:
      * <ul>
-     * 
+     *
      * <li>The specified number of bytes have been read,
-     * 
+     *
      * <li>The <code>read</code> method of the underlying stream returns
      * <code>-1</code>, indicating end-of-file, or
-     * 
+     *
      * <li>The <code>available</code> method of the underlying stream returns
      * zero, indicating that further input requests would block.
-     * 
+     *
      * </ul>
      * If the first <code>read</code> on the underlying stream returns
      * <code>-1</code> to indicate end-of-file then this method returns
      * <code>-1</code>. Otherwise this method returns the number of bytes
      * actually read.
-     * 
+     *
      * <p>
      * Subclasses of this class are encouraged, but not required, to attempt to
      * read as many bytes as possible in the same fashion.
-     * 
+     *
      * @param b destination buffer.
      * @param off offset at which to start storing bytes.
      * @param len maximum number of bytes to read.
@@ -163,7 +163,7 @@ public abstract class RingBufferedInputStream extends FilterInputStream {
     /**
      * See the general contract of the <code>skip</code> method of
      * <code>InputStream</code>.
-     * 
+     *
      * @param n the number of bytes to be skipped.
      * @return the actual number of bytes skipped.
      * @exception IOException if an I/O error occurs.
@@ -185,7 +185,7 @@ public abstract class RingBufferedInputStream extends FilterInputStream {
      * filtered, and thus may not be the same size after processing (although
      * subclasses that do the filtering should override this method and use the
      * amount of data available in the underlying inputstream).
-     * 
+     *
      * @return the number of bytes that can be read from this inputstream
      *         without blocking.
      * @exception IOException if an I/O error occurs.
@@ -200,7 +200,7 @@ public abstract class RingBufferedInputStream extends FilterInputStream {
     /**
      * See the general contract of the <code>mark</code> method of
      * <code>InputStream</code>.
-     * 
+     *
      * @param readlimit the maximum limit of bytes that can be read before the
      *            mark position becomes invalid.
      * @see #reset()
@@ -215,7 +215,7 @@ public abstract class RingBufferedInputStream extends FilterInputStream {
      * If <code>markpos</code> is -1 (no mark has been set or the mark has
      * been invalidated), an <code>IOException</code> is thrown. Otherwise,
      * <code>pos</code> is set equal to <code>markpos</code>.
-     * 
+     *
      * @exception IOException if this stream has not been marked or if the mark
      *                has been invalidated.
      * @see #mark(int)
@@ -229,7 +229,7 @@ public abstract class RingBufferedInputStream extends FilterInputStream {
      * Tests if this input stream supports the <code>mark</code> and
      * <code>reset</code> methods. The <code>markSupported</code> method of
      * <code>FilteredAudioInputStream</code> returns <code>true</code>.
-     * 
+     *
      * @return a <code>boolean</code> indicating if this stream type supports
      *         the <code>mark</code> and <code>reset</code> methods.
      * @see #mark(int)
@@ -242,7 +242,7 @@ public abstract class RingBufferedInputStream extends FilterInputStream {
     /**
      * Closes this input stream and releases any system resources associated
      * with the stream.
-     * 
+     *
      * @exception IOException if an I/O error occurs.
      */
     public synchronized void close() throws IOException {

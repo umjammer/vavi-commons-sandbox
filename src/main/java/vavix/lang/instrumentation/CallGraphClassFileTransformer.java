@@ -23,20 +23,20 @@ import javassist.CtMethod;
 
 /**
  * CallGraphClassFileTransformer.
- * 
+ *
  * @author <a href="mailto:vavivavi@yahoo.co.jp">Naohide Sano</a> (nsano)
  * @version 0.00 110829 nsano initial version <br>
  */
 public class CallGraphClassFileTransformer implements VaviClassFileTransformer {
 
     /** */
-    private static Pattern pattern; 
+    private static Pattern pattern;
 
     /** */
     private static final String prefix = CallGraphClassFileTransformer.class.getName();
 
     /** */
-    private String key; 
+    private String key;
 
     /** */
     public String getKey() {
@@ -93,7 +93,7 @@ System.err.println("CallGraphClassFileTransformer::transform: " + key + ": " + e
 
     /** */
     public static Set<String> signatures = new HashSet<>();
-    
+
     /** */
     public static String getKey(CtClass ctClass, CtMethod ctMethod) {
         return ctClass.getName() + "#" + ctMethod.getName() + ctMethod.getSignature();

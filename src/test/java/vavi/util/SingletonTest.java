@@ -11,12 +11,12 @@ import junit.framework.TestCase;
 
 
 /**
- * SingletonTest. 
+ * SingletonTest.
  *
  * @author <a href="mailto:vavivavi@yahoo.co.jp">Naohide Sano</a> (nsano)
  * @version 0.00 050914 nsano initial version <br>
  */
-@SuppressWarnings("unused") 
+@SuppressWarnings("unused")
 public class SingletonTest extends TestCase {
 
     static class A extends Singleton {

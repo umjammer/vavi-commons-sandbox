@@ -9,7 +9,7 @@ package vavi.util;
 
 /**
  * This class attempts to erase characters echoed to the console.
- * 
+ *
  * @author <a href="mailto:vavivavi@yahoo.co.jp">Naohide Sano</a> (nsano)
  * @version 0.00 040825 nsano initial version <br>
  */

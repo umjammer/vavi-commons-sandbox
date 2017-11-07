@@ -12,7 +12,7 @@ import java.util.EmptyStackException;
 
 /**
  * A First-in first-out on the model of the java.util.Stack
- * 
+ *
  * @since Transmorpher 1.0
  * @see java.util.Stack#Stack()
  * @see java.util.Vector#Vector()
@@ -39,7 +39,7 @@ public class Fifo<E> extends ArrayList<E> {
 
     /**
      * Pushes an item onto the top of the Fifo
-     * 
+     *
      * @param item the item to be pushed on the Fifo
      * @see java.util.Vector#addElement(Object)
      */
@@ -50,7 +50,7 @@ public class Fifo<E> extends ArrayList<E> {
 
     /**
      * Returns the first element of the Fifo which is withdrawn
-     * 
+     *
      * @return the first element on top of the Fifo
      * @throws java.util.EmptyStackException
      */
@@ -64,7 +64,7 @@ public class Fifo<E> extends ArrayList<E> {
 
     /**
      * Returns the first element of the Fifo (which is left unchanged)
-     * 
+     *
      * @return the first element on top of the Fifo
      * @throws java.util.EmptyStackException
      */
@@ -77,7 +77,7 @@ public class Fifo<E> extends ArrayList<E> {
 
     /**
      * T400 if the Fifo is empty
-     * 
+     *
      * @return true if and only if the Fifo contains no item; false otherwise
      */
     public boolean isEmpty() {
@@ -86,7 +86,7 @@ public class Fifo<E> extends ArrayList<E> {
 
     /**
      * Returns the number of elements in the Fifo
-     * 
+     *
      * @return the number of elements in the Fifo
      */
     public int size() {
@@ -115,7 +115,7 @@ public class Fifo<E> extends ArrayList<E> {
      * Returns the 1-based position where the object item is in the Fifo. If the object item accours at an element of the Fifo,
      * this method returns the distance from the bottom of the Fifo of the occurence nearest to the bottom. The bottom item is
      * considered at distance 1. The equals method is used to compare item to the items in this Fifo.
-     * 
+     *
      * @param item the item to be found
      * @return the 1-based position for the begining of the Fifo where the object is located; the return value -1 indicates that
      *         the object is not in the Fifo.

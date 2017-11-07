@@ -9,7 +9,7 @@ package vavix.text;
 
 /**
  * AnsiColor.
- * 
+ *
  * @author <a href="mailto:vavivavi@yahoo.co.jp">Naohide Sano</a> (nsano)
  * @version 0.00 010730 nsano initial version <br>
  *          0.01 020516 nsano repackage <br>
@@ -61,7 +61,7 @@ public enum AnsiColor {
     /**
      * This function uses ANSI escape sequence of setting colors. So the
      * application use this function will be not pure Java.
-     * 
+     *
      * @param fore the fore ground ansi color
      * @param back the back ground ansi color
      */
@@ -71,7 +71,7 @@ public enum AnsiColor {
 
     /**
      * Returns the ANSI graphics color code string.
-     * 
+     *
      * @param color the ansi color
      */
     public static String getEscapeSequenceString(AnsiColor color) {

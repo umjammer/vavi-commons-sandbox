@@ -29,7 +29,7 @@ import java.util.StringTokenizer;
  * <li> TODO 解析，フォーマット系の分離
  * <li> TODO 明治以前の実装
  * <li> TODO set 系が機能していない
- * 
+ *
  * @author 城風敏彦
  * @author <a href="mailto:vavivavi@yahoo.co.jp">Naohide Sano</a> (nsano)
  * @version 1.00 020620 城風 initial version <br>
@@ -60,7 +60,7 @@ public class JapaneseCalendar extends Calendar {
      * 年、月、日から和暦オブジェクトを生成します． GregorianCalendar は，
      * 1 月が 0 で表されるため，引数の月数から 1 を
      * 引いて生成
-     * 
+     *
      * @param year 西暦の年
      * @param month 月 (1 ~ 12)
      * @param day 日
@@ -71,7 +71,7 @@ public class JapaneseCalendar extends Calendar {
 
     /**
      * 元号、年、月、日から和暦オブジェクトを生成します．
-     * 
+     *
      * @param gengou 元号をあらわすアルファベット文字で "M", "T", "S", "H" のいずれか
      * @param year 元号の年
      * @param month 月 (1 ~ 12)
@@ -84,18 +84,18 @@ public class JapaneseCalendar extends Calendar {
     /**
      * 文字列から和暦オブジェクトを生成します．
      * 受け付ける形式は現在のところ以下のとおりです．
-     * 
+     *
      * <pre>
      * GYYMMDD
      * GYY-MM-DD
      * YYYYMMDD
      * YYYY-MM-DD
      * </pre>
-     * 
+     *
      * "G" は元号をあらわすアルファベット文字で "M", "T", "S", "H" のいずれか
      * "-" は日付区切り文字(何でも良い) "MM"
      * は月を表す数字で 1 〜 12
-     * 
+     *
      * @param dateString 日付文字列
      */
     public JapaneseCalendar(String dateString) {
@@ -135,7 +135,7 @@ public class JapaneseCalendar extends Calendar {
     /**
      * 元号、年、月、日から和暦オブジェクトを生成します． GregorianCalendar は，1 月が 0 で表されるため，引数の月数から 1 を
      * 引いて生成
-     * 
+     *
      * @param gengou 元号をあらわすアルファベット文字で "M", "T", "S", "H" のいずれか
      * @param year 元号の年
      * @param month 月 (1 ~ 12)
@@ -184,7 +184,7 @@ Debug.println("2: " + toFS(this));
 
     /**
      * 元号を取得します．
-     * 
+     *
      * @return 元号の文字列
      */
     public String getGengou() {
@@ -310,7 +310,7 @@ Debug.println("here");
 
     /**
      * 元号，年月日を設定します．
-     * 
+     *
      * @param gengou 元号
      * @param year 元号の年
      * @param month 月 (1 ~ 12)
@@ -366,7 +366,7 @@ Debug.println("here");
 
         /**
          * します．
-         * 
+         *
          * @param year 元号の年
          * @param month 月 (1 ~ 12)
          * @param day 日

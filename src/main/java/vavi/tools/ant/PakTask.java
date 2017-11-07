@@ -13,7 +13,7 @@ import vavi.util.iappli.Pak;
 
 /**
  * Pak.
- * 
+ *
  * @author <a href="mailto:vavivavi@yahoo.co.jp">Naohide Sano</a> (nsano)
  * @version 0.00 040125 nsano initial version <br>
  */

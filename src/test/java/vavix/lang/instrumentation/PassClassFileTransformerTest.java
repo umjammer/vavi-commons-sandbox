@@ -14,7 +14,7 @@ import vavix.lang.instrumentation.PassClassFileTransformer;
 
 
 /**
- * PassClassFileTransformerTest. 
+ * PassClassFileTransformerTest.
  *
  * @author <a href="mailto:umjammer@gmail.com">Naohide Sano</a> (umjammer)
  * @version 0.00 2011/08/23 umjammer initial version <br>

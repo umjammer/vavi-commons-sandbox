@@ -17,7 +17,7 @@ import java.io.Writer;
 /**
  * An output engine that copies data from a Reader through a OutputStreamWriter
  * to the target OutputStream.
- * 
+ *
  * @author Copyright (c) 2002 Merlin Hughes <merlin@merlin.org>
  */
 public class ReaderWriterOutputEngine implements OutputEngine {

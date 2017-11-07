@@ -30,7 +30,7 @@ import java.util.List;
 
 /**
  * A simple framework for printing change lists produced by <code>Diff</code>.
- * 
+ *
  * @see vavi.util.gnu.Diff
  * @author Stuart D. Gathman
  * @author <a href="mailto:vavivavi@yahoo.co.jp">Naohide Sano</a> (nsano)

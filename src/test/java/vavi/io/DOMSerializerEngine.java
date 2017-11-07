@@ -20,7 +20,7 @@ import org.w3c.dom.traversal.NodeIterator;
 /**
  * An output engine that serializes a DOM tree using a specified
  * character encoding to the target OutputStream.
- * 
+ *
  * @author Copyright (c) 2002 Merlin Hughes <merlin@merlin.org>
  */
 public class DOMSerializerEngine implements OutputEngine {

@@ -14,7 +14,7 @@ import java.io.OutputStream;
 
 /**
  * Various stream-related utility methods.
- * 
+ *
  * @author Copyright (c) 2002 Merlin Hughes <merlin@merlin.org>
  */
 public class Streams {

@@ -23,7 +23,7 @@ import org.w3c.dom.NodeList;
 
 /**
  * JTreePrinter.
- * 
+ *
  * @author <a href="mailto:vavivavi@yahoo.co.jp">Naohide Sano</a> (nsano)
  * @version 0.00 060925 nsano initial version <br>
  */
@@ -37,7 +37,7 @@ public class JTreePrinter {
     }
 
     /**
-     * @param showWS show whote space 
+     * @param showWS show whote space
      */
     public JTreePrinter(boolean showWS) {
         this.showWS = showWS;
@@ -55,7 +55,7 @@ public class JTreePrinter {
             addChildNodes(treeNode, node);
         }
 
-        TreeModel treeModel = new DefaultTreeModel(treeNode);        
+        TreeModel treeModel = new DefaultTreeModel(treeNode);
 
         JTree tree = new JTree();
         tree.setPreferredSize(new Dimension(640, 480));
@@ -89,7 +89,7 @@ public class JTreePrinter {
             }
 
             TreeNode childTreeNode = new TreeNode(childNode);
-            treeNode.add(childTreeNode);        
+            treeNode.add(childTreeNode);
 
             if (childNode.hasChildNodes()) {
                 addChildNodes(childTreeNode, childNode);

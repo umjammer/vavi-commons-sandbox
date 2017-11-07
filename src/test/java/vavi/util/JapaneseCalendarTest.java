@@ -14,7 +14,7 @@ import junit.framework.TestCase;
 
 /**
  * JapaneseCalendarTest.
- * 
+ *
  * @author <a href="mailto:vavivavi@yahoo.co.jp">Naohide Sano</a> (nsano)
  * @version 0.00 050228 nsano initial version <br>
  */
@@ -34,7 +34,7 @@ public class JapaneseCalendarTest extends TestCase {
      * Class under test for void JapaneseCalendar()
      */
     public void test1() {
-        
+
         jc = new JapaneseCalendar((GregorianCalendar) Calendar.getInstance());
         assertEquals(jc, JapaneseCalendar.toFS(jc));
 

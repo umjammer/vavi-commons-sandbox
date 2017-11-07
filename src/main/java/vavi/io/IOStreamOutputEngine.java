@@ -15,7 +15,7 @@ import java.io.OutputStream;
 /**
  * An output engine that copies data from an InputStream through a
  * FilterOutputStream to the target OutputStream.
- * 
+ *
  * @author Copyright (c) 2002 Merlin Hughes <merlin@merlin.org>
  */
 public class IOStreamOutputEngine implements OutputEngine {

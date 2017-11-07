@@ -20,20 +20,20 @@ import javassist.CtMethod;
 
 /**
  * EnterExitClassFileTransformer.
- * 
+ *
  * @author <a href="mailto:vavivavi@yahoo.co.jp">Naohide Sano</a> (nsano)
  * @version 0.00 050320 nsano initial version <br>
  */
 public class EnterExitClassFileTransformer implements VaviClassFileTransformer {
 
     /** */
-    private static Pattern pattern; 
+    private static Pattern pattern;
 
     /** */
     private static final String prefix = EnterExitClassFileTransformer.class.getName();
 
     /** */
-    private String key; 
+    private String key;
 
     /** */
     public String getKey() {

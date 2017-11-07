@@ -13,9 +13,9 @@ import vavi.util.Debug;
 
 /**
  * 権限を表現するクラスです． unix のファイルシステムの権限と同じです．
- * 
+ *
  * @author <a href=mailto:vavivavi@yahoo.co.jp>Naohide Sano</a> (nsano)
- * 
+ *
  * @version 0.00 000224 nsano initial version <br>
  *          1.00 030924 nsano repackage <br>
  */
@@ -44,7 +44,7 @@ public class Permission {
 
     /**
      * Permission オブジェクトを構築します．
-     * 
+     *
      * @param permission 3 桁の数値
      */
     public Permission(String permission) {
@@ -60,7 +60,7 @@ public class Permission {
 
     /**
      * 読み取り権限があるかどうか．
-     * 
+     *
      * @param mask 対象のマスク
      * @see #OWNER_MASK
      * @see #GROUP_MASK
@@ -72,7 +72,7 @@ public class Permission {
 
     /**
      * 書き込み権限があるかどうか．
-     * 
+     *
      * @param mask 対象のマスク
      * @see #OWNER_MASK
      * @see #GROUP_MASK
@@ -84,7 +84,7 @@ public class Permission {
 
     /**
      * 実行権限があるかどうか．
-     * 
+     *
      * @param mask 対象のマスク
      * @see #OWNER_MASK
      * @see #GROUP_MASK
@@ -96,7 +96,7 @@ public class Permission {
 
     /**
      * 権限があるかどうか．
-     * 
+     *
      * @param level 対象のマスク
      * @see #OWNER_MASK
      * @see #GROUP_MASK

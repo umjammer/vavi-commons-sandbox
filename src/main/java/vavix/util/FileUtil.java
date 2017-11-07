@@ -15,7 +15,7 @@ import java.nio.channels.FileChannel;
 
 /**
  * FileUtil.
- * 
+ *
  * @author <a href="mailto:sano-n@klab.jp">Naohide Sano</a> (nsano)
  * @version 0.00 2009/02/17 nsano initial version <br>
  */

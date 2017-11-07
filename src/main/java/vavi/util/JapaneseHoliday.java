@@ -70,7 +70,7 @@ public class JapaneseHoliday {
      * 指定された年月日が休日かどうか判定します。
      * オブジェクトのカレンダーは指定された日に変更されます。
      * @param yyyy 年、西暦 4 桁で指定
-     * @param mm 月、10 月の場合は 9 を指定 
+     * @param mm 月、10 月の場合は 9 を指定
      * @param dd 日
      * @return 休日ならば true、そうでないなら false
      */

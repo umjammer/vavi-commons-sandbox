@@ -565,7 +565,7 @@ public class Diff {
         /**
          * Return equiv_count[I] as the number of lines in this file
          * that fall in equivalence class I.
-         * 
+         *
          * @return the array of equivalence class counts.
          */
         int[] equivCount() {

@@ -16,7 +16,7 @@ import org.apache.commons.logging.LogFactory;
  * Swing コンポーネントをフィールドとして持つ bean に対して
  * POJO との BeanUtils 的な操作を行うクラスです。
  * Swing コンポーネントと java の型のマッピングは以下に示します。
- * 
+ *
  * TODO マッピングは定義ファイル
  * @author <a href="mailto:vavivavi@yahoo.co.jp">Naohide Sano</a> (nsano)
  * @version 0.00 040830 nsano initial version <br>
@@ -48,7 +48,7 @@ public class SwingBeanUtils extends AdvancedBeanUtils {
     }
 
     /**
-     * 
+     *
      * @param bean
      * @param swingBean
      * @throws IllegalAccessException

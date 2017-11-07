@@ -15,7 +15,7 @@ import java.util.StringTokenizer;
 
 /**
  * クラス関連のユーティリティクラスです．
- * 
+ *
  * @author <a href="mailto:vavivavi@yahoo.co.jp">Naohide Sano</a> (nsano)
  * @version 0.00 020517 nsano initial version <br>
  *          0.01 040627 nsano add getWrapperClass <br>
@@ -28,7 +28,7 @@ public final class ClassUtil {
     /**
      * 文字列からクラスを取得します．
      * TODO なんかどっかにありそう．
-     * 
+     *
      * @param className プリミティブ型もそのまま指定できます．
      *                  逆に java.lang は認識しないので書いてください．
      */

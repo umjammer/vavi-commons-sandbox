@@ -21,7 +21,7 @@ import vavix.io.FastByteArrayOutputStream;
  * is printed to System.err and null is returned. Depending on your specific
  * application, it might make more sense to have copy(...) re-throw the
  * exception.
- * 
+ *
  * @author <a href="mailto:vavivavi@yahoo.co.jp">Naohide Sano</a> (nsano)
  * @version 0.00 071106 nsano initial version <br>
  */

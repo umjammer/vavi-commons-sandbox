@@ -10,7 +10,7 @@ import java.io.InputStream;
 
 /**
  * An unsynchronized ByteArrayInputStream alternative.
- * 
+ *
  * @author Copyright (c) 2002 Merlin Hughes <merlin@merlin.org>
  */
 public class AdvancedByteArrayInputStream extends InputStream {

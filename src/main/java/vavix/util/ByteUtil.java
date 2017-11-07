@@ -12,7 +12,7 @@ import javax.sound.sampled.AudioFormat;
 
 
 /**
- * ByteUtil. 
+ * ByteUtil.
  *
  * @author <a href="mailto:vavivavi@yahoo.co.jp">Naohide Sano</a> (nsano)
  * @version 0.00 060203 nsano initial version <br>

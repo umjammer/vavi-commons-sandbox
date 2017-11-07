@@ -33,7 +33,7 @@ import static org.junit.Assert.assertEquals;
 
 
 /**
- * Test1. 
+ * Test1.
  *
  * @author <a href="mailto:umjammer@gmail.com">Naohide Sano</a> (umjammer)
  * @version 0.00 2011/10/15 umjammer initial version <br>
@@ -48,9 +48,9 @@ public class Test1 {
 
     /**
      * GZIP encode w/ FastByteArrayInputStream
-     * 
+     *
      * <pre>
-     * 
+     *
      * source -> -+                 +-> in
      *            |                 |
      *            +-> gzip output ->+
@@ -59,7 +59,7 @@ public class Test1 {
      */
     @Test
     public void test001() throws Exception {
-        
+
         String s = "aHello Naohide Sano";
         byte[] bytes = s.getBytes();
         InputStream in = new FastByteArrayInputStream(bytes, 1, bytes.length - 1);
@@ -90,16 +90,16 @@ System.err.println(r);
 
     /**
      * GZIP decode. w/ FastByteArrayOutputStream
-     * 
+     *
      * TODO incomplete (*1)
      * <pre>
-     * 
+     *
      *
      * </pre>
      */
 //    @Test
     public void test002() throws Exception {
-        
+
         String s = "Hello Naohide Sano";
         byte[] bytes = s.getBytes();
         FastByteArrayOutputStream baos = new FastByteArrayOutputStream();
@@ -138,7 +138,7 @@ System.err.println(r);
      */
     @Test
     public void test003() throws Exception {
-        
+
         String s = "Hello Naohide Sano";
         byte[] bytes = s.getBytes();
         InputStream in = new AdvancedByteArrayInputStream(bytes);
@@ -168,13 +168,13 @@ System.err.println(r);
     /**
      * rot13 decode w/ FastByteArrayOutputStream, FastByteArrayInputStream
      * <pre>
-     * 
+     *
      *
      * </pre>
      */
     @Test
     public void test004() throws Exception {
-        
+
         String s = "Hello Naohide Sano";
         byte[] bytes = s.getBytes();
         FastByteArrayOutputStream baos = new FastByteArrayOutputStream();
@@ -203,13 +203,13 @@ System.err.println(r);
     /**
      * rot13 encode/decode
      * <pre>
-     * 
+     *
      *
      * </pre>
      */
     @Test
     public void test005() throws Exception {
-        
+
         File inFile = new File("tmp/JapaneseCalendar.java.1");
 Debug.println(inFile.length());
         InputStream fis = new BufferedInputStream(new FileInputStream(inFile));
@@ -236,13 +236,13 @@ Debug.println(inFile.length() + ", " + outFile.length());
     /**
      * AdvancedPipedInputStream
      * <pre>
-     * 
+     *
      *
      * </pre>
      */
     @Test
     public void test006() throws Exception {
-        
+
         File inFile = new File("tmp/JapaneseCalendar.java.1");
 Debug.println(inFile.length());
         final InputStream in = new Rot13.InputStream(new BufferedInputStream(new FileInputStream(inFile)));
@@ -267,7 +267,7 @@ Debug.println(inFile.length());
         thread.start();
         thread.join();
         source.close();
-        
+
 Debug.println(inFile.length() + ", " + outFile.length());
         assertEquals(Checksum.getChecksum(inFile), Checksum.getChecksum(outFile));
     }

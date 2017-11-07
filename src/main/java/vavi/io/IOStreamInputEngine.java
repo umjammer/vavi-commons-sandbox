@@ -14,7 +14,7 @@ import java.io.OutputStream;
 /**
  * An input engine that copies data from an OutputStream through a
  * FilterInputStream to the target InputStream.
- * 
+ *
  * @author <a href="mailto:vavivavi@yahoo.co.jp">Naohide Sano</a> (nsano)
  */
 public class IOStreamInputEngine implements InputEngine {
@@ -34,14 +34,14 @@ public class IOStreamInputEngine implements InputEngine {
     private InputStream in;
 
     /**
-     * @param out 実際に書き出すストリーム 
+     * @param out 実際に書き出すストリーム
      */
     public IOStreamInputEngine(OutputStream out, InputStreamFactory factory) {
         this(out, factory, DEFAULT_BUFFER_SIZE);
     }
 
     /**
-     * @param out 実際に書き出すストリーム 
+     * @param out 実際に書き出すストリーム
      */
     public IOStreamInputEngine(OutputStream out, InputStreamFactory factory, int bufferSize) {
         this.out = out;

@@ -23,7 +23,7 @@ package vavix.util;
 
 /**
  * RingBuffer class.
- * 
+ *
  * @author David R Robison
  */
 public class RingBuffer {
@@ -50,7 +50,7 @@ public class RingBuffer {
 
     /**
      * Constructor.
-     * 
+     *
      * @param size The size of the ring buffer
      */
     public RingBuffer(int size) {
@@ -67,7 +67,7 @@ public class RingBuffer {
 
     /**
      * Return the size of the ring buffer.
-     * 
+     *
      * @return The ring buffer size
      */
     public int size() {
@@ -76,7 +76,7 @@ public class RingBuffer {
 
     /**
      * Resize the ring buffer.
-     * 
+     *
      * @param newSize The new size of the ring buffer
      */
     public void setSize(int newSize) {
@@ -91,7 +91,7 @@ public class RingBuffer {
 
     /**
      * return the space available writing.
-     * 
+     *
      * @return The byte that may be written to the ring buffer
      */
     public int left() {
@@ -117,7 +117,7 @@ public class RingBuffer {
 
     /**
      * Put data into the ring buffer.
-     * 
+     *
      * @param data The data to write
      * @param offset The start position in the data array
      * @param len The bytes from the data array to write
@@ -162,7 +162,7 @@ public class RingBuffer {
 
     /**
      * Return the bytes available for reading.
-     * 
+     *
      * @return The number of bytes that may be read from the ring buffer
      */
     public int available() {
@@ -177,7 +177,7 @@ public class RingBuffer {
 
     /**
      * Read data from the ring buffer.
-     * 
+     *
      * @param data Where to put the data
      * @param offset The offset into the data array to start putting data
      * @param len The maximum data to read
@@ -232,7 +232,7 @@ public class RingBuffer {
 
     /**
      * Return EOF status.
-     * 
+     *
      * @return True if EOF.
      */
     public boolean isEOF() {
@@ -241,7 +241,7 @@ public class RingBuffer {
 
     /**
      * Set the EOF status.
-     * 
+     *
      * @param eof The eof to set.
      */
     public void setEOF(boolean eof) {

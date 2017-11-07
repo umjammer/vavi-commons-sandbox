@@ -22,7 +22,7 @@ import vavi.util.StringUtil;
 
 /**
  * AdvancedBeanUtils.
- * 
+ *
  * @author <a href="mailto:vavivavi@yahoo.co.jp">Naohide Sano</a> (nsano)
  * @version 0.00 040830 nsano initial version <br>
  */

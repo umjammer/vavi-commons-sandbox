@@ -194,7 +194,7 @@ public final class SimpleCharStream implements CharStream
   }
 
   /**
-   * @deprecated 
+   * @deprecated
    * @see #getEndColumn
    */
 
@@ -203,7 +203,7 @@ public final class SimpleCharStream implements CharStream
   }
 
   /**
-   * @deprecated 
+   * @deprecated
    * @see #getEndLine
    */
 
@@ -378,7 +378,7 @@ public final class SimpleCharStream implements CharStream
         bufcolumn[j] = newCol + columnDiff;
         columnDiff = nextColDiff;
         i++;
-     } 
+     }
 
      if (i < len)
      {

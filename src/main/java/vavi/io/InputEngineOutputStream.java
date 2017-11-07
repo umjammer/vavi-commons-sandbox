@@ -13,7 +13,7 @@ import java.io.OutputStream;
 
 /**
  * An output stream that writes data from an InputEngine.
- * 
+ *
  * @author <a href="mailto:vavivavi@yahoo.co.jp">Naohide Sano</a> (nsano)
  */
 public class InputEngineOutputStream extends OutputStream {
@@ -56,7 +56,7 @@ public class InputEngineOutputStream extends OutputStream {
 
     /**
      * <li> limit が capacity に達したら {@link InputEngine#execute()}</li>
-     * 
+     *
      * <pre>
      * buffer
      * |              +limit  +capacity
@@ -144,7 +144,7 @@ public class InputEngineOutputStream extends OutputStream {
     }
 
     /**
-     * index: last pointer of buffer 
+     * index: last pointer of buffer
      */
     private int readImpl(byte[] data, int offset, int length) {
         if (limit - index <= 0) {

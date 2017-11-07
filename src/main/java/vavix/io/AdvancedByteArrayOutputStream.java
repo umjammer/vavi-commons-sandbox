@@ -12,7 +12,7 @@ import java.io.OutputStream;
 /**
  * An unsynchronized ByteArrayOutputStream alternative that efficiently provides
  * read-only access to the internal byte array with no unnecessary copying.
- * 
+ *
  * @author Copyright (c) 2002 Merlin Hughes <merlin@merlin.org>
  */
 public class AdvancedByteArrayOutputStream extends OutputStream {

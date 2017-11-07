@@ -15,7 +15,7 @@ import java.io.OutputStream;
  * an application. This provides a less-strict contract than the standard piped
  * streams, resulting in much-improved performance. Also supports non-blocking
  * operation.
- * 
+ *
  * @author Copyright (c) 2002 Merlin Hughes <merlin@merlin.org>
  */
 public class AdvancedPipedInputStream extends InputStream {

@@ -17,7 +17,7 @@ import static org.junit.Assert.assertEquals;
 
 
 /**
- * Rot13Test. 
+ * Rot13Test.
  *
  * @author <a href="mailto:vavivavi@yahoo.co.jp">Naohide Sano</a> (nsano)
  * @version 0.00 060203 nsano initial version <br>
@@ -28,13 +28,13 @@ public class Rot13Test {
     @Test
     public void test1() throws Exception {
         String string = "Naohide Sano 1970";
-        StringBuilder sb = new StringBuilder(); 
+        StringBuilder sb = new StringBuilder();
         for (char c : string.toCharArray()) {
             sb.append((char) Rot13.codec(c));
         }
 System.err.println(sb.toString());
         string = sb.toString();
-        sb = new StringBuilder(); 
+        sb = new StringBuilder();
         for (char c : string.toCharArray()) {
             sb.append((char) Rot13.codec(c));
         }

@@ -14,7 +14,7 @@ import java.io.OutputStream;
 
 /**
  * An input stream that reads data from an OutputEngine.
- * 
+ *
  * @author Copyright (c) 2002 Merlin Hughes <merlin@merlin.org>
  */
 public class OutputEngineInputStream extends InputStream {

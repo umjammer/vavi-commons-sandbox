@@ -22,20 +22,20 @@ import javassist.CtMethod;
 
 /**
  * PassClassFileTransformer.
- * 
+ *
  * @author <a href="mailto:vavivavi@yahoo.co.jp">Naohide Sano</a> (nsano)
  * @version 0.00 110823 nsano initial version <br>
  */
 public class PassClassFileTransformer implements VaviClassFileTransformer {
 
     /** */
-    private static Pattern pattern; 
+    private static Pattern pattern;
 
     /** */
     private static final String prefix = PassClassFileTransformer.class.getName();
 
     /** */
-    private String key; 
+    private String key;
 
     /** */
     public String getKey() {
@@ -74,7 +74,7 @@ System.err.println("PassClassFileTransformer::transform: pattern: " + pattern.pa
                                               "    if (!vavix.lang.instrumentation.PassClassFileTransformer.signatures.contains(\"" + key + "\")) {" +
                                               "        System.err.println(\"" + key + "\");" +
                                               "        vavix.lang.instrumentation.PassClassFileTransformer.signatures.add(\"" + key + "\");" +
-                                              "    }" + 
+                                              "    }" +
                                               "}");
                 }
 
@@ -87,15 +87,15 @@ System.err.println("PassClassFileTransformer::transform: " + className + ": " + 
             return null;
         }
     }
-    
+
     /** */
     public static Set<String> signatures = new HashSet<>();
-    
+
     /** */
     public static String getKey(CtClass ctClass, CtMethod ctMethod) {
         return normalize(ctClass.getName()) + "#" + ctMethod.getName() + ctMethod.getSignature();
     }
-    
+
     static String normalize(String name) {
         if (name.indexOf('.') > 0 && name.lastIndexOf('$') > 0) {
             String packageName = name.substring(0, name.lastIndexOf('.'));

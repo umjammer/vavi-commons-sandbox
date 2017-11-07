@@ -12,15 +12,15 @@ import java.io.InputStream;
 
 /**
  * An incremental data source that writes data to an OutputStream.
- * 
+ *
  * @author <a href="mailto:vavivavi@yahoo.co.jp">Naohide Sano</a> (nsano)
  */
 public interface InputEngine {
     /** */
     void initialize(InputStream in) throws IOException;
 
-    /** 
-     * in が -1 を返すまで読み込む必要がある 
+    /**
+     * in が -1 を返すまで読み込む必要がある
      */
     void execute() throws IOException;
 

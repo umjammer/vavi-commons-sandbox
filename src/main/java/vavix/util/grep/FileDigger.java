@@ -12,9 +12,9 @@ import java.io.IOException;
 
 /**
  * ディレクトリを再帰的に掘り下げていくインターフェースです。
- * <p> 
+ * <p>
  * 掘る人形
- * </p> 
+ * </p>
  * @author <a href="mailto:vavivavi@yahoo.co.jp">Naohide Sano</a> (nsano)
  * @version 0.00 050215 nsano initial version <br>
  */
@@ -23,9 +23,9 @@ public interface FileDigger {
 
     /**
      * 一つのファイルに対して何らかのアクションを行うインターフェースです。
-     * <p> 
+     * <p>
      * 浚う人形
-     * </p> 
+     * </p>
      */
     @FunctionalInterface
     public interface FileDredger {
@@ -38,7 +38,7 @@ public interface FileDigger {
 
     /**
      * 掘ります。
-     * @param dir トップディレクトリ 
+     * @param dir トップディレクトリ
      */
     void dig(File dir) throws IOException;
 }

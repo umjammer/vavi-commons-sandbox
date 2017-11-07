@@ -13,7 +13,7 @@ import java.io.OutputStream;
 
 /**
  * An incremental data source that writes data to an OutputStream.
- * 
+ *
  * @author Copyright (c) 2002 Merlin Hughes <merlin@merlin.org>
  */
 public interface OutputEngine {
