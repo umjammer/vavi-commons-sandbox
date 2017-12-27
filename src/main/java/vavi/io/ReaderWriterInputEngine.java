@@ -17,7 +17,7 @@ import java.io.Writer;
  * An input engine that copies data from a Writer through a InputStreamReader
  * to the target InputStream.
  *
- * @author <a href="mailto:vavivavi@yahoo.co.jp">Naohide Sano</a> (nsano)
+ * @author <a href="mailto:umjammer@gmail.com">Naohide Sano</a> (nsano)
  */
 public class ReaderWriterInputEngine implements InputEngine {
     /** */

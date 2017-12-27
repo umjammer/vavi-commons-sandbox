@@ -18,7 +18,7 @@ import java.util.regex.Pattern;
  * <p>
  * 掘る人
  * </p>
- * @author <a href="mailto:vavivavi@yahoo.co.jp">Naohide Sano</a> (nsano)
+ * @author <a href="mailto:umjammer@gmail.com">Naohide Sano</a> (nsano)
  * @version 0.00 050215 nsano initial version <br>
  */
 public class RegexFileDigger implements FileDigger {

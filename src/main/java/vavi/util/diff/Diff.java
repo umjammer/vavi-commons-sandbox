@@ -17,7 +17,7 @@
  * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  */
 
-package vavi.util.gnu;
+package vavi.util.diff;
 
 import java.io.File;
 import java.io.IOException;
@@ -43,7 +43,7 @@ import java.util.Map;
  * there is a memory overwrite bug in GNU diff 1.15.
  *
  * @author Stuart D. Gathman
- * @author <a href="mailto:vavivavi@yahoo.co.jp">Naohide Sano</a> (nsano)
+ * @author <a href="mailto:umjammer@gmail.com">Naohide Sano</a> (nsano)
  * @version 1.00 stuart translated from GNU diff 1.15 <br>
  *          1.20 000302 stuart Add GPL and copyright <br>
  *          1.30 000303 stuart move discard_confusing_lines and shift_boundaries to class FileData <br>

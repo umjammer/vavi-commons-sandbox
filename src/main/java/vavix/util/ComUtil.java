@@ -14,7 +14,7 @@ import vavi.util.Debug;
 /**
  * ComUtil.
  *
- * @author <a href="mailto:vavivavi@yahoo.co.jp">Naohide Sano</a> (nsano)
+ * @author <a href="mailto:umjammer@gmail.com">Naohide Sano</a> (nsano)
  * @version 0.00 040915 nsano initial version <br>
  */
 public final class ComUtil {

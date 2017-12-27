@@ -11,14 +11,14 @@ import java.io.File;
 import org.apache.tools.ant.BuildException;
 import org.apache.tools.ant.Task;
 import vavi.util.Debug;
-import vavi.util.gnu.Diff;
-import vavi.util.gnu.DiffUtil;
+import vavi.util.diff.Diff;
+import vavi.util.diff.DiffUtil;
 
 
 /**
  * Diff.
  *
- * @author <a href="mailto:vavivavi@yahoo.co.jp">Naohide Sano</a> (nsano)
+ * @author <a href="mailto:umjammer@gmail.com">Naohide Sano</a> (nsano)
  * @version 0.00 040212 nsano initial version <br>
  */
 public class DiffTask extends Task {

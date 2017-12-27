@@ -13,7 +13,7 @@ import java.io.InputStream;
 /**
  * An incremental data source that writes data to an OutputStream.
  *
- * @author <a href="mailto:vavivavi@yahoo.co.jp">Naohide Sano</a> (nsano)
+ * @author <a href="mailto:umjammer@gmail.com">Naohide Sano</a> (nsano)
  */
 public interface InputEngine {
     /** */

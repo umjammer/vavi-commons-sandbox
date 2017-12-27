@@ -15,7 +15,7 @@ import java.io.IOException;
  * <p>
  * 掘る人形
  * </p>
- * @author <a href="mailto:vavivavi@yahoo.co.jp">Naohide Sano</a> (nsano)
+ * @author <a href="mailto:umjammer@gmail.com">Naohide Sano</a> (nsano)
  * @version 0.00 050215 nsano initial version <br>
  */
 @FunctionalInterface

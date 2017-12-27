@@ -17,7 +17,7 @@ import java.util.EmptyStackException;
  * @see java.util.Stack#Stack()
  * @see java.util.Vector#Vector()
  * @author Fluxmedia and INRIA Rh�ne-Alpes.
- * @author <a href="mailto:vavivavi@yahoo.co.jp">Naohide Sano</a> (nsano)
+ * @author <a href="mailto:umjammer@gmail.com">Naohide Sano</a> (nsano)
  * @version 0.00 030314 nsano ported <br>
  */
 public class Fifo<E> extends ArrayList<E> {

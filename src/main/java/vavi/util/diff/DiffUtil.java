@@ -16,7 +16,7 @@
  * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  */
 
-package vavi.util.gnu;
+package vavi.util.diff;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -31,9 +31,9 @@ import java.util.List;
 /**
  * A simple framework for printing change lists produced by <code>Diff</code>.
  *
- * @see vavi.util.gnu.Diff
+ * @see vavi.util.diff.Diff
  * @author Stuart D. Gathman
- * @author <a href="mailto:vavivavi@yahoo.co.jp">Naohide Sano</a> (nsano)
+ * @author <a href="mailto:umjammer@gmail.com">Naohide Sano</a> (nsano)
  * @version 1.20 000302 stuart add GPL <br>
  *          1.21 020430 nsano ignore white space between "" <br>
  *          1.22 030210 nsano use List instead of Vector <br>

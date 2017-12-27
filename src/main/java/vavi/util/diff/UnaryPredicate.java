@@ -4,16 +4,16 @@
  * Programmed by Naohide Sano
  */
 
-package vavi.util.gnu;
+package vavi.util.diff;
 
 
 /**
  * UnaryPredicate.
  *
- * @author <a href="mailto:vavivavi@yahoo.co.jp">Naohide Sano</a> (nsano)
+ * @author <a href="mailto:umjammer@gmail.com">Naohide Sano</a> (nsano)
  * @version 0.00 020430 nsano initial version <br>
  */
-public interface UnaryPredicate {
+interface UnaryPredicate {
     boolean execute(Object obj);
 }
 

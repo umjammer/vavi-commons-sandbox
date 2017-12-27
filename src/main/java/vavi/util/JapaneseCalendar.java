@@ -31,7 +31,7 @@ import java.util.StringTokenizer;
  * <li> TODO set 系が機能していない
  *
  * @author 城風敏彦
- * @author <a href="mailto:vavivavi@yahoo.co.jp">Naohide Sano</a> (nsano)
+ * @author <a href="mailto:umjammer@gmail.com">Naohide Sano</a> (nsano)
  * @version 1.00 020620 城風 initial version <br>
  *          2.00 021119 nsano refine <br>
  */

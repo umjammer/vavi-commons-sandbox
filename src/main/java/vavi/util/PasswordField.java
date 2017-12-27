@@ -16,7 +16,7 @@ import java.util.Arrays;
  * This class prompts the user for a password and attempts to mask input with
  * "*".
  *
- * @author <a href="mailto:vavivavi@yahoo.co.jp">Naohide Sano</a> (nsano)
+ * @author <a href="mailto:umjammer@gmail.com">Naohide Sano</a> (nsano)
  * @version 0.00 040825 nsano initial version <br>
  */
 public class PasswordField {

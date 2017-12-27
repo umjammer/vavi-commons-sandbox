@@ -9,31 +9,25 @@ package vavi.util;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 
-import junit.framework.TestCase;
+import org.junit.Test;
+
+import static org.junit.Assert.assertEquals;
 
 
 /**
  * JapaneseCalendarTest.
  *
- * @author <a href="mailto:vavivavi@yahoo.co.jp">Naohide Sano</a> (nsano)
+ * @author <a href="mailto:umjammer@gmail.com">Naohide Sano</a> (nsano)
  * @version 0.00 050228 nsano initial version <br>
  */
-public class JapaneseCalendarTest extends TestCase {
-
-    JapaneseCalendar jc;
-
-    protected void setUp() throws Exception {
-        super.setUp();
-    }
-
-    protected void tearDown() throws Exception {
-        super.tearDown();
-    }
+public class JapaneseCalendarTest {
 
     /**
      * Class under test for void JapaneseCalendar()
      */
+    @Test
     public void test1() {
+        JapaneseCalendar jc;
 
         jc = new JapaneseCalendar((GregorianCalendar) Calendar.getInstance());
         assertEquals(jc, JapaneseCalendar.toFS(jc));
@@ -68,7 +62,10 @@ public class JapaneseCalendarTest extends TestCase {
     /**
      * Class under test for void JapaneseCalendar()
      */
+    @Test
     public void test2() {
+        JapaneseCalendar jc = new JapaneseCalendar((GregorianCalendar) Calendar.getInstance());
+
         jc.set(2001, 8 - 1, 11);        // TODO 機能していない
         assertEquals("2001 8 11", jc);
         assertEquals("2001 8 11", JapaneseCalendar.toFS(jc));

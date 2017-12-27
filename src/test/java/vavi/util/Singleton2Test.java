@@ -15,7 +15,7 @@ import junit.framework.TestCase;
 /**
  * SingletonTest.
  * <p>
- * @author <a href="mailto:vavivavi@yahoo.co.jp">Naohide Sano</a> (nsano)
+ * @author <a href="mailto:umjammer@gmail.com">Naohide Sano</a> (nsano)
  * @version 0.00 050914 nsano initial version <br>
  */
 @SuppressWarnings("unused")

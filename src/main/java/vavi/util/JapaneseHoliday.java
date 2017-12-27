@@ -30,7 +30,7 @@ import java.util.Calendar;
  * 12月23日        天皇誕生日
  * </pre>
  *
- * @author <a href="mailto:vavivavi@yahoo.co.jp">Naohide Sano</a> (nsano)
+ * @author <a href="mailto:umjammer@gmail.com">Naohide Sano</a> (nsano)
  * @version 0.00 021119 nsano port <br>
  */
 public class JapaneseHoliday {

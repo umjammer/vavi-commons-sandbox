@@ -1,3 +1,0 @@
-Premain-Class: vavix.util.VaviInstrumentation
-Boot-Class-Path: javassist.jar
-Can-Redefine-Classes: true

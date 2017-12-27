@@ -1,3 +1,6 @@
+/*
+ * http://www.oli4.ch/laoe/
+ */
 
 package vavix.util;
 

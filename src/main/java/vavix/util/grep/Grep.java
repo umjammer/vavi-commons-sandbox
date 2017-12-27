@@ -22,7 +22,7 @@ import java.util.regex.Pattern;
 
 /**
  * 濾し器
- * @author <a href="mailto:vavivavi@yahoo.co.jp">Naohide Sano</a> (nsano)
+ * @author <a href="mailto:umjammer@gmail.com">Naohide Sano</a> (nsano)
  * @version 0.00 050215 nsano initial version <br>
  */
 public class Grep {
@@ -110,19 +110,6 @@ public class Grep {
         fis.close();
 
         return results;
-    }
-
-    /**
-     * @param args 0: top directory, 1: grep pattern, 2: file pattern
-     */
-    public static void main(final String[] args) throws Exception {
-        new RegexFileDigger(new FileDigger.FileDredger() {
-            public void dredge(File file) throws IOException {
-                for (Grep.ResultSet rs : new Grep(file, Pattern.compile(args[1])).exec()) {
-System.out.print(rs.file + ":" + rs.lineNumber + ":" + rs.line);
-                }
-            }
-        }, Pattern.compile(args[2])).dig(new File(args[0]));
     }
 }
 

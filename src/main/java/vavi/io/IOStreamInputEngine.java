@@ -15,7 +15,7 @@ import java.io.OutputStream;
  * An input engine that copies data from an OutputStream through a
  * FilterInputStream to the target InputStream.
  *
- * @author <a href="mailto:vavivavi@yahoo.co.jp">Naohide Sano</a> (nsano)
+ * @author <a href="mailto:umjammer@gmail.com">Naohide Sano</a> (nsano)
  */
 public class IOStreamInputEngine implements InputEngine {
     /** */

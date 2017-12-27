@@ -15,7 +15,7 @@ import java.util.Map;
  * <p>
  * パッケージが違うサブクラスはクラス、デフォルトコンストラクタともに public でなければなりません。
  * </p>
- * @author <a href="mailto:vavivavi@yahoo.co.jp">Naohide Sano</a> (nsano)
+ * @author <a href="mailto:umjammer@gmail.com">Naohide Sano</a> (nsano)
  * @version 0.00 030821 nsano initial version <br>
  */
 public abstract class Singleton {

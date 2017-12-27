@@ -14,7 +14,7 @@ import java.io.IOException;
 /**
  * Rot13.
  *
- * @author <a href="mailto:vavivavi@yahoo.co.jp">Naohide Sano</a> (nsano)
+ * @author <a href="mailto:umjammer@gmail.com">Naohide Sano</a> (nsano)
  * @version 0.00 040503 nsano initial version <br>
  */
 public class Rot13 {

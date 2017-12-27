@@ -14,7 +14,7 @@ import vavi.util.Debug;
 /**
  * 権限を表現するクラスです． unix のファイルシステムの権限と同じです．
  *
- * @author <a href=mailto:vavivavi@yahoo.co.jp>Naohide Sano</a> (nsano)
+ * @author <a href=mailto:umjammer@gmail.com>Naohide Sano</a> (nsano)
  *
  * @version 0.00 000224 nsano initial version <br>
  *          1.00 030924 nsano repackage <br>

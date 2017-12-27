@@ -10,7 +10,7 @@ package vavi.tools.parser;
 /**
  * JavaParserVisitorAdapter.
  *
- * @author <a href="mailto:vavivavi@yahoo.co.jp">Naohide Sano</a> (nsano)
+ * @author <a href="mailto:umjammer@gmail.com">Naohide Sano</a> (nsano)
  * @version 0.00 020519 vavi initial version <br>
  */
 public abstract class JavaParserVisitorAdapter implements JavaParserVisitor
