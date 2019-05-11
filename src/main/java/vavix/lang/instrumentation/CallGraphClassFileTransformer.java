@@ -30,37 +30,42 @@ import javassist.CtMethod;
 public class CallGraphClassFileTransformer implements VaviClassFileTransformer {
 
     /** */
-    private static Pattern pattern;
+    private Pattern pattern;
 
     /** */
     private static final String prefix = CallGraphClassFileTransformer.class.getName();
 
-    /** */
-    private String key;
+    /** never use before call #transform() */
+    private String id;
 
-    /** */
-    public String getKey() {
-        return key;
+    /* */
+    public String getId() {
+        return id;
     }
 
-    /** */
-    public void setKey(String key) {
-        this.key = key;
+    /* */
+    public void setId(String id) {
+        this.id = id;
     }
 
     /**
      * <pre>
-     * vavix.lang.instrumentation.CallGraphClassFileTransformer.${key}.pattern ... class name matcher in regex
+     * system environment
+     *
+     * vavix.lang.instrumentation.CallGraphClassFileTransformer.${id}.pattern ... class name matcher in regex
      * </pre>
      */
     public byte[] transform(ClassLoader loader, String className, Class<?> classBeingRedefined, ProtectionDomain protectionDomain, byte[] classfileBuffer) throws IllegalClassFormatException {
-        ClassPool classPool = ClassPool.getDefault();
-
         if (pattern == null) {
             Properties props = System.getProperties();
-            pattern = Pattern.compile(props.getProperty(prefix + "." + key + "." + "pattern"));
-System.err.println("CallGraphClassFileTransformer::transform: pattern: " + pattern.pattern());
+            try {
+                pattern = Pattern.compile(props.getProperty(prefix + "." + id + "." + "pattern"));
+            } catch (Exception e) {
+System.err.println("CallGraphClassFileTransformer::transform: bad pattern: " + prefix + "." + id + "." + "pattern");
+            }
         }
+
+        ClassPool classPool = ClassPool.getDefault();
 
         Matcher matcher = pattern.matcher(className);
         String key = null;

@@ -13,7 +13,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.regex.Pattern;
 
-import org.junit.Ignore;
+import org.junit.jupiter.api.Disabled;
 
 import vavix.util.BoyerMooreSearch;
 import vavix.util.grep.FileDigger;
@@ -26,7 +26,7 @@ import vavix.util.grep.RegexFileDigger;
  * @author <a href="mailto:umjammer@gmail.com">Naohide Sano</a> (umjammer)
  * @version 0.00 2011/02/09 umjammer initial version <br>
  */
-@Ignore
+@Disabled
 public class BoyerMooreSearchTest {
 
     /**

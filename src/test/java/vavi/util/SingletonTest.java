@@ -7,7 +7,7 @@
 package vavi.util;
 
 
-import junit.framework.TestCase;
+import static org.junit.jupiter.api.Assertions.fail;
 
 
 /**
@@ -17,7 +17,7 @@ import junit.framework.TestCase;
  * @version 0.00 050914 nsano initial version <br>
  */
 @SuppressWarnings("unused")
-public class SingletonTest extends TestCase {
+public class SingletonTest {
 
     static class A extends Singleton {
     }

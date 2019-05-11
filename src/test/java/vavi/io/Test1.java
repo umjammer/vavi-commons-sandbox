@@ -18,7 +18,8 @@ import java.io.OutputStream;
 import java.util.zip.GZIPInputStream;
 import java.util.zip.GZIPOutputStream;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
 
 import vavi.util.Checksum;
 import vavi.util.Debug;
@@ -29,7 +30,7 @@ import vavix.io.FastByteArrayOutputStream;
 import vavix.io.Rot13;
 import vavix.io.Streams;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 
 /**
@@ -97,9 +98,8 @@ System.err.println(r);
      *
      * </pre>
      */
-//    @Test
+    @Disabled
     public void test002() throws Exception {
-
         String s = "Hello Naohide Sano";
         byte[] bytes = s.getBytes();
         FastByteArrayOutputStream baos = new FastByteArrayOutputStream();

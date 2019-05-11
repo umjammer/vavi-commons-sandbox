@@ -58,16 +58,6 @@ Debug.printStackTrace(e);
             throw new BuildException("Error", e);
         }
     }
-
-    //----
-
-    /** */
-    public static void main(String[] args) {
-        DiffTask task = new DiffTask();
-        task.setSrcfile(args[0]);
-        task.setTargetfile(args[1]);
-        task.execute();
-    }
 }
 
 /* */

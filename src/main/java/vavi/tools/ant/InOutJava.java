@@ -20,12 +20,12 @@ import org.apache.tools.ant.taskdefs.Java;
 
 /**
  * Extension of the org.apache.tools.ant.taskdefs.Java in order to enable
- * the redirection of the Standar Input of the Java application loadded.
+ * the redirection of the Standard Input of the Java application loaded.
  * It just add another param to the Java task, "input".
  * By now, it doesn't accept the fork option, because then I don't know
  * how to make the redirection :-/, and it gets hung...
  * Any ideas will be welcome
- * 14 june 2002.
+ * @version 14 june 2002.
  * @author ebota@uoc.edu
  */
 public class InOutJava extends Java {

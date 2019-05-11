@@ -11,9 +11,13 @@
   <organization>
     <name></name>
   </organization>
-  <version>0.3.3</version>
-  <url>https://github.com/umjammer/vavi-commons</url>
-  <description>0.3.3
+  <version>0.3.4</version>
+  <url>https://github.com/umjammer/vavi-commons-sandbox</url>
+  <description>0.3.4
+
+    change diff package name
+
+0.3.3
 
     out source swing related
 
@@ -21,13 +25,6 @@
 
     move LevenshteinDistance to vavi-commons
     add swing xml pretty printer</description>
-  <distributionManagement>
-    <repository>
-      <id>internal.repo</id>
-      <name>Temporary Staging Repository</name>
-      <url>file://${project.build.directory}/mvn-repo</url>
-    </repository>
-  </distributionManagement>
   <build>
     <plugins>
       <plugin>
@@ -42,13 +39,16 @@
       <plugin>
         <groupId>org.codehaus.mojo</groupId>
         <artifactId>native2ascii-maven-plugin</artifactId>
+        <version>2.0.1</version>
         <executions>
           <execution>
             <goals>
-              <goal>native2ascii</goal>
+              <goal>resources</goal>
             </goals>
             <configuration>
-              <encoding>Windows-31J</encoding>
+              <includes>
+                <include>**/*_ja_JP.properties</include>
+              </includes>
             </configuration>
           </execution>
         </executions>
@@ -79,64 +79,45 @@
           </execution>
         </executions>
       </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-jar-plugin</artifactId>
+        <version>2.3.1</version>
+        <configuration>
+          <archive>
+            <manifestEntries>
+              <Premain-Class>vavix.util.VaviInstrumentation</Premain-Class>
+              <Can-Redefine-Classes>true</Can-Redefine-Classes>
+              <Boot-Class-Path>javassist-3.8.0.GA.jar</Boot-Class-Path>
+            </manifestEntries>
+          </archive>
+        </configuration>
+      </plugin>
+      <plugin>
+        <!-- mvn install -->
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-antrun-plugin</artifactId>
+        <version>1.8</version>
+        <executions>
+          <execution>
+            <phase>install</phase>
+            <configuration>
+              <target>
+                <jar jarfile="vavi-instrumentation.jar" manifest="src/test/resources/manifest.mf">
+                  <fileset dir="target/classes">
+                    <include name="vavix/lang/instrumentation/*Instrumentation.class" />
+                    <include name="vavix/lang/instrumentation/*ClassFileTransformer*.class" />
+                  </fileset>
+                </jar>
+              </target>
+            </configuration>
+            <goals>
+              <goal>run</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
     </plugins>
-    <pluginManagement>
-      <plugins>
-        <!--This plugin's configuration is used to store Eclipse m2e settings only. It has no influence on the Maven build itself.-->
-        <plugin>
-          <groupId>org.eclipse.m2e</groupId>
-          <artifactId>lifecycle-mapping</artifactId>
-          <version>1.0.0</version>
-          <configuration>
-            <lifecycleMappingMetadata>
-              <pluginExecutions>
-                <pluginExecution>
-                  <pluginExecutionFilter>
-                    <groupId>org.codehaus.mojo</groupId>
-                    <artifactId>javacc-maven-plugin</artifactId>
-                    <versionRange>[2.5,)</versionRange>
-                    <goals>
-                      <goal>javacc</goal>
-                      <goal>jjtree-javacc</goal>
-                    </goals>
-                  </pluginExecutionFilter>
-                  <action>
-                    <ignore></ignore>
-                  </action>
-                </pluginExecution>
-                <pluginExecution>
-                  <pluginExecutionFilter>
-                    <groupId>org.codehaus.mojo</groupId>
-                    <artifactId>native2ascii-maven-plugin</artifactId>
-                    <versionRange>[1.0-alpha-1,)</versionRange>
-                    <goals>
-                      <goal>native2ascii</goal>
-                    </goals>
-                  </pluginExecutionFilter>
-                  <action>
-                    <execute/>
-                  </action>
-                </pluginExecution>
-              </pluginExecutions>
-            </lifecycleMappingMetadata>
-          </configuration>
-        </plugin>
-        <plugin>
-          <groupId>org.apache.maven.plugins</groupId>
-          <artifactId>maven-jar-plugin</artifactId>
-          <version>2.3.1</version>
-          <configuration>
-            <archive>
-              <manifestEntries>
-                <Premain-Class>vavix.util.VaviInstrumentation</Premain-Class>
-                <Can-Redefine-Classes>true</Can-Redefine-Classes>
-                <Boot-Class-Path>javassist-3.8.0.GA.jar</Boot-Class-Path>
-              </manifestEntries>
-            </archive>
-          </configuration>
-        </plugin>
-      </plugins>
-    </pluginManagement>
   </build>
   <repositories>
     <repository>
@@ -152,17 +133,22 @@
       <optional>false</optional>
     </dependency>
     <dependency>
-      <groupId>junit</groupId>
-      <artifactId>junit</artifactId>
-      <version>4.5</version>
+      <groupId>org.junit.jupiter</groupId>
+      <artifactId>junit-jupiter-api</artifactId>
+      <version>5.3.0</version>
       <scope>test</scope>
       <optional>false</optional>
     </dependency>
     <dependency>
+      <groupId>org.junit.jupiter</groupId>
+      <artifactId>junit-jupiter-engine</artifactId>
+      <version>5.3.0</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
       <groupId>org.apache.ant</groupId>
       <artifactId>ant</artifactId>
-      <version>1.7.0</version>
-      <optional>false</optional>
+      <version>1.10.1</version>
     </dependency>
     <dependency>
       <groupId>javassist</groupId>
@@ -182,12 +168,8 @@
       <optional>false</optional>
     </dependency>
   </dependencies>
-  <properties>
-    <!-- github server corresponds to entry in ~/.m2/settings.xml -->
-    <github.global.server>github</github.global.server>
-  </properties>
   <scm>
-    <url>https://github.com/umjammer/vavi-commons-sandbox/tree/master/vavi-commons-sandbox</url>
+    <url>https://github.com/umjammer/vavi-commons-sandbox/</url>
   </scm>
   <issueManagement>
     <url>https://github.com/umjammer/vavi-commons-sandbox/issues</url>

@@ -27,43 +27,47 @@ import javassist.CtMethod;
 public class EnterExitClassFileTransformer implements VaviClassFileTransformer {
 
     /** */
-    private static Pattern pattern;
+    private Pattern pattern;
 
     /** */
     private static final String prefix = EnterExitClassFileTransformer.class.getName();
 
-    /** */
-    private String key;
+    /** never use before call #transform() */
+    private String id;
 
-    /** */
-    public String getKey() {
-        return key;
+    /* */
+    public String getId() {
+        return id;
     }
 
-    /** */
-    public void setKey(String key) {
-        this.key = key;
-//System.err.println("EnterExitClassFileTransformer::setKey: key: " + key);
+    /* */
+    public void setId(String id) {
+        this.id = id;
+//System.err.println("EnterExitClassFileTransformer::setId: id: " + id);
     }
 
     /**
+     * system environment
      * <pre>
-     * vavix.lang.instrumentation.EnterExitClassFileTransformer.${key}.pattern ... class name matcher in regex
+     * vavix.lang.instrumentation.EnterExitClassFileTransformer.${id}.pattern ... class name matcher in regex
      * </pre>
      */
     public byte[] transform(ClassLoader loader, String className, Class<?> classBeingRedefined, ProtectionDomain protectionDomain, byte[] classfileBuffer) throws IllegalClassFormatException {
-        ClassPool classPool = ClassPool.getDefault();
-
         if (pattern == null) {
             Properties props = System.getProperties();
-            pattern = Pattern.compile(props.getProperty(prefix + "." + key + "." + "pattern"));
-System.err.println("EnterExitClassFileTransformer::transform: pattern: " + pattern.pattern());
+            try {
+                pattern = Pattern.compile(props.getProperty(prefix + "." + id + "." + "pattern"));
+            } catch (Exception e) {
+System.err.println("EnterExitClassFileTransformer::transform: bad pattern: " + prefix + "." + id + "." + "pattern");
+            }
         }
 
-//System.err.println("EnterExitClassFileTransformer::transform: format: " + className);
+        ClassPool classPool = ClassPool.getDefault();
+
+//System.err.println("EnterExitClassFileTransformer::transform: class: " + className);
         Matcher matcher = pattern.matcher(className);
         if (matcher.matches()) {
-//System.err.println("EnterExitClassFileTransformer::transform: format: " + className);
+//System.err.println("EnterExitClassFileTransformer::transform: matched: " + className);
             try {
                 ByteArrayInputStream stream = new ByteArrayInputStream(classfileBuffer);
                 CtClass ctClass = classPool.makeClass(stream);
