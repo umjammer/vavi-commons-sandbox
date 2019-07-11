@@ -5,17 +5,20 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
   <modelVersion>4.0.0</modelVersion>
+
   <groupId>vavi</groupId>
   <artifactId>vavi-commons-sandbox</artifactId>
   <name>Vavi Commons Sandbox API</name>
+  <version>0.3.4</version>
+
   <organization>
     <name></name>
   </organization>
-  <version>0.3.4</version>
   <url>https://github.com/umjammer/vavi-commons-sandbox</url>
   <description>0.3.4
 
     change diff package name
+    update instrumentation
 
 0.3.3
 
@@ -24,7 +27,19 @@
 0.3.2
 
     move LevenshteinDistance to vavi-commons
-    add swing xml pretty printer</description>
+    add swing xml pretty printer
+
+TODO
+
+    mac finder alias
+        https://en.wikipedia.org/wiki/Alias_(Mac_OS)</description>
+  <scm>
+    <url>https://github.com/umjammer/vavi-commons-sandbox/</url>
+  </scm>
+  <issueManagement>
+    <url>https://github.com/umjammer/vavi-commons-sandbox/issues</url>
+  </issueManagement>
+
   <build>
     <plugins>
       <plugin>
@@ -93,14 +108,17 @@
           </archive>
         </configuration>
       </plugin>
+<!--
       <plugin>
-        <!-- mvn install -->
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-antrun-plugin</artifactId>
         <version>1.8</version>
         <executions>
           <execution>
             <phase>install</phase>
+            <goals>
+              <goal>run</goal>
+            </goals>
             <configuration>
               <target>
                 <jar jarfile="vavi-instrumentation.jar" manifest="src/test/resources/manifest.mf">
@@ -111,33 +129,53 @@
                 </jar>
               </target>
             </configuration>
-            <goals>
-              <goal>run</goal>
-            </goals>
           </execution>
         </executions>
       </plugin>
+-->
     </plugins>
   </build>
+
   <repositories>
     <repository>
       <id>jitpack.io</id>
       <url>https://jitpack.io</url>
     </repository>
   </repositories>
+
   <dependencies>
+    <dependency>
+      <groupId>com.github.umjammer</groupId>
+      <artifactId>vavi-commons</artifactId>
+      <version>1.0.8</version>
+    </dependency>
     <dependency>
       <groupId>commons-beanutils</groupId>
       <artifactId>commons-beanutils</artifactId>
       <version>1.8.0</version>
-      <optional>false</optional>
     </dependency>
+    <dependency>
+      <groupId>javassist</groupId>
+      <artifactId>javassist</artifactId>
+      <version>3.8.0.GA</version>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.ant</groupId>
+      <artifactId>ant</artifactId>
+      <version>1.10.1</version>
+    </dependency>
+
+    <dependency>
+      <groupId>net.sf.jacob-project</groupId>
+      <artifactId>jacob</artifactId>
+      <version>1.14.3</version>
+    </dependency>
+
     <dependency>
       <groupId>org.junit.jupiter</groupId>
       <artifactId>junit-jupiter-api</artifactId>
       <version>5.3.0</version>
       <scope>test</scope>
-      <optional>false</optional>
     </dependency>
     <dependency>
       <groupId>org.junit.jupiter</groupId>
@@ -145,33 +183,6 @@
       <version>5.3.0</version>
       <scope>test</scope>
     </dependency>
-    <dependency>
-      <groupId>org.apache.ant</groupId>
-      <artifactId>ant</artifactId>
-      <version>1.10.1</version>
-    </dependency>
-    <dependency>
-      <groupId>javassist</groupId>
-      <artifactId>javassist</artifactId>
-      <version>3.8.0.GA</version>
-      <optional>false</optional>
-    </dependency>
-    <dependency>
-      <groupId>com.github.umjammer</groupId>
-      <artifactId>vavi-commons</artifactId>
-      <version>1.0.6</version>
-    </dependency>
-    <dependency>
-      <groupId>net.sf.jacob-project</groupId>
-      <artifactId>jacob</artifactId>
-      <version>1.14.3</version>
-      <optional>false</optional>
-    </dependency>
   </dependencies>
-  <scm>
-    <url>https://github.com/umjammer/vavi-commons-sandbox/</url>
-  </scm>
-  <issueManagement>
-    <url>https://github.com/umjammer/vavi-commons-sandbox/issues</url>
-  </issueManagement>
+
 </project>
