@@ -41,6 +41,7 @@ System.err.println("---- " + title + " ----");
             transformer.setOutputProperties(props);
             transformer.transform(source, result);
         } catch (Exception e) {
+            // TODO check error policy
             e.printStackTrace(System.err);
         }
     }
