@@ -10,16 +10,24 @@ import java.lang.instrument.ClassFileTransformer;
 
 
 /**
- * VaviClassFileTransformer.
+ * This class indicates a loaded class by {@link VaviInstrumentation}.
+ * Each class has id.
+ * <p>
+ * {{@link #setId(String)}'s id means the id of transformer classes.
+ * </p>
+ * ex. id is "1"
+ * <pre>
+ * -Dvavix.lang.instrumentation.VaviInstrumentation.1=vavix.lang.instrumentation.PassClassFileTransformer
+ * </pre>
  *
  * @author <a href="mailto:umjammer@gmail.com">Naohide Sano</a> (nsano)
  * @version 0.00 060809 nsano initial version <br>
  */
 public interface VaviClassFileTransformer extends ClassFileTransformer {
     /** */
-    void setKey(String key);
+    void setId(String id);
     /** */
-    String getKey();
+    String getId();
 }
 
 /* */

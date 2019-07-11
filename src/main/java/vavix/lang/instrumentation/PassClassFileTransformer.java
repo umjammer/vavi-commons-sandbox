@@ -21,7 +21,17 @@ import javassist.CtMethod;
 
 
 /**
- * PassClassFileTransformer.
+ * Traces a method has been passed or not.
+ *
+ * <pre>
+ * java \
+ * -cp target/classes \
+ * -Xbootclasspath/a:${HOME}/.m2/repository/javassist/javassist/3.8.0.GA/javassist-3.8.0.GA.jar \
+ * -javaagent:vavi-instrumentation.jar \
+ * -Dvavix.lang.instrumentation.VaviInstrumentation.1=vavix.lang.instrumentation.PassClassFileTransformer \
+ * -Dvavix.lang.instrumentation.PassClassFileTransformer.1.pattern=your\\/package\\/.+ \
+ * your.package.YourMainClass
+ * </pre>
  *
  * @author <a href="mailto:umjammer@gmail.com">Naohide Sano</a> (nsano)
  * @version 0.00 110823 nsano initial version <br>
@@ -29,37 +39,56 @@ import javassist.CtMethod;
 public class PassClassFileTransformer implements VaviClassFileTransformer {
 
     /** */
-    private static Pattern pattern;
+    private Pattern pattern;
+
+    /** */
+    private static boolean normalize;
+
+    /** */
+    private static boolean cleaning;
+
+    /** */
+    private boolean duplication;
 
     /** */
     private static final String prefix = PassClassFileTransformer.class.getName();
 
-    /** */
-    private String key;
+    /** never use before call #transform() */
+    private String id;
 
-    /** */
-    public String getKey() {
-        return key;
+    /* */
+    public String getId() {
+        return id;
     }
 
-    /** */
-    public void setKey(String key) {
-        this.key = key;
+    /* */
+    public void setId(String id) {
+        this.id = id;
     }
 
     /**
+     * system environment
      * <pre>
-     * vavix.lang.instrumentation.PassClassFileTransformer.${key}.pattern ... class name matcher in regex
+     * vavix.lang.instrumentation.PassClassFileTransformer.cleaning ... boolean value ignore synthetic method, switch table or not (true)
+     * vavix.lang.instrumentation.PassClassFileTransformer.normalize ... boolean value normalizing method name or not (false)
+     * vavix.lang.instrumentation.PassClassFileTransformer.${id}.duplication ... show duplication or not (false)
+     * vavix.lang.instrumentation.PassClassFileTransformer.${id}.pattern ... class name matcher in regex
      * </pre>
      */
     public byte[] transform(ClassLoader loader, String className, Class<?> classBeingRedefined, ProtectionDomain protectionDomain, byte[] classfileBuffer) throws IllegalClassFormatException {
-        ClassPool classPool = ClassPool.getDefault();
-
         if (pattern == null) {
             Properties props = System.getProperties();
-            pattern = Pattern.compile(props.getProperty(prefix + "." + key + "." + "pattern"));
-System.err.println("PassClassFileTransformer::transform: pattern: " + pattern.pattern());
+            try {
+                pattern = Pattern.compile(props.getProperty(prefix + "." + id + "." + "pattern"));
+            } catch (Exception e) {
+System.err.println("PassClassFileTransformer::transform: bad pattern: " + prefix + "." + id + "." + "pattern");
+            }
+            normalize = Boolean.valueOf(props.getProperty(prefix + "." + "normalize", "false"));
+            cleaning = Boolean.valueOf(props.getProperty(prefix + "." + "cleaning", "true"));
+            duplication = Boolean.valueOf(props.getProperty(prefix + "." + "duplication", "false"));
         }
+
+        ClassPool classPool = ClassPool.getDefault();
 
         Matcher matcher = pattern.matcher(className);
         if (matcher.matches()) {
@@ -68,14 +97,30 @@ System.err.println("PassClassFileTransformer::transform: pattern: " + pattern.pa
                 CtClass ctClass = classPool.makeClass(stream);
 
                 CtMethod[] ctMethods = ctClass.getDeclaredMethods();
+
                 for (int i = 0; i < ctMethods.length; i++) {
+                    if (cleaning && !available(ctMethods[i].getName())) {
+                        continue;
+                    }
                     String key = getKey(ctClass, ctMethods[i]);
-                    ctMethods[i].insertBefore("{" +
-                                              "    if (!vavix.lang.instrumentation.PassClassFileTransformer.signatures.contains(\"" + key + "\")) {" +
-                                              "        System.err.println(\"" + key + "\");" +
-                                              "        vavix.lang.instrumentation.PassClassFileTransformer.signatures.add(\"" + key + "\");" +
-                                              "    }" +
-                                              "}");
+try {
+                    if (duplication) {
+                        ctMethods[i].insertBefore(
+                            "{" +
+                            "    System.err.println(\"" + key + "\");" +
+                            "}");
+                    } else {
+                        ctMethods[i].insertBefore(
+                            "{" +
+                            "    if (!vavix.lang.instrumentation.PassClassFileTransformer.signatures.contains(\"" + key + "\")) {" +
+                            "        System.err.println(\"" + key + "\");" +
+                            "        vavix.lang.instrumentation.PassClassFileTransformer.signatures.add(\"" + key + "\");" +
+                            "    }" +
+                            "}");
+                    }
+} catch (Exception e) {
+ System.err.println("PassClassFileTransformer::transform: " + key + ": " + e.getMessage());
+}
                 }
 
                 return ctClass.toBytecode();
@@ -88,12 +133,27 @@ System.err.println("PassClassFileTransformer::transform: " + className + ": " + 
         }
     }
 
+    /** @see #cleaning */
+    private static boolean available(String methodName) {
+        if (methodName.startsWith("access$") ||
+            methodName.startsWith("$SWITCH_TABLE$")
+        ) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+
     /** */
     public static Set<String> signatures = new HashSet<>();
 
     /** */
     public static String getKey(CtClass ctClass, CtMethod ctMethod) {
-        return normalize(ctClass.getName()) + "#" + ctMethod.getName() + ctMethod.getSignature();
+        if (normalize) {
+            return normalize(ctClass.getName()) + "#" + ctMethod.getName() + ctMethod.getSignature();
+        } else {
+            return ctClass.getName() + "#" + ctMethod.getName() + ctMethod.getSignature();
+        }
     }
 
     static String normalize(String name) {
