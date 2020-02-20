@@ -9,7 +9,7 @@
   <groupId>vavi</groupId>
   <artifactId>vavi-commons-sandbox</artifactId>
   <name>Vavi Commons Sandbox API</name>
-  <version>0.3.4</version>
+  <version>0.3.5</version>
 
   <organization>
     <name></name>
@@ -147,12 +147,12 @@ TODO
     <dependency>
       <groupId>com.github.umjammer</groupId>
       <artifactId>vavi-commons</artifactId>
-      <version>1.0.10</version>
+      <version>1.0.12</version>
     </dependency>
     <dependency>
       <groupId>commons-beanutils</groupId>
       <artifactId>commons-beanutils</artifactId>
-      <version>1.8.0</version>
+      <version>1.8.3</version>
     </dependency>
     <dependency>
       <groupId>javassist</groupId>
