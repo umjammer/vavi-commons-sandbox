@@ -16,9 +16,9 @@
  * See LICENSE.txt for details.
  */
 package vavix.io;
- 
+
 import java.io.*;
- 
+
 /**
  * Implements the Circular Buffer producer/consumer model for bytes.
  * More information about this class is available from <a target="_top" href=
@@ -39,21 +39,21 @@ import java.io.*;
  * @since ostermillerutils 1.00.00
  */
 public class CircularByteBuffer {
- 
+
     /**
      * The default size for a circular byte buffer.
      *
      * @since ostermillerutils 1.00.00
      */
     private final static int DEFAULT_SIZE = 1024;
- 
+
     /**
      * A buffer that will grow as things are added.
      *
      * @since ostermillerutils 1.00.00
      */
     public final static int INFINITE_SIZE = -1;
- 
+
     /**
      * The circular buffer.
      * <p>
@@ -156,7 +156,7 @@ public class CircularByteBuffer {
             inputStreamClosed = false;
         }
     }
- 
+
     /**
      * Retrieve a OutputStream that can be used to fill
      * this buffer.
@@ -175,7 +175,7 @@ public class CircularByteBuffer {
     public OutputStream getOutputStream(){
         return out;
     }
- 
+
     /**
      * Retrieve a InputStream that can be used to empty
      * this buffer.
@@ -190,7 +190,7 @@ public class CircularByteBuffer {
     public InputStream getInputStream(){
         return in;
     }
- 
+
     /**
      * Get number of bytes that are available to be read.
      * <p>
@@ -208,7 +208,7 @@ public class CircularByteBuffer {
             return available();
         }
     }
- 
+
     /**
      * Get the number of bytes this buffer has free for
      * writing.
@@ -227,7 +227,7 @@ public class CircularByteBuffer {
             return spaceLeft();
         }
     }
- 
+
     /**
      * Get the capacity of this buffer.
      * <p>
@@ -245,7 +245,7 @@ public class CircularByteBuffer {
             return buffer.length;
         }
     }
- 
+
     /**
      * double the size of the buffer
      *
@@ -272,7 +272,7 @@ public class CircularByteBuffer {
         readPosition = marked;
         writePosition = marked + available;
     }
- 
+
     /**
      * Space available in the buffer which can be written.
      *
@@ -288,7 +288,7 @@ public class CircularByteBuffer {
         // space at the beginning and end.
         return ((buffer.length - 1) - (writePosition - markPosition));
     }
- 
+
     /**
      * Bytes available for reading.
      *
@@ -304,7 +304,7 @@ public class CircularByteBuffer {
         // space at the beginning and end.
         return (buffer.length - (readPosition - writePosition));
     }
- 
+
     /**
      * Bytes saved for supporting marks.
      *
@@ -320,7 +320,7 @@ public class CircularByteBuffer {
         // space at the beginning and end.
         return (buffer.length - (markPosition - readPosition));
     }
- 
+
     /**
      * If we have passed the markSize reset the
      * mark so that the space can be used.
@@ -333,7 +333,7 @@ public class CircularByteBuffer {
             markSize = 0;
         }
     }
- 
+
     /**
      * Create a new buffer with a default capacity.
      * Writing to a full buffer will block until space
@@ -344,7 +344,7 @@ public class CircularByteBuffer {
     public CircularByteBuffer(){
         this (DEFAULT_SIZE, true);
     }
- 
+
     /**
      * Create a new buffer with given capacity.
      * Writing to a full buffer will block until space
@@ -365,7 +365,7 @@ public class CircularByteBuffer {
     public CircularByteBuffer(int size){
         this (size, true);
     }
- 
+
     /**
      * Create a new buffer with a default capacity and
      * given blocking behavior.
@@ -379,7 +379,7 @@ public class CircularByteBuffer {
     public CircularByteBuffer(boolean blockingWrite){
         this (DEFAULT_SIZE, blockingWrite);
     }
- 
+
     /**
      * Create a new buffer with the given capacity and
      * blocking behavior.
@@ -409,14 +409,14 @@ public class CircularByteBuffer {
         }
         this.blockingWrite = blockingWrite;
     }
- 
+
     /**
      * Class for reading from a circular byte buffer.
      *
      * @since ostermillerutils 1.00.00
      */
     protected class CircularByteBufferInputStream extends InputStream {
- 
+
         /**
          * Returns the number of bytes that can be read (or skipped over) from this
          * input stream without blocking by the next caller of a method for this input
@@ -433,7 +433,7 @@ public class CircularByteBuffer {
                 return (CircularByteBuffer.this.available());
             }
         }
- 
+
         /**
          * Close the stream. Once a stream has been closed, further read(), available(),
          * mark(), or reset() invocations will throw an IOException. Closing a
@@ -448,7 +448,7 @@ public class CircularByteBuffer {
                 inputStreamClosed = true;
             }
         }
- 
+
         /**
          * Mark the present position in the stream. Subsequent calls to reset() will
          * attempt to reposition the stream to this point.
@@ -471,7 +471,7 @@ public class CircularByteBuffer {
                 }
             }
         }
- 
+
         /**
          * Tell whether this stream supports the mark() operation.
          *
@@ -482,7 +482,7 @@ public class CircularByteBuffer {
         @Override public boolean markSupported() {
             return true;
         }
- 
+
         /**
          * Read a single byte.
          * This method will block until a byte is available, an I/O error occurs,
@@ -518,7 +518,7 @@ public class CircularByteBuffer {
                 }
             }
         }
- 
+
         /**
          * Read bytes into an array.
          * This method will block until some input is available,
@@ -598,7 +598,7 @@ public class CircularByteBuffer {
                 readPosition = markPosition;
             }
         }
- 
+
         /**
          * Skip bytes.
          * This method will block until some bytes are available,
@@ -642,7 +642,7 @@ public class CircularByteBuffer {
             }
         }
     }
- 
+
     /**
      * Class for writing to a circular byte buffer.
      * If the buffer is full, the writes will either block
@@ -652,7 +652,7 @@ public class CircularByteBuffer {
      * @since ostermillerutils 1.00.00
      */
     protected class CircularByteBufferOutputStream extends OutputStream {
- 
+
         /**
          * Close the stream, flushing it first.
          * This will cause the InputStream associated with this circular buffer
@@ -673,7 +673,7 @@ public class CircularByteBuffer {
                 outputStreamClosed = true;
             }
         }
- 
+
         /**
          * Flush the stream.
          *
@@ -688,7 +688,7 @@ public class CircularByteBuffer {
             }
             // this method needs to do nothing
         }
- 
+
         /**
          * Write an array of bytes.
          * If the buffer allows blocking writes, this method will block until
@@ -705,7 +705,7 @@ public class CircularByteBuffer {
         @Override public void write(byte[] cbuf) throws IOException {
             write(cbuf, 0, cbuf.length);
         }
- 
+
         /**
          * Write a portion of an array of bytes.
          * If the buffer allows blocking writes, this method will block until
@@ -760,7 +760,7 @@ public class CircularByteBuffer {
                 }
             }
         }
- 
+
         /**
          * Write a single byte.
          * The byte to be written is contained in the 8 low-order bits of the

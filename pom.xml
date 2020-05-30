@@ -8,14 +8,22 @@
 
   <groupId>vavi</groupId>
   <artifactId>vavi-commons-sandbox</artifactId>
-  <name>Vavi Commons Sandbox API</name>
-  <version>0.3.5</version>
+  <version>0.4.0</version>
 
+  <name>Vavi Commons Sandbox API</name>
   <organization>
     <name></name>
   </organization>
   <url>https://github.com/umjammer/vavi-commons-sandbox</url>
-  <description>0.3.4
+  <description>0.4.0
+
+    promote instrumentation, engineering io into main stream
+
+0.3.5
+
+    maintenance version
+
+0.3.4
 
     change diff package name
     update instrumentation
@@ -108,31 +116,15 @@ TODO
           </archive>
         </configuration>
       </plugin>
-<!--
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-antrun-plugin</artifactId>
-        <version>1.8</version>
-        <executions>
-          <execution>
-            <phase>install</phase>
-            <goals>
-              <goal>run</goal>
-            </goals>
-            <configuration>
-              <target>
-                <jar jarfile="vavi-instrumentation.jar" manifest="src/test/resources/manifest.mf">
-                  <fileset dir="target/classes">
-                    <include name="vavix/lang/instrumentation/*Instrumentation.class" />
-                    <include name="vavix/lang/instrumentation/*ClassFileTransformer*.class" />
-                  </fileset>
-                </jar>
-              </target>
-            </configuration>
-          </execution>
-        </executions>
+        <artifactId>maven-surefire-plugin</artifactId>
+        <version>2.22.2</version>
+        <configuration>
+          <argLine>-Djava.util.logging.config.file=${project.build.testOutputDirectory}/logging.properties</argLine>
+          <trimStackTrace>false</trimStackTrace>
+        </configuration>
       </plugin>
--->
     </plugins>
   </build>
 
@@ -147,17 +139,12 @@ TODO
     <dependency>
       <groupId>com.github.umjammer</groupId>
       <artifactId>vavi-commons</artifactId>
-      <version>1.0.13</version>
+      <version>1.1.0</version>
     </dependency>
     <dependency>
       <groupId>commons-beanutils</groupId>
       <artifactId>commons-beanutils-core</artifactId>
       <version>1.8.3</version>
-    </dependency>
-    <dependency>
-      <groupId>javassist</groupId>
-      <artifactId>javassist</artifactId>
-      <version>3.8.0.GA</version>
     </dependency>
     <dependency>
       <groupId>org.apache.ant</groupId>
@@ -190,5 +177,4 @@ TODO
       <scope>test</scope>
     </dependency>
   </dependencies>
-
 </project>

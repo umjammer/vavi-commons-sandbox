@@ -4,7 +4,7 @@
  * Programmed by Naohide Sano
  */
 
-package vavi.util;
+package vavix.util;
 
 import java.io.BufferedInputStream;
 import java.io.File;
@@ -15,7 +15,8 @@ import java.util.regex.Pattern;
 
 import org.junit.jupiter.api.Disabled;
 
-import vavix.util.BoyerMooreSearch;
+import vavi.util.StringUtil;
+
 import vavix.util.grep.FileDigger;
 import vavix.util.grep.RegexFileDigger;
 

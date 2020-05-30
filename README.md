@@ -4,17 +4,13 @@
 
 Many Utilities
 
-## Contents
+## 💖 Contents
 
-### Adaptive I/O Stream
-
-to be promoted to vavi-commons
-
-### Mime Utility
+### 💜 Mime Utility
 
 to be deprecated
 
-### Ant Tasks
+### 💜 Ant Tasks
 
 to be deprecated
 
@@ -23,26 +19,28 @@ to be deprecated
  * InOut
  * iAppli pak
 
-### Java Parser
+### 💜 Java Parser
 
 to be deprecated
 
-### Utility
+### 💜 Utility
 
  * Japanese Holiday
  * Password Field
  * Singleton
 
-## GNU Diff
+### 💜 GNU Diff
 
-## XML
+### 💜 XML
 
-## Instrumentation
+### 💜 Ansi Color
 
-to be promoted to vavi-commons
-
-## Ansi Color
-
-## Grep
+### 💜 Grep
 
 to be deprecated
+
+### 💜 Dynamic Morphism
+
+### TODO
+
+ * regex find group iteration

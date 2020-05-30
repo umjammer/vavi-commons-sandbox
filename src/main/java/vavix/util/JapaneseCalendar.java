@@ -28,10 +28,12 @@ import vavi.util.Debug;
  * getMonth(), set(int, int, int) の月が，1: 1月 になるようにしている。
  * 新暦である明治6年(1873年)以降をサポート???。
  * </p>
- * <li> TODO 解析，フォーマット系の分離
- * <li> TODO 明治以前の実装
- * <li> TODO set 系が機能していない
- *
+ * <ul>
+ * <li> TODO 解析，フォーマット系の分離</li>
+ * <li> TODO 明治以前の実装</li>
+ * <li> TODO set 系が機能していない</li>
+ * <li> TODO holiday</li>
+ * </li>
  * @author 城風敏彦
  * @author <a href="mailto:umjammer@gmail.com">Naohide Sano</a> (nsano)
  * @version 1.00 020620 城風 initial version <br>

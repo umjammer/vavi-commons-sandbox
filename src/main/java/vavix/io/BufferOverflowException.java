@@ -16,9 +16,9 @@
  * See LICENSE.txt for details.
  */
 package vavix.io;
- 
+
 import java.io.IOException;
- 
+
 /**
  * An indication that there was a buffer overflow.
  *
@@ -26,12 +26,12 @@ import java.io.IOException;
  * @since ostermillerutils 1.00.00
  */
 public class BufferOverflowException extends IOException {
- 
+
     /**
      * Serial version ID
      */
     private static final long serialVersionUID = -322401823167626048L;
- 
+
     /**
      * Create a new Exception
      *
@@ -40,7 +40,7 @@ public class BufferOverflowException extends IOException {
     public BufferOverflowException(){
         super();
     }
- 
+
     /**
      * Create a new Exception with the given message.
      *
