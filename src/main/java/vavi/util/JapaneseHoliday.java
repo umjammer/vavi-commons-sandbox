@@ -6,7 +6,8 @@
 
 package vavi.util;
 
-import java.util.Calendar;
+import java.time.DayOfWeek;
+import java.time.LocalDate;
 
 
 /**
@@ -36,7 +37,7 @@ import java.util.Calendar;
 public class JapaneseHoliday {
 
     /** このオブジェクトが指す日付 */
-    private Calendar calendar;
+    private LocalDate calendar;
 
     /** 土曜日も休日とするかどうか */
     private boolean saturdayHoliday;
@@ -45,7 +46,7 @@ public class JapaneseHoliday {
      * デフォルトのタイムゾーンおよびロケールを持つカレンダーを使用します。
      */
     public JapaneseHoliday() {
-        this.calendar = Calendar.getInstance();
+        this.calendar = LocalDate.now();
     }
 
     /**
@@ -61,30 +62,29 @@ public class JapaneseHoliday {
      * @return 休日ならば true、そうでないなら false
      */
     public boolean isHoliday() {
-        return isHoliday(calendar.get(Calendar.YEAR),
-                         calendar.get(Calendar.MONTH),
-                         calendar.get(Calendar.DAY_OF_MONTH));
+        return isHoliday(calendar.getYear(),
+                         calendar.getMonthValue(),
+                         calendar.getDayOfMonth());
     }
 
     /**
      * 指定された年月日が休日かどうか判定します。
      * オブジェクトのカレンダーは指定された日に変更されます。
      * @param yyyy 年、西暦 4 桁で指定
-     * @param mm 月、10 月の場合は 9 を指定
-     * @param dd 日
+     * @param mm 月 1 ~ 12
+     * @param dd 日 1 ~ 31
      * @return 休日ならば true、そうでないなら false
      */
     public boolean isHoliday(int yyyy, int mm, int dd) {
         int[] equinox = getEquinoxDays(yyyy);
 
         int[] monday = getMondayHoliday(yyyy);
-        mm++;
-        // わかりやすく cal.set(Calendar.YEAR, yyyy);
-        calendar.set(Calendar.MONTH, mm - 1);
-        calendar.set(Calendar.DAY_OF_MONTH, dd);
-        if (calendar.get(Calendar.DAY_OF_WEEK) == Calendar.SUNDAY) {
+        calendar.withYear(yyyy);
+        calendar.withMonth(mm);
+        calendar.withDayOfMonth(dd);
+        if (calendar.getDayOfWeek() == DayOfWeek.SUNDAY) {
             return true;
-        } else if (saturdayHoliday && calendar.get(Calendar.DAY_OF_WEEK) == Calendar.SATURDAY) {
+        } else if (saturdayHoliday && calendar.getDayOfWeek() == DayOfWeek.SATURDAY) {
             return true;
         }
 
@@ -101,69 +101,69 @@ public class JapaneseHoliday {
             return true;
         } else {
             if (mm == 2 && dd == 12) {
-                calendar.set(Calendar.MONTH, 1);
-                calendar.set(Calendar.DAY_OF_MONTH, 11);
+                calendar.withMonth(1);
+                calendar.withDayOfMonth(11);
 
-                if (calendar.get(Calendar.DAY_OF_WEEK) == Calendar.SUNDAY) {
+                if (calendar.getDayOfWeek() == DayOfWeek.SUNDAY) {
                     return true;
                 }
             } else if
                 (mm == 3 && dd == (equinox[0] + 1)) {
-                calendar.set(Calendar.MONTH, 2);
+                calendar.withMonth(2);
 
-                calendar.set(Calendar.DAY_OF_MONTH, equinox[0]);
-                if (calendar.get(Calendar.DAY_OF_WEEK) == Calendar.SUNDAY) {
+                calendar.withDayOfMonth(equinox[0]);
+                if (calendar.getDayOfWeek() == DayOfWeek.SUNDAY) {
                     return true;
                 }
             } else if (mm == 4 && dd == 30) {
-                calendar.set(Calendar.MONTH, 3);
-                calendar.set(Calendar.DAY_OF_MONTH, 29);
-                if (calendar.get(Calendar.DAY_OF_WEEK) == Calendar.SUNDAY) {
+                calendar.withMonth(3);
+                calendar.withDayOfMonth(29);
+                if (calendar.getDayOfWeek() == DayOfWeek.SUNDAY) {
                     return true;
                 }
             } else if (mm == 5 && dd == 6) {
-                calendar.set(Calendar.MONTH, 4);
-                calendar.set(Calendar.DAY_OF_MONTH, 5);
-                if (calendar.get(Calendar.DAY_OF_WEEK) == Calendar.SUNDAY) {
+                calendar.withMonth(4);
+                calendar.withDayOfMonth(5);
+                if (calendar.getDayOfWeek() == DayOfWeek.SUNDAY) {
                     return true;
                 }
             } else if (mm == 9 && dd == (equinox[1] + 1)) {
-                calendar.set(Calendar.MONTH, 8);
-                calendar.set(Calendar.DAY_OF_MONTH, equinox[1]);
-                if (calendar.get(Calendar.DAY_OF_WEEK) == Calendar.SUNDAY) {
+                calendar.withMonth(8);
+                calendar.withDayOfMonth(equinox[1]);
+                if (calendar.getDayOfWeek() == DayOfWeek.SUNDAY) {
                     return true;
                 }
             } else if (mm == 11 && dd == 4) {
-                calendar.set(Calendar.MONTH, 10);
-                calendar.set(Calendar.DAY_OF_MONTH, 3);
-                if (calendar.get(Calendar.DAY_OF_WEEK) == Calendar.SUNDAY) {
+                calendar.withMonth(10);
+                calendar.withDayOfMonth(3);
+                if (calendar.getDayOfWeek() == DayOfWeek.SUNDAY) {
                     return true;
                 }
             } else if (mm == 11 && dd == 24) {
-                calendar.set(Calendar.MONTH, 10);
-                calendar.set(Calendar.DAY_OF_MONTH, 23);
-                if (calendar.get(Calendar.DAY_OF_WEEK) == Calendar.SUNDAY) {
+                calendar.withMonth(10);
+                calendar.withDayOfMonth(23);
+                if (calendar.getDayOfWeek() == DayOfWeek.SUNDAY) {
                     return true;
                 }
             } else if (mm == 12 && dd == 24) {
-                calendar.set(Calendar.MONTH, 11);
-                calendar.set(Calendar.DAY_OF_MONTH, 23);
-                if (calendar.get(Calendar.DAY_OF_WEEK) == Calendar.SUNDAY) {
+                calendar.withMonth(11);
+                calendar.withDayOfMonth(23);
+                if (calendar.getDayOfWeek() == DayOfWeek.SUNDAY) {
                     return true;
                 }
             } else {
                 if (yyyy <= 2002) {
                     if (mm == 7 && dd == (monday[1] + 1)) {
-                        calendar.set(Calendar.MONTH, 6);
-                        calendar.set(Calendar.DAY_OF_MONTH, monday[1]);
-                        if (calendar.get(Calendar.DAY_OF_WEEK) == Calendar.SUNDAY) {
+                        calendar.withMonth(6);
+                        calendar.withDayOfMonth(monday[1]);
+                        if (calendar.getDayOfWeek() == DayOfWeek.SUNDAY) {
                             return true;
                         }
                     } else if (mm == 9 && (dd == monday[2] + 1)) {
-                        calendar.set(Calendar.MONTH, 8);
-                        calendar.set(Calendar.DAY_OF_MONTH, monday[2]);
-                        if (calendar.get(Calendar.DAY_OF_WEEK) ==
-                            Calendar.SUNDAY) {
+                        calendar.withMonth(8);
+                        calendar.withDayOfMonth(monday[2]);
+                        if (calendar.getDayOfWeek() ==
+                            DayOfWeek.SUNDAY) {
                             return true;
                         }
                     }
@@ -178,23 +178,13 @@ public class JapaneseHoliday {
      * @return 春分、秋分の日
      */
     private int[] getEquinoxDays(int yyyy) {
-        long temp = 0;
+        int temp = 0;
         // 一時的な変数 temp = (242194 * (yyyy - 1980));
 
         temp -= ((yyyy - 1980) >> 2) * 1000000;
-        long s3 = (20843100 + temp) / 1000000;
-
-        long s9 = (23248800 + temp) / 1000000;
-        String s3s = String.valueOf(s3);
-        // s3s =
-        s3s.substring(0, s3s.indexOf('.'));
-        String s9s = String.valueOf(s9);
-        // s9s =
-        s9s.substring(0, s9s.indexOf('.'));
-        return new int[] {
-            Integer.parseInt(s3s),
-            Integer.parseInt(s9s)
-        };
+        int s3 = (20843100 + temp) / 1000000;
+        int s9 = (23248800 + temp) / 1000000;
+        return new int[] { s3, s9 };
     }
 
     /**
@@ -209,110 +199,110 @@ public class JapaneseHoliday {
         // 成人の日 1月第二月曜日 int h7 = 20;
         // 海の日 7月第三月曜日(2003年から) int h9 = 15;
         // 敬老の日 9月第三月曜日(2003年から) int h10 = 0;
-        // 体育の日 10月第二月曜日 cal.set(Calendar.YEAR, yyyy);
+        // 体育の日 10月第二月曜日 cal.set(DayOfWeek.YEAR, yyyy);
 
-        calendar.set(Calendar.MONTH, 0);
-        calendar.set(Calendar.DAY_OF_MONTH, 1);
-        int week = calendar.get(Calendar.DAY_OF_WEEK);
+        calendar.withMonth(1);
+        calendar.withDayOfMonth(1);
+        DayOfWeek week = calendar.getDayOfWeek();
         switch (week) {
-        case 0:
+        case SUNDAY:
             h1 = 9;
             break;
-        case 1:
+        case MONDAY:
             h1 = 8;
             break;
-        case 2:
+        case TUESDAY:
             h1 = 14;
             break;
-        case 3:
+        case WEDNESDAY:
             h1 = 13;
             break;
-        case 4:
+        case THURSDAY:
             h1 = 12;
             break;
-        case 5:
+        case FRIDAY:
             h1 = 11;
             break;
-        case 6:
+        case SATURDAY:
             h1 = 10;
             break;
         }
 
-        calendar.set(Calendar.MONTH, 9);
-        week = calendar.get(Calendar.DAY_OF_WEEK);
+        calendar.withMonth(10);
+        week = calendar.getDayOfWeek();
         switch (week) {
-        case 0:
+        case SUNDAY:
             h10 = 9;
             break;
-        case 1:
+        case MONDAY:
             h10 = 8;
             break;
-        case 2:
+        case TUESDAY:
             h10 = 14;
             break;
-        case 3:
+        case WEDNESDAY:
             h10 = 13;
             break;
-        case 4:
+        case THURSDAY:
             h10 = 12;
             break;
-        case 5:
+        case FRIDAY:
             h10 = 11;
             break;
-        case 6:
+        case SATURDAY:
             h10 = 10;
             break;
         }
 
         if (yyyy >= 2003) {
-            calendar.set(Calendar.MONTH, 6);
-            week = calendar.get(Calendar.DAY_OF_WEEK);
+            calendar.withMonth(7);
+            week = calendar.getDayOfWeek();
             switch (week) {
-            case 0:
+            case SUNDAY:
                 h7 = 16;
                 break;
-            case 1:
+            case MONDAY:
                 h7 = 15;
                 break;
-            case 2:
+            case TUESDAY:
                 h7 = 21;
                 break;
-            case 3:
+            case WEDNESDAY:
                 h7 = 20;
                 break;
-            case 4:
+            case THURSDAY:
                 h7 = 19;
                 break;
-            case 5:
+            case FRIDAY:
                 h7 = 18;
                 break;
-            case 6:
+            case SATURDAY:
                 h7 = 17;
                 break;
             }
 
-            calendar.set(Calendar.MONTH, 8);
-            week = calendar.get(Calendar.DAY_OF_WEEK);
+            calendar.withMonth(9);
+            week = calendar.getDayOfWeek();
             switch (week) {
-            case 0:
+            case SUNDAY:
                 h9 = 16;
                 break;
-            case 1:
+            case MONDAY:
                 h9 = 15;
                 break;
-            case 2:
+            case TUESDAY:
                 h9 = 21;
                 break;
-            case 3:
+            case WEDNESDAY:
                 h9 = 20;
                 break;
-            case 4:
+            case THURSDAY:
                 h9 = 19;
                 break;
-            case 5:
+            case FRIDAY:
                 h9 = 18;
                 break;
-            case 6:
+            case SATURDAY:
                 h9 = 17;
                 break;
             }

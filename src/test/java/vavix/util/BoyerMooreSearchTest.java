@@ -13,12 +13,14 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.regex.Pattern;
 
-import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
 
 import vavi.util.StringUtil;
 
 import vavix.util.grep.FileDigger;
 import vavix.util.grep.RegexFileDigger;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 
 /**
@@ -27,8 +29,17 @@ import vavix.util.grep.RegexFileDigger;
  * @author <a href="mailto:umjammer@gmail.com">Naohide Sano</a> (umjammer)
  * @version 0.00 2011/02/09 umjammer initial version <br>
  */
-@Disabled
+@SuppressWarnings("deprecation")
 public class BoyerMooreSearchTest {
+
+    @Test
+    void test1() {
+        String a = "sano";
+        String b = "askkkjadkjdsaldsm,sda,ac,./asdklsasanolkasasdj:ask:mkncasdnasnasdnkcasdacsnds";
+        BoyerMooreSearch bm = new BoyerMooreSearch(b.getBytes());
+        int r = bm.indexOf(a.getBytes(), 0);
+        assertEquals(34, r);
+    }
 
     /**
      * @param args 0: top dir, 1: patern
