@@ -8,6 +8,7 @@ package vavix.util.grep;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
 
 
 /**
@@ -17,7 +18,9 @@ import java.io.IOException;
  * </p>
  * @author <a href="mailto:umjammer@gmail.com">Naohide Sano</a> (nsano)
  * @version 0.00 050215 nsano initial version <br>
+ * @deprecated use {@link Files#walkFileTree(java.nio.file.Path, java.nio.file.FileVisitor)}
  */
+@Deprecated
 @FunctionalInterface
 public interface FileDigger {
 

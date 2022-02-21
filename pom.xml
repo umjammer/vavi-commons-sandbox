@@ -15,28 +15,7 @@
     <name></name>
   </organization>
   <url>https://github.com/umjammer/vavi-commons-sandbox</url>
-  <description>0.4.0
-
-    promote instrumentation, engineering io into main stream
-
-0.3.5
-
-    maintenance version
-
-0.3.4
-
-    change diff package name
-    update instrumentation
-
-0.3.3
-
-    out source swing related
-
-0.3.2
-
-    move LevenshteinDistance to vavi-commons
-    add swing xml pretty printer
-
+  <description>
 TODO
 
     mac finder alias
@@ -101,20 +80,6 @@ TODO
             </configuration>
           </execution>
         </executions>
-      </plugin>
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-jar-plugin</artifactId>
-        <version>2.3.1</version>
-        <configuration>
-          <archive>
-            <manifestEntries>
-              <Premain-Class>vavix.util.VaviInstrumentation</Premain-Class>
-              <Can-Redefine-Classes>true</Can-Redefine-Classes>
-              <Boot-Class-Path>javassist-3.8.0.GA.jar</Boot-Class-Path>
-            </manifestEntries>
-          </archive>
-        </configuration>
       </plugin>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>

@@ -9,6 +9,7 @@ package vavix.util.grep;
 import java.io.File;
 import java.io.FileFilter;
 import java.io.IOException;
+import java.nio.file.Files;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -20,7 +21,9 @@ import java.util.regex.Pattern;
  * </p>
  * @author <a href="mailto:umjammer@gmail.com">Naohide Sano</a> (nsano)
  * @version 0.00 050215 nsano initial version <br>
+ * @deprecated use {@link Files#walkFileTree(java.nio.file.Path, java.nio.file.FileVisitor)}
  */
+@Deprecated
 public class RegexFileDigger implements FileDigger {
 
     /**

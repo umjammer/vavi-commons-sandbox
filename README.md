@@ -4,13 +4,13 @@
 
 Many Utilities
 
-## 💖 Contents
+## 🧰 Contents
 
-### 💜 Mime Utility
+### 🔧 Mime Utility
 
 to be deprecated
 
-### 💜 Ant Tasks
+### 🔧 Ant Tasks
 
 to be deprecated
 
@@ -19,27 +19,27 @@ to be deprecated
  * InOut
  * iAppli pak
 
-### 💜 Java Parser
+### 🔧 Java Parser
 
 to be deprecated
 
-### 💜 Utility
+### 🔧 Utility
 
  * Japanese Holiday
  * Password Field
  * Singleton
 
-### 💜 GNU Diff
+### 🔧 GNU Diff
 
-### 💜 XML
+### 🔧 XML
 
-### 💜 Ansi Color
+### 🔧 Ansi Color
 
-### 💜 Grep
+### 🔧 Grep
 
 to be deprecated
 
-### 💜 Dynamic Morphism
+### 🔧 Dynamic Morphism
 
 ### TODO
 
