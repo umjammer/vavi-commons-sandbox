@@ -6,18 +6,20 @@
 
 package vavi.util;
 
+import org.junit.jupiter.api.Test;
+
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.fail;
 
 
 /**
- * SingletonTest.
+ * Singleton2Test.
  * <p>
  * @author <a href="mailto:umjammer@gmail.com">Naohide Sano</a> (nsano)
  * @version 0.00 050914 nsano initial version <br>
  */
 @SuppressWarnings("unused")
-public class Singleton2Test {
+class Singleton2Test {
 
     public static class A extends Singleton {
     }
@@ -25,8 +27,8 @@ public class Singleton2Test {
     public static class B extends A {
     }
 
-    /** */
-    public void test1() throws Exception {
+    @Test
+    void test1() throws Exception {
 
         A a = A.getInstance(A.class);
         B b = B.getInstance(B.class);
@@ -35,8 +37,8 @@ public class Singleton2Test {
     public static class C extends Singleton {
     }
 
-    /** */
-    public void test2() throws Exception {
+    @Test
+    void test2() throws Exception {
         C c = C.getInstance(C.class);
     }
 
@@ -45,8 +47,8 @@ public class Singleton2Test {
         }
     }
 
-    /** */
-    public void test3() throws Exception {
+    @Test
+    void test3() throws Exception {
 
         D d = D.getInstance(D.class);
     }
@@ -54,8 +56,8 @@ public class Singleton2Test {
     public static class E extends Singleton {
     }
 
-    /** */
-    public void test4() throws Exception {
+    @Test
+    void test4() throws Exception {
         E e = E.getInstance(E.class);
         assertTrue(true);
         try {
@@ -77,8 +79,8 @@ public class Singleton2Test {
         }
     }
 
-    /** */
-    public void test5() throws Exception {
+    @Test
+    void test5() throws Exception {
         F f = F.getInstance(F.class);
     }
 }

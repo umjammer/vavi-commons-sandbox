@@ -7,6 +7,9 @@
 package vavi.util;
 
 
+import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.fail;
 
 
@@ -17,7 +20,7 @@ import static org.junit.jupiter.api.Assertions.fail;
  * @version 0.00 050914 nsano initial version <br>
  */
 @SuppressWarnings("unused")
-public class SingletonTest {
+class SingletonTest {
 
     static class A extends Singleton {
     }
@@ -25,7 +28,7 @@ public class SingletonTest {
     static class B extends A {
     }
 
-    /** */
+    @Test
     public void test1() throws Exception {
 
         A a = A.getInstance(A.class);
@@ -37,13 +40,11 @@ public class SingletonTest {
         }
     }
 
-    /** */
+    @Test
     public void test2() throws Exception {
-        try {
+        assertThrows(IllegalStateException.class, () -> {
             C c = C.getInstance(C.class);
-            fail();
-        } catch (IllegalStateException e) {
-        }
+        });
     }
 
     static class D extends Singleton {
@@ -51,7 +52,7 @@ public class SingletonTest {
         }
     }
 
-    /** */
+    @Test
     public void test3() throws Exception {
 
         D d = D.getInstance(D.class);
@@ -60,14 +61,12 @@ public class SingletonTest {
     static class E extends Singleton {
     }
 
-    /** */
+    @Test
     public void test4() throws Exception {
-        try {
+        assertThrows(IllegalStateException.class, () -> {
             E e = E.getInstance(E.class);
             e = new E();
-            fail();
-        } catch (IllegalStateException e) {
-        }
+        });
     }
 
     interface X<T> {
@@ -82,17 +81,17 @@ public class SingletonTest {
         }
     }
 
-    /** */
+    @Test
     public void test5() throws Exception {
         F f = F.getInstance(F.class);
     }
 
-    /** */
+    @Test
     public void test6() throws Exception {
         G g = G.getInstance(G.class);
     }
 
-    /** */
+    @Test
     public void test7() throws Exception {
         H h = H.getInstance(H.class);
     }
@@ -114,4 +113,5 @@ class H extends Singleton implements Y<Object> {
         return null;
     }
 }
+
 /* */
