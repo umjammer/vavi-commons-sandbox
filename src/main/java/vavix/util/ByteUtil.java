@@ -16,7 +16,9 @@ import javax.sound.sampled.AudioFormat;
  *
  * @author <a href="mailto:umjammer@gmail.com">Naohide Sano</a> (nsano)
  * @version 0.00 060203 nsano initial version <br>
+ * @deprecated use {@link vavi.util.ByteUtil}
  */
+@Deprecated
 public class ByteUtil {
 
     /** */
