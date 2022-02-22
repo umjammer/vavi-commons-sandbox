@@ -114,9 +114,9 @@ TODO
 
   <dependencies>
     <dependency>
-      <groupId>com.github.umjammer</groupId>
+      <groupId>vavi</groupId> <!-- com.github.umjammer -->
       <artifactId>vavi-commons</artifactId>
-      <version>1.1.5</version>
+      <version>1.1.6-SNAPSHOT</version>
     </dependency>
     <dependency>
       <groupId>commons-beanutils</groupId>
@@ -127,6 +127,11 @@ TODO
       <groupId>org.apache.ant</groupId>
       <artifactId>ant</artifactId>
       <version>1.10.11</version>
+    </dependency>
+    <dependency>
+      <groupId>vavi</groupId>
+      <artifactId>vavi-util-binaryio</artifactId>
+      <version>1.0.0-SNAPSHOT</version>
     </dependency>
 
     <dependency>
