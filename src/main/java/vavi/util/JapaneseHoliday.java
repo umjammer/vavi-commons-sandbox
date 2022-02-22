@@ -8,6 +8,7 @@ package vavi.util;
 
 import java.time.DayOfWeek;
 import java.time.LocalDate;
+import java.time.ZoneId;
 
 
 /**
@@ -36,18 +37,11 @@ import java.time.LocalDate;
  */
 public class JapaneseHoliday {
 
-    /** このオブジェクトが指す日付 */
-    private LocalDate calendar;
+    /** */
+    private static final String zoneId = "Japan";
 
     /** 土曜日も休日とするかどうか */
     private boolean saturdayHoliday;
-
-    /**
-     * デフォルトのタイムゾーンおよびロケールを持つカレンダーを使用します。
-     */
-    public JapaneseHoliday() {
-        this.calendar = LocalDate.now();
-    }
 
     /**
      * 土曜日も休日とするかどうかを設定します。
@@ -62,6 +56,7 @@ public class JapaneseHoliday {
      * @return 休日ならば true、そうでないなら false
      */
     public boolean isHoliday() {
+        LocalDate calendar = LocalDate.now(ZoneId.of(zoneId));
         return isHoliday(calendar.getYear(),
                          calendar.getMonthValue(),
                          calendar.getDayOfMonth());
@@ -79,9 +74,9 @@ public class JapaneseHoliday {
         int[] equinox = getEquinoxDays(yyyy);
 
         int[] monday = getMondayHoliday(yyyy);
-        calendar.withYear(yyyy);
-        calendar.withMonth(mm);
-        calendar.withDayOfMonth(dd);
+        LocalDate calendar = LocalDate.now(ZoneId.of(zoneId)).withYear(yyyy);
+        calendar = calendar.withMonth(mm);
+        calendar = calendar.withDayOfMonth(dd);
         if (calendar.getDayOfWeek() == DayOfWeek.SUNDAY) {
             return true;
         } else if (saturdayHoliday && calendar.getDayOfWeek() == DayOfWeek.SATURDAY) {
@@ -101,69 +96,67 @@ public class JapaneseHoliday {
             return true;
         } else {
             if (mm == 2 && dd == 12) {
-                calendar.withMonth(1);
-                calendar.withDayOfMonth(11);
+                calendar = calendar.withMonth(1);
+                calendar = calendar.withDayOfMonth(11);
 
                 if (calendar.getDayOfWeek() == DayOfWeek.SUNDAY) {
                     return true;
                 }
             } else if
                 (mm == 3 && dd == (equinox[0] + 1)) {
-                calendar.withMonth(2);
-
-                calendar.withDayOfMonth(equinox[0]);
+                calendar = calendar.withMonth(2);
+                calendar = calendar.withDayOfMonth(equinox[0]);
                 if (calendar.getDayOfWeek() == DayOfWeek.SUNDAY) {
                     return true;
                 }
             } else if (mm == 4 && dd == 30) {
-                calendar.withMonth(3);
-                calendar.withDayOfMonth(29);
+                calendar = calendar.withMonth(3);
+                calendar = calendar.withDayOfMonth(29);
                 if (calendar.getDayOfWeek() == DayOfWeek.SUNDAY) {
                     return true;
                 }
             } else if (mm == 5 && dd == 6) {
-                calendar.withMonth(4);
-                calendar.withDayOfMonth(5);
+                calendar = calendar.withMonth(4);
+                calendar = calendar.withDayOfMonth(5);
                 if (calendar.getDayOfWeek() == DayOfWeek.SUNDAY) {
                     return true;
                 }
             } else if (mm == 9 && dd == (equinox[1] + 1)) {
-                calendar.withMonth(8);
-                calendar.withDayOfMonth(equinox[1]);
+                calendar = calendar.withMonth(8);
+                calendar = calendar.withDayOfMonth(equinox[1]);
                 if (calendar.getDayOfWeek() == DayOfWeek.SUNDAY) {
                     return true;
                 }
             } else if (mm == 11 && dd == 4) {
-                calendar.withMonth(10);
-                calendar.withDayOfMonth(3);
+                calendar = calendar.withMonth(10);
+                calendar = calendar.withDayOfMonth(3);
                 if (calendar.getDayOfWeek() == DayOfWeek.SUNDAY) {
                     return true;
                 }
             } else if (mm == 11 && dd == 24) {
-                calendar.withMonth(10);
-                calendar.withDayOfMonth(23);
+                calendar = calendar.withMonth(10);
+                calendar = calendar.withDayOfMonth(23);
                 if (calendar.getDayOfWeek() == DayOfWeek.SUNDAY) {
                     return true;
                 }
             } else if (mm == 12 && dd == 24) {
-                calendar.withMonth(11);
-                calendar.withDayOfMonth(23);
+                calendar = calendar.withMonth(11);
+                calendar = calendar.withDayOfMonth(23);
                 if (calendar.getDayOfWeek() == DayOfWeek.SUNDAY) {
                     return true;
                 }
             } else {
                 if (yyyy <= 2002) {
                     if (mm == 7 && dd == (monday[1] + 1)) {
-                        calendar.withMonth(6);
-                        calendar.withDayOfMonth(monday[1]);
+                        calendar = calendar.withMonth(6);
+                        calendar = calendar.withDayOfMonth(monday[1]);
                         if (calendar.getDayOfWeek() == DayOfWeek.SUNDAY) {
                             return true;
                         }
                     } else if (mm == 9 && (dd == monday[2] + 1)) {
-                        calendar.withMonth(8);
-                        calendar.withDayOfMonth(monday[2]);
-                        if (calendar.getDayOfWeek() ==
-                            DayOfWeek.SUNDAY) {
+                        calendar = calendar.withMonth(8);
+                        calendar = calendar.withDayOfMonth(monday[2]);
+                        if (calendar.getDayOfWeek() == DayOfWeek.SUNDAY) {
                             return true;
                         }
                     }
@@ -177,9 +170,8 @@ public class JapaneseHoliday {
      * @param yyyy
      * @return 春分、秋分の日
      */
-    private int[] getEquinoxDays(int yyyy) {
+    private static int[] getEquinoxDays(int yyyy) {
         int temp = 0;
-        // 一時的な変数 temp = (242194 * (yyyy - 1980));
 
         temp -= ((yyyy - 1980) >> 2) * 1000000;
         int s3 = (20843100 + temp) / 1000000;
@@ -191,7 +183,7 @@ public class JapaneseHoliday {
      * @param yyyy
      * @return 指定した年の月曜日の休日
      */
-    private int[] getMondayHoliday(int yyyy) {
+    private static int[] getMondayHoliday(int yyyy) {
         int h1 = 0;
         int h7 = 0;
         int h9 = 0;
@@ -201,8 +193,9 @@ public class JapaneseHoliday {
         // 敬老の日 9月第三月曜日(2003年から) int h10 = 0;
         // 体育の日 10月第二月曜日 cal.set(DayOfWeek.YEAR, yyyy);
 
-        calendar.withMonth(1);
-        calendar.withDayOfMonth(1);
+        LocalDate calendar = LocalDate.now(ZoneId.of(zoneId)).withYear(yyyy);
+        calendar = calendar.withMonth(1);
+        calendar = calendar.withDayOfMonth(1);
         DayOfWeek week = calendar.getDayOfWeek();
         switch (week) {
         case SUNDAY:
@@ -228,7 +221,7 @@ public class JapaneseHoliday {
             break;
         }
 
-        calendar.withMonth(10);
+        calendar = calendar.withMonth(10);
         week = calendar.getDayOfWeek();
         switch (week) {
         case SUNDAY:
@@ -255,7 +248,7 @@ public class JapaneseHoliday {
         }
 
         if (yyyy >= 2003) {
-            calendar.withMonth(7);
+            calendar = calendar.withMonth(7);
             week = calendar.getDayOfWeek();
             switch (week) {
             case SUNDAY:
@@ -281,7 +274,7 @@ public class JapaneseHoliday {
                 break;
             }
 
-            calendar.withMonth(9);
+            calendar = calendar.withMonth(9);
             week = calendar.getDayOfWeek();
             switch (week) {
             case SUNDAY:

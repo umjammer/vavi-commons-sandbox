@@ -6,8 +6,12 @@
 
 package vavi.util;
 
+import java.time.DateTimeException;
+
 import org.junit.jupiter.api.Test;
 
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 
@@ -23,6 +27,11 @@ class JapaneseHolidayTest {
     void test() {
         JapaneseHoliday jh = new JapaneseHoliday();
         assertTrue(jh.isHoliday(2001, 4, 29));
+
+        assertThrows(DateTimeException.class, () -> {
+            JapaneseHoliday jh2 = new JapaneseHoliday();
+            assertFalse(jh2.isHoliday(2022, 2, 29));
+        });
     }
 }
 
