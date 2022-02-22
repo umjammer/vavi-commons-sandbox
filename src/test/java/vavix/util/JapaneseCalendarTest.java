@@ -22,6 +22,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
  * @version 0.00 050228 nsano initial version <br>
  */
 @Disabled
+@SuppressWarnings("deprecation")
 public class JapaneseCalendarTest {
 
     /**
