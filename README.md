@@ -27,6 +27,8 @@ to be deprecated
 
  * Japanese Holiday
    * iCal version
+   * google calendar cloud api version
+   * calculated version
  * Password Field
  * Singleton
 

@@ -53,8 +53,11 @@ holidays.stream().sorted().forEach(System.err::println);
 
     @Test
     void test2() {
+Debug.println("-------- Google Calendar API --------");
         HolidaysProvider provider = new GoogleCalendarHolidaysJaProvider();
-provider.holydays().stream().sorted().forEach(System.err::println);
+        List<HolidaysProvider.Holyday> holidays = provider.holidays(2022);
+holidays.stream().sorted().forEach(System.err::println);
+        assertArrayEquals(expected, holidays.stream().map(HolidaysProvider.Holyday::toString).toArray());
     }
 }
 
