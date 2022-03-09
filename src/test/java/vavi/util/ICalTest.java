@@ -4,7 +4,7 @@
  * Programmed by Naohide Sano
  */
 
-package vavi.util.holiday;
+package vavi.util;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -12,8 +12,6 @@ import java.net.URI;
 
 import org.junit.jupiter.api.Test;
 
-import vavi.util.Debug;
-import vavi.util.StringUtil;
 import vavi.util.serdes.Serdes;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;

@@ -4,7 +4,7 @@
  * Programmed by Naohide Sano
  */
 
-package vavi.util.holiday;
+package vavi.util;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -21,12 +21,11 @@ import java.util.Scanner;
 import java.util.logging.Level;
 
 import vavi.beans.BeanUtil;
-import vavi.util.Debug;
+import vavi.util.serdes.BeanBinder;
 import vavi.util.serdes.Binder;
-import vavi.util.serdes.DefaultBinder;
 import vavi.util.serdes.Element;
 import vavi.util.serdes.Serdes;
-import vavi.util.serdes.Serdes.Util.Context;
+import vavi.util.serdes.SimpleBeanBinder;
 
 
 /**
@@ -35,67 +34,56 @@ import vavi.util.serdes.Serdes.Util.Context;
  * @author <a href="mailto:umjammer@gmail.com">Naohide Sano</a> (umjammer)
  * @version 0.00 2022/02/22 umjammer initial version <br>
  */
-@Serdes(binder = ICal.class)
-public class ICal extends DefaultBinder {
+@Serdes(beanBinder = ICal.class)
+public class ICal extends SimpleBeanBinder<ICal.ICalIOSource> implements Binder {
 
-    @Serdes(binder = VCalendar.class)
-    public static class VCalendar implements Binder {
-        @Element(sequence = 1, value = "PRODID")
+    @Serdes
+    public static class VCalendar {
+        @Element("PRODID")
         String prodId;
-        @Element(sequence = 2, value = "VERSION")
+        @Element("VERSION")
         String vesion;
-        @Element(sequence = 3, value = "CALSCALE")
+        @Element("CALSCALE")
         String calScale;
-        @Element(sequence = 4, value = "METHOD")
+        @Element("METHOD")
         String method;
-        @Element(sequence = 5, value = "X-WR-CALNAME")
+        @Element("X-WR-CALNAME")
         String xWRCalname;
-        @Element(sequence = 6, value = "X-WR-TIMEZONE")
+        @Element("X-WR-TIMEZONE")
         String xWRTimeZone;
-        @Element(sequence = 7, value = "X-WR-CALDESC")
+        @Element("X-WR-CALDESC")
         String xWRCaldesc;
         @Override
         public String toString() {
             return prodId + " " + xWRCaldesc + " " + vesion;
         }
-        @Override
-        public void bind(Context context, Object destBean, Field field) throws IOException {
-            if (field.getType().equals(String.class)) {
-                String key = Element.Util.getValue(field);
-                context.value = preReader.get().lines1.get(key);
-Debug.println(Level.FINE, "field: " + field.getName() + " <- " + context.value);
-            } else {
-                assert false : field.getType().toString();
-            }
-            BeanUtil.setFieldValue(field, destBean, context.value);
-        }
     }
 
-    @Serdes(binder = VEvent.class)
-    public static class VEvent implements Binder, Comparable<VEvent> {
-        @Element(sequence = 1, value = "DTSTART")
+    @Serdes
+    public static class VEvent implements Comparable<VEvent> {
+        @Element("DTSTART")
         String dtStart;
-        @Element(sequence = 2, value = "DTEND")
+        @Element("DTEND")
         String dtEndId;
-        @Element(sequence = 3, value = "DTSTAMP")
+        @Element("DTSTAMP")
         String dtStamp;
-        @Element(sequence = 4, value = "UID")
+        @Element("UID")
         String uiId;
-        @Element(sequence = 5, value = "CLASS")
+        @Element("CLASS")
         String clazz;
-        @Element(sequence = 6, value = "CREATED")
+        @Element("CREATED")
         String created;
-        @Element(sequence = 7, value = "DESCRIPTION")
+        @Element("DESCRIPTION")
         String description;
-        @Element(sequence = 9, value = "LAST-MODIFIED")
+        @Element("LAST-MODIFIED")
         String lastModifiled;
-        @Element(sequence = 9, value = "SEQUENCE")
+        @Element("SEQUENCE")
         String sequence;
-        @Element(sequence = 10, value = "STATUS")
+        @Element("STATUS")
         String status;
-        @Element(sequence = 11, value = "SUMMARY")
+        @Element("SUMMARY")
         public String summary;
-        @Element(sequence = 12, value = "TRANSP")
+        @Element("TRANSP")
         String transp;
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("uuuuMMdd");
         public LocalDate getDate() {
@@ -109,19 +97,16 @@ Debug.println(Level.FINE, "field: " + field.getName() + " <- " + context.value);
         public int compareTo(VEvent o) {
             return this.getDate().compareTo(o.getDate());
         }
-        public void bind(Context context, Object destBean, Field field) throws IOException {
-            if (field.getType().equals(String.class)) {
-                String key = Element.Util.getValue(field);
-                context.value = preReader.get().lines2.get(preReader.get().index2).get(key);
-Debug.println(Level.FINE, "field: " + field.getName() + " <- " + context.value);
-            } else {
-                assert false : field.getType().toString();
-            }
-            BeanUtil.setFieldValue(field, destBean, context.value);
-        }
     }
 
-    private static class PreReader {
+    @Element
+    public VCalendar calendar;
+
+    @Element
+    public List<VEvent> events;
+
+    /** */
+    static class ICalIOSource implements BeanBinder.IOSource {
         private Map<String, String> lines1 = new HashMap<>();
         private List<Map<String, String>> lines2 = new ArrayList<>();
         int index2;
@@ -167,25 +152,48 @@ Debug.println(Level.FINE, "lines1: " + lines1.size() + ", lines2: " + lines2.siz
         }
     }
 
-    /** TODO bad use */
-    private static ThreadLocal<PreReader> preReader = new ThreadLocal<>();
-
-    @Element(sequence = 1)
-    public VCalendar calendar;
-
-    @Element(sequence = 2)
-    public List<VEvent> events;
-
-    @SuppressWarnings("unchecked")
     @Override
-    public void bind(Context context, Object destBean, Field field) throws IOException {
-        if (preReader.get() == null || ICal.class.cast(destBean).calendar == null) {
-            preReader.remove();
-            preReader.set(new PreReader());
-            preReader.get().read((InputStream) context.dis);
+    public ICalIOSource getIOSource(Object... args) throws IOException {
+        ICalIOSource in = new ICalIOSource();
+        if (args[0] instanceof InputStream) {
+            InputStream is = InputStream.class.cast(args[0]);
+            in.read(is);
+        } else {
+            throw new IllegalArgumentException("unsupported class args[0]: " + args[0].getClass().getName());
         }
+        return in;
+    }
 
-        if (field.getType().equals(List.class)) {
+    @Override
+    protected Binder getDefaultBinder() {
+        return this;
+    }
+
+    // String
+    protected EachBinder stringEachBinder = new Binder.StringEachBinder() {
+        @SuppressWarnings("unchecked")
+        public void bind(EachContext context, Object destBean, Field field) throws IOException {
+            SimpleEachContext eachContext = SimpleEachContext.class.cast(context);
+            String key = Element.Util.getValue(field);
+            if (destBean instanceof VCalendar) {
+                context.setValue(eachContext.context.in.lines1.get(key));
+            } else if (destBean instanceof VEvent) {
+                context.setValue(eachContext.context.in.lines2.get(eachContext.context.in.index2).get(key));
+            } else {
+                assert false : destBean.getClass().getName();
+            }
+Debug.println(Level.FINE, "field: " + field.getName() + " <- " + context.getValue());
+        }
+    };
+
+    // List
+    protected EachBinder listEachBinder = new EachBinder() {
+        @Override public boolean matches(Class<?> fieldClass) {
+            return fieldClass.equals(List.class);
+        }
+        @SuppressWarnings("unchecked")
+        public void bind(EachContext context, Object destBean, Field field) throws IOException {
+            SimpleEachContext eachContext = SimpleEachContext.class.cast(context);
             try {
                 Object fieldValue = BeanUtil.getFieldValue(field, destBean);
                 if (fieldValue == null) {
@@ -193,23 +201,28 @@ Debug.println(Level.FINE, "lines1: " + lines1.size() + ", lines2: " + lines2.siz
                 }
                 String name = ((ParameterizedType) field.getGenericType()).getActualTypeArguments()[0].getTypeName();
                 Class<?> fieldElementClass = Class.forName(name);
-Debug.println(Level.FINE, "generic type: " + fieldElementClass + ", " + preReader.get().lines2.size());
-                for (preReader.get().index2 = 0; preReader.get().index2 < preReader.get().lines2.size(); preReader.get().index2++) {
+Debug.println(Level.FINE, "generic type: " + fieldElementClass + ", " + eachContext.context.in.lines2.size());
+                for (eachContext.context.in.index2 = 0; eachContext.context.in.index2 < eachContext.context.in.lines2.size(); eachContext.context.in.index2++) {
                     Object fieldBean = fieldElementClass.newInstance();
                     context.deserialize(fieldBean);
                     List.class.cast(fieldValue).add(fieldBean);
                 }
-                context.value = fieldValue;
+                context.setValue(fieldValue);
             } catch (InstantiationException | IllegalAccessException | ClassNotFoundException e) {
                 throw new IllegalStateException(e);
             }
-        } else if (defaultEachBinder.matches(field.getType())) {
-            defaultEachBinder.bind(context, destBean, field);
-        } else {
-            assert false : field.getType().toString();
         }
+    };
 
-        BeanUtil.setFieldValue(field, destBean, context.value);
+    /** */
+    private EachBinder[] eachBinders = {
+        stringEachBinder,
+        listEachBinder,
+    };
+
+    @Override
+    public EachBinder[] getEachBinders() {
+        return eachBinders;
     }
 }
 

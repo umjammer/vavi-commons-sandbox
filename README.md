@@ -26,6 +26,7 @@ to be deprecated
 ### 🔧 Utility
 
  * Japanese Holiday
+   * iCal version
  * Password Field
  * Singleton
 
