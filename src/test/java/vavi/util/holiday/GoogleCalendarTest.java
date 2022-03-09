@@ -7,6 +7,7 @@
 package vavi.util.holiday;
 
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.condition.DisabledIfEnvironmentVariable;
 
 import com.google.api.client.googleapis.javanet.GoogleNetHttpTransport;
 import com.google.api.client.json.gson.GsonFactory;
@@ -30,9 +31,10 @@ import vavi.util.Debug;
 class GoogleCalendarTest {
 
     // "primary"
-    static final String calendarId = "umjammer@gmail.com";
+    static final String calendarId = System.getenv("GOOGLE_ACCOUNT");
 
     @Test
+    @DisabledIfEnvironmentVariable(named = "GITHUB_WORKFLOW", matches = ".*")
     void test1() throws Exception {
         GoogleServiceAccountAppCredential appCredential = new GoogleServiceAccountAppCredential("googlecalendar");
 

@@ -9,6 +9,7 @@ package vavi.util.holiday;
 import java.util.List;
 
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.condition.DisabledIfEnvironmentVariable;
 
 import vavi.util.Debug;
 
@@ -52,6 +53,7 @@ holidays.stream().sorted().forEach(System.err::println);
     }
 
     @Test
+    @DisabledIfEnvironmentVariable(named = "GITHUB_WORKFLOW", matches = ".*")
     void test2() {
 Debug.println("-------- Google Calendar API --------");
         HolidaysProvider provider = new GoogleCalendarHolidaysJaProvider();
