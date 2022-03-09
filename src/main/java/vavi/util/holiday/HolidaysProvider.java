@@ -18,6 +18,7 @@ import java.util.List;
  */
 public interface HolidaysProvider {
 
+    /** common */
     class Holyday implements Comparable<Holyday> {
         LocalDate date;
         String desc;
@@ -35,7 +36,8 @@ public interface HolidaysProvider {
         }
     }
 
-    List<Holyday> holydays();
+    /** sorted */
+    List<Holyday> holidays(int year);
 
     /** factory */
     static HolidaysProvider defaultProvider() {
