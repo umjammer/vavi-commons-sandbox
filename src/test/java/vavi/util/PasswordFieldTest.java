@@ -6,12 +6,12 @@
 
 package vavi.util;
 
-import java.io.IOException;
+import java.io.ByteArrayInputStream;
+import java.io.InputStream;
 
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.fail;
+import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 
 
 /**
@@ -20,22 +20,18 @@ import static org.junit.jupiter.api.Assertions.fail;
  * @author <a href="mailto:umjammer@gmail.com">Naohide Sano</a> (umjammer)
  * @version 0.00 2016/03/09 umjammer initial version <br>
  */
-@Disabled
 public class PasswordFieldTest {
 
     @Test
-    public void test() {
-        fail("Not yet implemented");
+    public void test() throws Exception {
+        InputStream is = new ByteArrayInputStream("p@sswo@d\n".getBytes());
+        char[] password = PasswordField.getPassword(is, "Enter your password:#");
+        assertArrayEquals("p@sswo@d".toCharArray(), password);
     }
 
     /** */
-    public static void main(String[] argv) {
-        char[] password = null;
-        try {
-            password = PasswordField.getPassword(System.in, "Enter your password:#");
-        } catch (IOException ioe) {
-            ioe.printStackTrace();
-        }
+    public static void main(String[] argv) throws Exception {
+        char[] password = PasswordField.getPassword(System.in, "Enter your password:#");
         if (password == null) {
             System.out.println("No password entered");
         } else {

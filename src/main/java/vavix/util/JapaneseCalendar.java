@@ -39,6 +39,7 @@ import vavi.util.Debug;
  * @version 1.00 020620 城風 initial version <br>
  *          2.00 021119 nsano refine <br>
  */
+@Deprecated
 public class JapaneseCalendar extends Calendar {
 
     /** */

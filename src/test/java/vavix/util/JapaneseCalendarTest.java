@@ -9,6 +9,7 @@ package vavix.util;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -20,6 +21,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
  * @author <a href="mailto:umjammer@gmail.com">Naohide Sano</a> (nsano)
  * @version 0.00 050228 nsano initial version <br>
  */
+@Disabled
+@SuppressWarnings("deprecation")
 public class JapaneseCalendarTest {
 
     /**

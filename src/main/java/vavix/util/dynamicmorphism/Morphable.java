@@ -41,15 +41,13 @@ public abstract class Morphable<B, A> {
             throw new IllegalArgumentException(clazz.getName());
         }
 
-        InvocationHandler invocationHandler = new InvocationHandler() {
-            public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
-                Method m = clazz.getMethod(method.getName(), resolveArgTypes(args));
-                Mapped mapping = m.getAnnotation(Mapped.class);
-                if (mapping != null) {
-                    return Morphable.invoke(Morphable.this, m, args);
-                } else {
-                    return Morphable.invoke(object, method.getName(), args);
-                }
+        InvocationHandler invocationHandler = (proxy, method, args) -> {
+            Method m = clazz.getMethod(method.getName(), resolveArgTypes(args));
+            Mapped mapping = m.getAnnotation(Mapped.class);
+            if (mapping != null) {
+                return Morphable.invoke(Morphable.this, m, args);
+            } else {
+                return Morphable.invoke(object, method.getName(), args);
             }
         };
         return (A) Proxy.newProxyInstance(object.getClass().getClassLoader(), interfaces, invocationHandler);
