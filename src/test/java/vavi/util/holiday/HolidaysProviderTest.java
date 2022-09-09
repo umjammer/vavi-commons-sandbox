@@ -8,12 +8,17 @@ package vavi.util.holiday;
 
 import java.util.List;
 
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.condition.DisabledIfEnvironmentVariable;
 
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 import vavi.util.Debug;
+import vavi.util.Locales;
 
 import static org.junit.jupiter.api.Assertions.assertArrayEquals;
+import static org.junit.jupiter.api.Assertions.assertInstanceOf;
 
 
 /**
@@ -60,6 +65,16 @@ Debug.println("-------- Google Calendar API --------");
         List<HolidaysProvider.Holiday> holidays = provider.holidays(2022);
 holidays.stream().sorted().forEach(System.err::println);
         assertArrayEquals(expected, holidays.stream().map(HolidaysProvider.Holiday::toString).toArray());
+    }
+
+    /** @see "https://blog1.mammb.com/entry/2017/07/05/223914" */
+    @Disabled("wip")
+    @ParameterizedTest
+    @ValueSource(strings = {"ja", "en"})
+    void test3(String lang) throws Exception {
+        System.setProperty("user.language", lang);
+        HolidaysProvider p = HolidaysProvider.defaultProvider();
+        assertInstanceOf(GoogleICalHolidaysJaProvider.class, p);
     }
 }
 

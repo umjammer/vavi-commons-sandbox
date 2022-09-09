@@ -27,11 +27,11 @@ class CalculatedHolidaysJaProviderTest {
     @Test
     void test() {
         CalculatedHolidaysJaProvider provider = new CalculatedHolidaysJaProvider();
-        List<HolidaysProvider.Holyday> holidays = provider.holidays(2022);
+        List<HolidaysProvider.Holiday> holidays = provider.holidays(2022);
 Debug.println("holidays: " + holidays.size());
         assertNotEquals(0, holidays.size());
 holidays.forEach(System.err::println);
-        assertArrayEquals(HolidaysProviderTest.expected, holidays.stream().map(HolidaysProvider.Holyday::toString).toArray());
+        assertArrayEquals(HolidaysProviderTest.expected, holidays.stream().map(HolidaysProvider.Holiday::toString).toArray());
     }
 }
 

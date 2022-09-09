@@ -7,7 +7,13 @@
 package vavi.util.holiday;
 
 import java.time.LocalDate;
+import java.util.Arrays;
 import java.util.List;
+import java.util.Locale;
+import java.util.NoSuchElementException;
+import java.util.ServiceLoader;
+
+import vavi.util.Locales;
 
 
 /**
@@ -39,9 +45,32 @@ public interface HolidaysProvider {
     /** sorted */
     List<Holiday> holidays(int year);
 
-    /** factory */
+    /**
+     * factory
+     * <p>
+     * TODO use ServiceProvider, consider @Locales
+     */
     static HolidaysProvider defaultProvider() {
-        return new GoogleICalHolidaysJaProvider();
+        for (HolidaysProvider p : ServiceLoader.load(HolidaysProvider.class)) {
+            Locales a = p.getClass().getAnnotation(Locales.class);
+            if (Arrays.asList(a.countries()).contains(Locale.getDefault().getCountry()) &&
+                    Arrays.asList(a.languages()).contains(Locale.getDefault().getCountry())) {
+                return p;
+            }
+        }
+        for (HolidaysProvider p : ServiceLoader.load(HolidaysProvider.class)) {
+            Locales a = p.getClass().getAnnotation(Locales.class);
+            if (Arrays.asList(a.countries()).contains(Locale.getDefault().getCountry())) {
+                return p;
+            }
+        }
+        for (HolidaysProvider p : ServiceLoader.load(HolidaysProvider.class)) {
+            Locales a = p.getClass().getAnnotation(Locales.class);
+            if (Arrays.asList(a.languages()).contains(Locale.getDefault().getCountry())) {
+                return p;
+            }
+        }
+        return ServiceLoader.load(HolidaysProvider.class).iterator().next();
     }
 }
 

@@ -25,7 +25,7 @@ to be deprecated
 
 ### 🔧 Utility
 
- * Japanese Holiday
+ * Holiday Provider
    * iCal version
    * google calendar cloud api version
    * calculated version
