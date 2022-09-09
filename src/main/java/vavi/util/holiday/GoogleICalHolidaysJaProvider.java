@@ -38,7 +38,7 @@ public class GoogleICalHolidaysJaProvider implements HolidaysProvider {
     private static final String url_en = "https://www.google.com/calendar/ical/japanese%40holiday.calendar.google.com/public/basic.ics";
 
     @Override
-    public List<Holyday> holidays(int year) {
+    public List<Holiday> holidays(int year) {
         try {
             String url = Locale.getDefault().getLanguage().equals(Locale.JAPAN.getLanguage()) ? url_jp : url_en;
 Debug.println("country: " + Locale.getDefault().getCountry());
@@ -54,7 +54,7 @@ Debug.println("userDefinedUrl: " + userDefinedUrl);
 
             return calendar.events.stream()
                     .filter(e -> e.getDate().getYear() == year)
-                    .map(e -> new Holyday(e.getDate(), e.summary))
+                    .map(e -> new Holiday(e.getDate(), e.summary))
                     .sorted()
                     .collect(Collectors.toList());
         } catch (IOException e) {

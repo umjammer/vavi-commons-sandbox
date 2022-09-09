@@ -19,10 +19,10 @@ import java.util.List;
 public interface HolidaysProvider {
 
     /** common */
-    class Holyday implements Comparable<Holyday> {
+    class Holiday implements Comparable<Holiday> {
         LocalDate date;
         String desc;
-        public Holyday(LocalDate date, String desc) {
+        public Holiday(LocalDate date, String desc) {
             this.date = date;
             this.desc = desc;
         }
@@ -31,13 +31,13 @@ public interface HolidaysProvider {
             return date + " " + desc;
         }
         @Override
-        public int compareTo(Holyday o) {
+        public int compareTo(Holiday o) {
             return this.date.compareTo(o.date);
         }
     }
 
     /** sorted */
-    List<Holyday> holidays(int year);
+    List<Holiday> holidays(int year);
 
     /** factory */
     static HolidaysProvider defaultProvider() {

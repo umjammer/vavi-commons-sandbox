@@ -18,7 +18,7 @@ import vavi.util.Locales;
 
 
 /**
- * CalclatedHolidaysJaProvider.
+ * CalculatedHolidaysJaProvider.
  *
  * @author <a href="mailto:umjammer@gmail.com">Naohide Sano</a> (nsano)
  * @version 0.00 021119 nsano port <br>
@@ -26,7 +26,7 @@ import vavi.util.Locales;
 @Locales(countries = "Japan", languages = "Japanese")
 public class CalculatedHolidaysJaProvider implements HolidaysProvider {
 
-    /** this cause Y10K problem lol  */
+    /** this causes the Y10K problem lol  */
     private static final int MoY = 9999;
 
     enum Holidays {
@@ -101,14 +101,14 @@ public class CalculatedHolidaysJaProvider implements HolidaysProvider {
     }
 
     @Override
-    public List<Holyday> holidays(int year) {
-        List<Holyday> holydays = new ArrayList<>();
+    public List<Holiday> holidays(int year) {
+        List<Holiday> holydays = new ArrayList<>();
         Arrays.stream(Holidays.values()).forEach(e -> {
             LocalDate date = e.getDate(year);
             if (date != null) {
-                holydays.add(new Holyday(date, e.summary));
+                holydays.add(new Holiday(date, e.summary));
                 if (year >= 1973 && date.getDayOfWeek() == DayOfWeek.SUNDAY) {
-                    holydays.add(new Holyday(date.withDayOfMonth(date.getDayOfMonth() + 1), "振替休日"));
+                    holydays.add(new Holiday(date.withDayOfMonth(date.getDayOfMonth() + 1), "振替休日"));
                 }
             }
         });

@@ -47,9 +47,9 @@ class HolidaysProviderTest {
     void test() {
 Debug.println("-------- Google Calendar ICal --------");
         HolidaysProvider provider = new GoogleICalHolidaysJaProvider();
-        List<HolidaysProvider.Holyday> holidays = provider.holidays(2022);
+        List<HolidaysProvider.Holiday> holidays = provider.holidays(2022);
 holidays.stream().sorted().forEach(System.err::println);
-        assertArrayEquals(expected, holidays.stream().map(HolidaysProvider.Holyday::toString).toArray());
+        assertArrayEquals(expected, holidays.stream().map(HolidaysProvider.Holiday::toString).toArray());
     }
 
     @Test
@@ -57,9 +57,9 @@ holidays.stream().sorted().forEach(System.err::println);
     void test2() {
 Debug.println("-------- Google Calendar API --------");
         HolidaysProvider provider = new GoogleCalendarHolidaysJaProvider();
-        List<HolidaysProvider.Holyday> holidays = provider.holidays(2022);
+        List<HolidaysProvider.Holiday> holidays = provider.holidays(2022);
 holidays.stream().sorted().forEach(System.err::println);
-        assertArrayEquals(expected, holidays.stream().map(HolidaysProvider.Holyday::toString).toArray());
+        assertArrayEquals(expected, holidays.stream().map(HolidaysProvider.Holiday::toString).toArray());
     }
 }
 
