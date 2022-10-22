@@ -60,7 +60,7 @@ public class GoogleCalendarHolidaysJaProvider implements HolidaysProvider {
     }
 
     @Override
-    public List<Holyday> holidays(int year) {
+    public List<Holiday> holidays(int year) {
         try {
             Events events = service.events().list(calendarId)
                 .setTimeMin(new DateTime(String.format("%04d-01-01T00:00:00.000+09:00", year)))
@@ -70,7 +70,7 @@ public class GoogleCalendarHolidaysJaProvider implements HolidaysProvider {
                 .execute();
 Debug.println(Level.FINE, "items: " + events.getItems().size());
 //events.getItems().forEach(System.err::println);
-            return events.getItems().stream().map(e -> new Holyday(toLocalDate(e.getStart().getDate()), e.getSummary())).collect(Collectors.toList());
+            return events.getItems().stream().map(e -> new Holiday(toLocalDate(e.getStart().getDate()), e.getSummary())).collect(Collectors.toList());
         } catch (IOException e) {
             throw new UncheckedIOException(e);
         }
