@@ -8,7 +8,7 @@
 
   <groupId>vavi</groupId>
   <artifactId>vavi-commons-sandbox</artifactId>
-  <version>0.4.2-SNAPSHOT</version>
+  <version>0.4.2</version>
 
   <name>Vavi Commons Sandbox API</name>
   <organization>
@@ -161,7 +161,7 @@ TODO
       <dependency>
         <groupId>org.junit</groupId>
         <artifactId>junit-bom</artifactId>
-        <version>5.8.1</version>
+        <version>5.9.0</version>
         <type>pom</type>
         <scope>import</scope>
       </dependency>
@@ -170,9 +170,9 @@ TODO
 
   <dependencies>
     <dependency>
-      <groupId>vavi</groupId> <!-- com.github.umjammer -->
+      <groupId>com.github.umjammer</groupId> <!-- com.github.umjammer -->
       <artifactId>vavi-commons</artifactId>
-      <version>1.1.7-SNAPSHOT</version>
+      <version>1.1.7</version>
     </dependency>
     <dependency>
       <groupId>commons-beanutils</groupId>
@@ -182,7 +182,7 @@ TODO
     <dependency>
       <groupId>org.apache.ant</groupId>
       <artifactId>ant</artifactId>
-      <version>1.10.11</version>
+      <version>1.10.12</version>
     </dependency>
     <dependency>
       <groupId>com.github.umjammer</groupId>
@@ -226,7 +226,7 @@ TODO
     <dependency>
       <groupId>com.google.apis</groupId>
       <artifactId>google-api-services-calendar</artifactId>
-      <version>v3-rev409-1.25.0</version>
+      <version>v3-rev20220715-2.0.0</version>
       <scope>test</scope>
     </dependency>
   </dependencies>
