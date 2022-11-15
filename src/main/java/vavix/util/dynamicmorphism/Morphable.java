@@ -59,7 +59,7 @@ public abstract class Morphable<B, A> {
             interfaces.add(clazz);
         }
         interfaces.addAll(Arrays.asList(clazz.getInterfaces()));
-        return interfaces.toArray(new Class<?>[interfaces.size()]);
+        return interfaces.toArray(new Class<?>[0]);
     }
 
     public static <T> T invoke(Object target, String methodName, Object... args) {
@@ -79,13 +79,14 @@ public abstract class Morphable<B, A> {
         }
     }
 
+    /** covert object array to class array */
     private static Class<?>[] resolveArgTypes(Object... args) {
         if (args == null) return new Class[0];
         List<Class<?>> argTypes = new ArrayList<>();
         for (Object arg : args) {
             argTypes.add(arg.getClass());
         }
-        return argTypes.toArray(new Class<?>[argTypes.size()]);
+        return argTypes.toArray(new Class<?>[0]);
     }
 }
 
