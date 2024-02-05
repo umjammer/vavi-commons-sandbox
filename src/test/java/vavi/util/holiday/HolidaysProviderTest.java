@@ -15,7 +15,6 @@ import org.junit.jupiter.api.condition.DisabledIfEnvironmentVariable;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 import vavi.util.Debug;
-import vavi.util.Locales;
 
 import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 import static org.junit.jupiter.api.Assertions.assertInstanceOf;
@@ -29,32 +28,33 @@ import static org.junit.jupiter.api.Assertions.assertInstanceOf;
  */
 class HolidaysProviderTest {
 
-    static final String[] expected = {
-        "2022-01-01 元日",
-        "2022-01-10 成人の日",
-        "2022-02-11 建国記念の日",
-        "2022-02-23 天皇誕生日",
-        "2022-03-21 春分の日",
-        "2022-04-29 昭和の日",
-        "2022-05-03 憲法記念日",
-        "2022-05-04 みどりの日",
-        "2022-05-05 こどもの日",
-        "2022-07-18 海の日",
-        "2022-08-11 山の日",
-        "2022-09-19 敬老の日",
-        "2022-09-23 秋分の日",
-        "2022-10-10 スポーツの日",
-        "2022-11-03 文化の日",
-        "2022-11-23 勤労感謝の日",
+    static final String[] expected2023 = {
+            "2023-01-01 元日",
+            "2023-01-02 休日 元日",
+            "2023-01-09 成人の日",
+            "2023-02-11 建国記念の日",
+            "2023-02-23 天皇誕生日",
+            "2023-03-21 春分の日",
+            "2023-04-29 昭和の日",
+            "2023-05-03 憲法記念日",
+            "2023-05-04 みどりの日",
+            "2023-05-05 こどもの日",
+            "2023-07-17 海の日",
+            "2023-08-11 山の日",
+            "2023-09-18 敬老の日",
+            "2023-09-23 秋分の日",
+            "2023-10-09 スポーツの日",
+            "2023-11-03 文化の日",
+            "2023-11-23 勤労感謝の日",
     };
 
     @Test
     void test() {
 Debug.println("-------- Google Calendar ICal --------");
         HolidaysProvider provider = new GoogleICalHolidaysJaProvider();
-        List<HolidaysProvider.Holiday> holidays = provider.holidays(2022);
+        List<HolidaysProvider.Holiday> holidays = provider.holidays(2023);
 holidays.stream().sorted().forEach(System.err::println);
-        assertArrayEquals(expected, holidays.stream().map(HolidaysProvider.Holiday::toString).toArray());
+        assertArrayEquals(expected2023, holidays.stream().map(HolidaysProvider.Holiday::toString).toArray());
     }
 
     @Test
@@ -62,9 +62,9 @@ holidays.stream().sorted().forEach(System.err::println);
     void test2() {
 Debug.println("-------- Google Calendar API --------");
         HolidaysProvider provider = new GoogleCalendarHolidaysJaProvider();
-        List<HolidaysProvider.Holiday> holidays = provider.holidays(2022);
+        List<HolidaysProvider.Holiday> holidays = provider.holidays(2023);
 holidays.stream().sorted().forEach(System.err::println);
-        assertArrayEquals(expected, holidays.stream().map(HolidaysProvider.Holiday::toString).toArray());
+        assertArrayEquals(expected2023, holidays.stream().map(HolidaysProvider.Holiday::toString).toArray());
     }
 
     /** @see "https://blog1.mammb.com/entry/2017/07/05/223914" */

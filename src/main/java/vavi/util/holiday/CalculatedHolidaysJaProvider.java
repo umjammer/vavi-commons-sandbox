@@ -108,6 +108,7 @@ public class CalculatedHolidaysJaProvider implements HolidaysProvider {
             if (date != null) {
                 holydays.add(new Holiday(date, e.summary));
                 if (year >= 1973 && date.getDayOfWeek() == DayOfWeek.SUNDAY) {
+                    // 祝日法第3条第2項による休日
                     holydays.add(new Holiday(date.withDayOfMonth(date.getDayOfMonth() + 1), "振替休日"));
                 }
             }
