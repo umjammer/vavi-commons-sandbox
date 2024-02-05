@@ -75,7 +75,7 @@ public class PasswordField {
      * @param prompt The prompt to display to the user.
      * @return The password as entered by the user.
      */
-    public static final char[] getPassword(InputStream in, String prompt) throws IOException {
+    public static char[] getPassword(InputStream in, String prompt) throws IOException {
         MaskingThread maskingthread = new MaskingThread(prompt);
         Thread thread = new Thread(maskingthread);
         thread.start();

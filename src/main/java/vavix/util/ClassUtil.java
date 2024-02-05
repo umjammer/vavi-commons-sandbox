@@ -11,6 +11,9 @@ import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.util.StringTokenizer;
+import java.util.logging.Level;
+
+import vavi.util.Debug;
 
 
 /**
@@ -58,7 +61,7 @@ public final class ClassUtil {
         } else {
             clazz = Class.forName(className);
         }
-//Debug.println(clazz);
+Debug.println(Level.FINER, clazz);
         return clazz;
     }
 
@@ -83,8 +86,8 @@ public final class ClassUtil {
     /**
      * 文字列からコンストラクタ用の引数のオブジェクトのリストを取得します．
      *
-     * @param line デリミタは { ',', '\t', ' ' }
-     *            null はそのまま書く． null
+     * @param line delimiters are <code>',', '\t', ' '</code>
+     *            null is <code>'null'</code>
      */
     static Object[] getArguments(String line, Class<?>[] argTypes)
         throws InstantiationException,
@@ -97,31 +100,31 @@ public final class ClassUtil {
             if ("null".equals(arg)) {
                 args[j] = null;
             } else if (argTypes[j] == Boolean.TYPE) {
-                args[j] = new Boolean(arg);
+                args[j] = Boolean.parseBoolean(arg);
             } else if (argTypes[j] == Byte.TYPE) {
-                args[j] = new Byte(arg);
+                args[j] = Byte.parseByte(arg);
             } else if (argTypes[j] == Character.TYPE) {
                 if (arg.length() > 1) {
                     throw new IllegalArgumentException(arg + " for char");
                 }
-                args[j] = new Character(arg.charAt(0));
+                args[j] = arg.charAt(0);
             } else if (argTypes[j] == Double.TYPE) {
-                args[j] = new Double(arg);
+                args[j] = Double.parseDouble(arg);
             } else if (argTypes[j] == Float.TYPE) {
-                args[j] = new Float(arg);
+                args[j] = Float.parseFloat(arg);
             } else if (argTypes[j] == Integer.TYPE) {
                 args[j] = new IntegerInstantiator().newInstance(arg);
             } else if (argTypes[j] == Long.TYPE) {
-                args[j] = new Long(arg);
+                args[j] = Long.parseLong(arg);
             } else if (argTypes[j] == Short.TYPE) {
-                args[j] = new Short(arg);
+                args[j] = Short.parseShort(arg);
             } else if (argTypes[j] == Void.TYPE) {
                 throw new IllegalArgumentException(arg + " for void");
-            } else if (argTypes[j] == String.class) {           // 特別
+            } else if (argTypes[j] == String.class) {           // special
                 args[j] = new StringInstantiator().newInstance(arg);
-            } else if (argTypes[j] == java.awt.Color.class) {   // 特別
+            } else if (argTypes[j] == java.awt.Color.class) {   // special
                 args[j] = new ColorInstantiator().newInstance(arg);
-            } else {    // TODO 再帰の文法でもよさそう．
+            } else {    // TODO recursion may work
                 args[j] = argTypes[j].newInstance();
             }
         }
@@ -166,7 +169,7 @@ public final class ClassUtil {
         int p = arg.lastIndexOf('.');
         String className = arg.substring(0, p);
         String enumName = arg.substring(p + 1, arg.length());
-//Debug.println(className + "#" + enumName);
+Debug.println(Level.FINER, className + "#" + enumName);
 
         Class<?> clazz = Class.forName(className);
 

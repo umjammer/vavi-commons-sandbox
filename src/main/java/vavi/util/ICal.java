@@ -9,6 +9,7 @@ package vavi.util;
 import java.io.IOException;
 import java.io.InputStream;
 import java.lang.reflect.Field;
+import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.ParameterizedType;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -156,7 +157,7 @@ Debug.println(Level.FINE, "lines1: " + lines1.size() + ", lines2: " + lines2.siz
     public ICalIOSource getIOSource(Object... args) throws IOException {
         ICalIOSource in = new ICalIOSource();
         if (args[0] instanceof InputStream) {
-            InputStream is = InputStream.class.cast(args[0]);
+            InputStream is = (InputStream) args[0];
             in.read(is);
         } else {
             throw new IllegalArgumentException("unsupported class args[0]: " + args[0].getClass().getName());
@@ -172,8 +173,8 @@ Debug.println(Level.FINE, "lines1: " + lines1.size() + ", lines2: " + lines2.siz
     // String
     protected EachBinder stringEachBinder = new Binder.StringEachBinder() {
         @SuppressWarnings("unchecked")
-        public void bind(EachContext context, Object destBean, Field field) throws IOException {
-            SimpleEachContext eachContext = SimpleEachContext.class.cast(context);
+        public void bind(EachContext context, Object destBean, Field field) {
+            SimpleEachContext eachContext = (SimpleEachContext) context;
             String key = Element.Util.getValue(field);
             if (destBean instanceof VCalendar) {
                 context.setValue(eachContext.context.in.lines1.get(key));
@@ -193,7 +194,7 @@ Debug.println(Level.FINE, "field: " + field.getName() + " <- " + context.getValu
         }
         @SuppressWarnings("unchecked")
         public void bind(EachContext context, Object destBean, Field field) throws IOException {
-            SimpleEachContext eachContext = SimpleEachContext.class.cast(context);
+            SimpleEachContext eachContext = (SimpleEachContext) context;
             try {
                 Object fieldValue = BeanUtil.getFieldValue(field, destBean);
                 if (fieldValue == null) {
@@ -203,12 +204,13 @@ Debug.println(Level.FINE, "field: " + field.getName() + " <- " + context.getValu
                 Class<?> fieldElementClass = Class.forName(name);
 Debug.println(Level.FINE, "generic type: " + fieldElementClass + ", " + eachContext.context.in.lines2.size());
                 for (eachContext.context.in.index2 = 0; eachContext.context.in.index2 < eachContext.context.in.lines2.size(); eachContext.context.in.index2++) {
-                    Object fieldBean = fieldElementClass.newInstance();
+                    Object fieldBean = fieldElementClass.getDeclaredConstructor().newInstance();
                     context.deserialize(fieldBean);
-                    List.class.cast(fieldValue).add(fieldBean);
+                    ((List<Object>) fieldValue).add(fieldBean);
                 }
                 context.setValue(fieldValue);
-            } catch (InstantiationException | IllegalAccessException | ClassNotFoundException e) {
+            } catch (InstantiationException | IllegalAccessException | ClassNotFoundException |
+                     InvocationTargetException | NoSuchMethodException e) {
                 throw new IllegalStateException(e);
             }
         }

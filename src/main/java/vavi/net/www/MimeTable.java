@@ -84,13 +84,13 @@ public class MimeTable implements FileNameMap {
     public synchronized void add(MimeEntry m) {
         entries.put(m.getType(), m);
 
-        String exts[] = m.getExtensions();
+        String[] exts = m.getExtensions();
         if (exts == null) {
             return;
         }
 
-        for (int i = 0; i < exts.length; i++) {
-            extensionMap.put(exts[i], m);
+        for (String ext : exts) {
+            extensionMap.put(ext, m);
         }
     }
 
@@ -104,8 +104,8 @@ public class MimeTable implements FileNameMap {
     public synchronized MimeEntry remove(MimeEntry entry) {
         String[] extensionKeys = entry.getExtensions();
         if (extensionKeys != null) {
-            for (int i = 0; i < extensionKeys.length; i++) {
-                extensionMap.remove(extensionKeys[i]);
+            for (String extensionKey : extensionKeys) {
+                extensionMap.remove(extensionKey);
             }
         }
 
@@ -117,9 +117,7 @@ public class MimeTable implements FileNameMap {
         MimeEntry entry = entries.get(type);
         if (entry == null) {
             // try a wildcard lookup
-            Iterator<MimeEntry> i = entries.values().iterator();
-            while (i.hasNext()) {
-                MimeEntry wild = i.next();
+            for (MimeEntry wild : entries.values()) {
                 if (wild.matches(type)) {
                     return wild;
                 }
