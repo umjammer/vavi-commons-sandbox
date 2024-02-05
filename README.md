@@ -1,7 +1,7 @@
-[![Release](https://jitpack.io/v/umjammer/vavi-commons-sandbox.svg)](https://jitpack.io/#umjammer/vavi-commons-sandbox)
-[![Java CI with Maven](https://github.com/umjammer/vavi-commons-sandbox/actions/workflows/maven.yml/badge.svg)](https://github.com/umjammer/vavi-commons-sandbox/actions/workflows/maven.yml)
+[![GitHub Packages](https://github.com/umjammer/vavi-commons-sandbox/actions/workflows/maven-publish.yml/badge.svg)](https://github.com/umjammer?tab=packages&repo_name=vavi-net-auth)
+[![Java CI](https://github.com/umjammer/vavi-commons-sandbox/actions/workflows/maven.yml/badge.svg)](https://github.com/umjammer/vavi-commons-sandbox/actions/workflows/maven.yml)
 [![CodeQL](https://github.com/umjammer/vavi-commons-sandbox/actions/workflows/codeql.yml/badge.svg)](https://github.com/umjammer/vavi-commons-sandbox/actions/workflows/codeql.yml)
-![Java](https://img.shields.io/badge/Java-8-b07219)
+![Java](https://img.shields.io/badge/Java-17-b07219)
 
 # vavi-commons-sandbox
 
@@ -52,3 +52,7 @@ wip
 ### TODO
 
  * regex find group iteration
+ * mime types
+   * https://www.iana.org/assignments/media-types/media-types.xhtml
+ * mac finder alias
+   * https://en.wikipedia.org/wiki/Alias_(Mac_OS)
