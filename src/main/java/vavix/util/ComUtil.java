@@ -6,6 +6,8 @@
 
 package vavix.util;
 
+import java.util.logging.Level;
+
 import com.jacob.com.Variant;
 
 import vavi.util.Debug;
@@ -23,13 +25,13 @@ public final class ComUtil {
 
     /** */
     public static Object toObject(Variant variant) {
-Debug.println("variant: " + variant + ", " + Debug.getCallerMethod(1));
+Debug.println(Level.FINE, "variant: " + variant + ", " + Debug.getCallerMethod(1));
         if (variant == null) {
             return null;
         }
         short type = variant.getvt();
-        String name = null;
-        Object value = null;
+        String name;
+        Object value;
         switch (type) {
         case Variant.VariantArray: // the VT_ARRAY modifier.
             name = "VariantArray";
@@ -53,7 +55,7 @@ Debug.println("variant: " + variant + ", " + Debug.getCallerMethod(1));
             break;
         case Variant.VariantDate: // the VT_DATE variant type.
             name = "VariantDate";
-Debug.println("date: " + variant + ": " + variant.getJavaDate());
+Debug.println(Level.FINE, "date: " + variant + ": " + variant.getJavaDate());
             value = variant.getJavaDate();
             break;
         case Variant.VariantDispatch: // the VT_DISPATCH variant type.
@@ -109,7 +111,7 @@ Debug.println("date: " + variant + ": " + variant.getJavaDate());
             value = variant.toJavaObject();
             break;
         }
-Debug.println(name + "(" + type + "): " + value);
+Debug.println(Level.FINE, name + "(" + type + "): " + value);
         return value;
     }
 }

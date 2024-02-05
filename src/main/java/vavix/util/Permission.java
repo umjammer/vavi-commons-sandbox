@@ -18,7 +18,9 @@ import vavi.util.Debug;
  *
  * @version 0.00 000224 nsano initial version <br>
  *          1.00 030924 nsano repackage <br>
+ * @deprecated use {@link java.nio.file.attribute.PosixFilePermission}
  */
+@Deprecated
 public class Permission {
 
     /** 読み込み可能のマスク */
