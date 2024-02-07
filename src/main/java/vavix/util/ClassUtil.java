@@ -23,6 +23,7 @@ import vavi.util.Debug;
  * @version 0.00 020517 nsano initial version <br>
  *          0.01 040627 nsano add getWrapperClass <br>
  */
+@Deprecated
 public final class ClassUtil {
 
     /** Cannot access. */

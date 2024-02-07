@@ -8,7 +8,7 @@
 
   <groupId>vavi</groupId>
   <artifactId>vavi-commons-sandbox</artifactId>
-  <version>0.4.3</version>
+  <version>0.4.4</version>
 
   <name>Vavi Commons Sandbox API</name>
   <organization>
@@ -22,13 +22,6 @@
   <issueManagement>
     <url>https://github.com/umjammer/vavi-commons-sandbox/issues</url>
   </issueManagement>
-
-  <distributionManagement>
-    <repository>
-      <id>github</id>
-      <url>https://maven.pkg.github.com/umjammer/vavi-commons-sandbox</url>
-    </repository>
-  </distributionManagement>
 
   <profiles>
     <profile>
@@ -156,10 +149,6 @@
       <id>jitpack.io</id>
       <url>https://jitpack.io</url>
     </repository>
-    <repository>
-      <id>github</id>
-      <url>https://maven.pkg.github.com/umjammer/*</url>
-    </repository>
   </repositories>
 
   <dependencyManagement>
@@ -224,9 +213,9 @@
     </dependency>
 
     <dependency>
-      <groupId>vavi</groupId>
+      <groupId>com.github.umjammer.vavi-net-auth</groupId> <!-- vavi / com.github.umjammer.vavi-net-auth -->
       <artifactId>vavi-net-auth-google</artifactId>
-      <version>0.1.8</version>
+      <version>0.1.9</version>
       <scope>test</scope>
     </dependency>
     <dependency>

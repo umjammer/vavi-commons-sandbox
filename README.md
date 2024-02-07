@@ -1,4 +1,4 @@
-[![GitHub Packages](https://github.com/umjammer/vavi-commons-sandbox/actions/workflows/maven-publish.yml/badge.svg)](https://github.com/umjammer?tab=packages&repo_name=vavi-net-auth)
+[![Release](https://jitpack.io/v/umjammer/vavi-commons-sandbox.svg)](https://jitpack.io/#umjammer/vavi-commons-sandbox)
 [![Java CI](https://github.com/umjammer/vavi-commons-sandbox/actions/workflows/maven.yml/badge.svg)](https://github.com/umjammer/vavi-commons-sandbox/actions/workflows/maven.yml)
 [![CodeQL](https://github.com/umjammer/vavi-commons-sandbox/actions/workflows/codeql.yml/badge.svg)](https://github.com/umjammer/vavi-commons-sandbox/actions/workflows/codeql.yml)
 ![Java](https://img.shields.io/badge/Java-17-b07219)
@@ -49,7 +49,13 @@ to be deprecated
 
 wip
 
-### TODO
+## Install
+
+ * [maven](https://github.com/umjammer?tab=packages&repo_name=vavi-commons-sandbox)
+ * this project uses github packages. add a personal access token to `~/.m2/settings.xml`
+ * see https://docs.github.com/en/packages/working-with-a-github-packages-registry/working-with-the-apache-maven-registry
+
+## TODO
 
  * regex find group iteration
  * mime types
