@@ -60,5 +60,3 @@ calendarList.forEach((k, v) -> {
 Debug.println("event: " + event.getId());
     }
 }
-
-/* */

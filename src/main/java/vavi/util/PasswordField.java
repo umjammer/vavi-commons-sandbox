@@ -129,5 +129,3 @@ loop:
         return ret;
     }
 }
-
-/* */

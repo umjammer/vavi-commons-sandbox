@@ -78,5 +78,3 @@ public enum AnsiColor {
         return getEscapeSequenceString(AnsiColor.NONE, color);
     }
 }
-
-/* */

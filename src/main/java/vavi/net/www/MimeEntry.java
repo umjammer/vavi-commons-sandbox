@@ -353,5 +353,3 @@ public class MimeEntry implements Cloneable {
                + ", extensions=" + getExtensionsAsList() + "]";
     }
 }
-
-/* */

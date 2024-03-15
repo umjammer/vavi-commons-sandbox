@@ -159,5 +159,3 @@ public class CSVTokenizer implements Enumeration<Object> {
         return "CSVTokenizer(\"" + source + "\")";
     }
 }
-
-/* */

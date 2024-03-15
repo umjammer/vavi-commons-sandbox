@@ -441,5 +441,3 @@ public abstract class JavaParserVisitorAdapter implements JavaParserVisitor
         return data;
     }
 }
-
-/* */

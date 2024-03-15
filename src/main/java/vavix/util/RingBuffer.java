@@ -248,5 +248,3 @@ public class RingBuffer {
         this.eof = eof;
     }
 }
-
-/* */

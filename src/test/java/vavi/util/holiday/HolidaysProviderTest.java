@@ -77,5 +77,3 @@ holidays.stream().sorted().forEach(System.err::println);
         assertInstanceOf(GoogleICalHolidaysJaProvider.class, p);
     }
 }
-
-/* */

@@ -132,5 +132,3 @@ public class Fifo<E> extends ArrayList<E> {
         return found ? (first - i) : -1;
     }
 }
-
-/* */

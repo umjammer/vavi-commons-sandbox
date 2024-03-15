@@ -74,5 +74,3 @@ public class JapaneseCalendarTest {
         assertEquals("2001 8 11", JapaneseCalendar.toFS(jc));
     }
 }
-
-/* */

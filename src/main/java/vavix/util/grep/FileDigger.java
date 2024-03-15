@@ -45,5 +45,3 @@ public interface FileDigger {
      */
     void dig(File dir) throws IOException;
 }
-
-/* */

@@ -71,5 +71,3 @@ System.err.println("ERROR (" + e.getMessage() + ") in file: " + files[i]); // TO
         }
     }
 }
-
-/* */

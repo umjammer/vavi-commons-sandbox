@@ -94,5 +94,3 @@ class MorphableTest {
         assertEquals(Exception.class, test(new IOException(), new RuntimeException()));
     }
 }
-
-/* */

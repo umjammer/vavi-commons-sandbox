@@ -253,5 +253,3 @@ public abstract class RingBufferedInputStream extends FilterInputStream {
         in = null;
     }
 }
-
-/* */

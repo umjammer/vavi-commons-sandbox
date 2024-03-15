@@ -6,13 +6,14 @@
 
 package vavix.util;
 
-import java.util.logging.Level;
+import java.lang.System.Logger;
+import java.lang.System.Logger.Level;
 
-import vavi.util.Debug;
+import static java.lang.System.getLogger;
 
 
 /**
- * 権限を表現するクラスです． unix のファイルシステムの権限と同じです．
+ * This class represents permissions, similar to permissions in a unix file system.
  *
  * @author <a href=mailto:umjammer@gmail.com>Naohide Sano</a> (nsano)
  *
@@ -23,31 +24,33 @@ import vavi.util.Debug;
 @Deprecated
 public class Permission {
 
-    /** 読み込み可能のマスク */
+    private static final Logger logger = getLogger(Permission.class.getName());
+
+    /** Readable mask */
     public static final int READ_MASK = 0x04;
 
-    /** 書き込み可能のマスク */
+    /** Writable mask */
     public static final int WRITE_MASK = 0x02;
 
-    /** 実行可能のマスク */
+    /** Executable Mask */
     public static final int EXECUTE_MASK = 0x01;
 
-    /** 所有者のマスク */
+    /** Owner's Mask */
     public static final int OWNER_MASK = 0;
 
-    /** グループのマスク */
+    /** Group Mask */
     public static final int GROUP_MASK = 1;
 
-    /** その他のマスク */
+    /** Other Masks */
     public static final int OTHER_MASK = 2;
 
-    /** 権限 */
+    /** permission */
     private int[] permission = new int[3];
 
     /**
-     * Permission オブジェクトを構築します．
+     * Constructs a Permission object.
      *
-     * @param permission 3 桁の数値
+     * @param permission Three digit number
      */
     public Permission(String permission) {
         try {
@@ -55,15 +58,15 @@ public class Permission {
             this.permission[GROUP_MASK] = Integer.parseInt(permission.substring(GROUP_MASK, GROUP_MASK + 1));
             this.permission[OTHER_MASK] = Integer.parseInt(permission.substring(OTHER_MASK, OTHER_MASK + 1));
         } catch (Exception e) {
-            Debug.println(Level.SEVERE, "bad permission string: [" + permission + "]");
+            logger.log(Level.ERROR, "bad permission string: [" + permission + "]");
         }
-        Debug.println("permission[" + this.permission[OWNER_MASK] + ":" + this.permission[GROUP_MASK] + ":" + this.permission[OTHER_MASK] + "]");
+logger.log(Level.DEBUG, "permission[" + this.permission[OWNER_MASK] + ":" + this.permission[GROUP_MASK] + ":" + this.permission[OTHER_MASK] + "]");
     }
 
     /**
-     * 読み取り権限があるかどうか．
+     * Do you have read permission?
      *
-     * @param mask 対象のマスク
+     * @param mask Target Mask
      * @see #OWNER_MASK
      * @see #GROUP_MASK
      * @see #OTHER_MASK
@@ -73,9 +76,9 @@ public class Permission {
     }
 
     /**
-     * 書き込み権限があるかどうか．
+     * Do you have write permission?
      *
-     * @param mask 対象のマスク
+     * @param mask Target Mask
      * @see #OWNER_MASK
      * @see #GROUP_MASK
      * @see #OTHER_MASK
@@ -85,9 +88,9 @@ public class Permission {
     }
 
     /**
-     * 実行権限があるかどうか．
+     * Do you have permission to execute?
      *
-     * @param mask 対象のマスク
+     * @param mask Target Mask
      * @see #OWNER_MASK
      * @see #GROUP_MASK
      * @see #OTHER_MASK
@@ -97,13 +100,13 @@ public class Permission {
     }
 
     /**
-     * 権限があるかどうか．
+     * Do you have the permission?
      *
-     * @param level 対象のマスク
+     * @param level Target Mask
      * @see #OWNER_MASK
      * @see #GROUP_MASK
      * @see #OTHER_MASK
-     * @param type 権限のタイプ
+     * @param type Privilege Types
      * @see #READ_MASK
      * @see #WRITE_MASK
      * @see #EXECUTE_MASK
@@ -112,5 +115,3 @@ public class Permission {
         return (permission[level] & type) != 0;
     }
 }
-
-/* */

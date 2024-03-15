@@ -322,5 +322,3 @@ public class MimeTable implements FileNameMap {
         return MimeEntry.UNKNOWN;
     }
 }
-
-/* */

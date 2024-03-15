@@ -80,5 +80,3 @@ Debug.println(Level.FINE, "items: " + events.getItems().size());
         return Instant.ofEpochMilli(dateTime.getValue()).atZone(ZoneId.systemDefault()).toLocalDate();
     }
 }
-
-/* */

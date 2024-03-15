@@ -117,5 +117,3 @@ public class CalculatedHolidaysJaProvider implements HolidaysProvider {
         return holydays;
     }
 }
-
-/* */

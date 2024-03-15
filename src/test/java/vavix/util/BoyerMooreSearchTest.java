@@ -76,5 +76,3 @@ System.out.println(StringUtil.getDump(b, 128));
         is.close();
     }
 }
-
-/* */

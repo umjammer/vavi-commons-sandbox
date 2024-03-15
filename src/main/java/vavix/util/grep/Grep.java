@@ -112,5 +112,3 @@ public class Grep {
         return results;
     }
 }
-
-/* */

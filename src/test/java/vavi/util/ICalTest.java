@@ -50,5 +50,3 @@ calendar.events.stream().sorted().forEach(System.err::println);
 calendar.events.forEach(System.err::println);
     }
 }
-
-/* */

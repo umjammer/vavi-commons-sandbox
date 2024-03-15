@@ -39,5 +39,3 @@ public final class Checksum {
         return cis.getChecksum().getValue();
     }
 }
-
-/* */
