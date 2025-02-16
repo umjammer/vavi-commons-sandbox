@@ -27,6 +27,8 @@ import vavi.net.auth.oauth2.google.GoogleServiceAccountAppCredential;
 import vavi.util.Debug;
 import vavi.util.Locales;
 
+import static java.util.function.Predicate.not;
+
 
 /**
  * GoogleCalendarHolidaysJaProvider.
@@ -43,7 +45,7 @@ public class GoogleCalendarHolidaysJaProvider implements HolidaysProvider {
 
     private static final String calendarId = "japanese__ja@holiday.calendar.google.com";
 
-    private Calendar service;
+    private final Calendar service;
 
     {
         try {
@@ -63,14 +65,21 @@ public class GoogleCalendarHolidaysJaProvider implements HolidaysProvider {
     public List<Holiday> holidays(int year) {
         try {
             Events events = service.events().list(calendarId)
-                .setTimeMin(new DateTime(String.format("%04d-01-01T00:00:00.000+09:00", year)))
-                .setTimeMax(new DateTime(String.format("%04d-01-01T00:00:00.000+09:00", year + 1)))
+                .setTimeMin(new DateTime(String.format("%04d-01-01T00:00:00.000+00:00", year)))
+                .setTimeMax(new DateTime(String.format("%04d-01-01T00:00:00.000+00:00", year + 1)))
                 .setOrderBy("startTime")
                 .setSingleEvents(true)
                 .execute();
 Debug.println(Level.FINE, "items: " + events.getItems().size());
-//events.getItems().forEach(System.err::println);
-            return events.getItems().stream().map(e -> new Holiday(toLocalDate(e.getStart().getDate()), e.getSummary())).collect(Collectors.toList());
+events.getItems().stream()
+        .filter(e -> e.getDescription().equals("祝日"))
+        .filter(not(e -> e.getSummary().equals("銀行休業日")))
+        .forEach(System.err::println);
+            return events.getItems().stream()
+                    .filter(e -> e.getDescription().equals("祝日"))
+                    .filter(not(e -> e.getSummary().equals("銀行休業日")))
+                    .map(e -> new Holiday(toLocalDate(e.getStart().getDate()), e.getSummary()))
+                    .collect(Collectors.toList());
         } catch (IOException e) {
             throw new UncheckedIOException(e);
         }
