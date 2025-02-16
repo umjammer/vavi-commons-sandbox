@@ -73,5 +73,3 @@ public interface HolidaysProvider {
         return ServiceLoader.load(HolidaysProvider.class).iterator().next();
     }
 }
-
-/* */

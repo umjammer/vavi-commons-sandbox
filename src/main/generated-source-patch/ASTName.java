@@ -27,5 +27,3 @@ public class ASTName extends SimpleNode {
         return name;
     }
 }
-
-/* */

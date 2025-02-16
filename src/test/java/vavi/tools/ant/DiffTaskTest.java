@@ -31,10 +31,8 @@ class DiffTaskTest {
     /** */
     public static void main(String[] args) {
         DiffTask task = new DiffTask();
-        task.setSrcfile(args[0]);
-        task.setTargetfile(args[1]);
+        task.setSrcFile(args[0]);
+        task.setTargetFile(args[1]);
         task.execute();
     }
 }
-
-/* */

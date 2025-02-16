@@ -455,5 +455,3 @@ public class DiffUtil {
         return a;
     }
 }
-
-/* */

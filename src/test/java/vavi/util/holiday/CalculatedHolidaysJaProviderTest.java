@@ -54,5 +54,3 @@ holidays.forEach(System.err::println);
         assertArrayEquals(expected2023, holidays.stream().map(HolidaysProvider.Holiday::toString).toArray());
     }
 }
-
-/* */

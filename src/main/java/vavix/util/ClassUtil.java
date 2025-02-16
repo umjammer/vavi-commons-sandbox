@@ -6,18 +6,19 @@
 
 package vavix.util;
 
+import java.lang.System.Logger;
+import java.lang.System.Logger.Level;
 import java.lang.reflect.Array;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.util.StringTokenizer;
-import java.util.logging.Level;
 
-import vavi.util.Debug;
+import static java.lang.System.getLogger;
 
 
 /**
- * クラス関連のユーティリティクラスです．
+ * Class-related utility class.
  *
  * @author <a href="mailto:umjammer@gmail.com">Naohide Sano</a> (nsano)
  * @version 0.00 020517 nsano initial version <br>
@@ -26,15 +27,17 @@ import vavi.util.Debug;
 @Deprecated
 public final class ClassUtil {
 
+    private static final Logger logger = getLogger(ClassUtil.class.getName());
+
     /** Cannot access. */
     private ClassUtil() {}
 
     /**
-     * 文字列からクラスを取得します．
-     * TODO なんかどっかにありそう．
+     * Gets the class from a string.
+     * TODO It seems like it's somewhere.
      *
-     * @param className プリミティブ型もそのまま指定できます．
-     *                  逆に java.lang は認識しないので書いてください．
+     * @param className Primitive types can also be specified as is.
+     *                  On the other hand, java.lang is not recognized, so please write it.
      */
     public static Class<?> forName(String className)
         throws ClassNotFoundException {
@@ -62,15 +65,15 @@ public final class ClassUtil {
         } else {
             clazz = Class.forName(className);
         }
-Debug.println(Level.FINER, clazz);
+logger.log(Level.TRACE, clazz);
         return clazz;
     }
 
     /**
-     * 文字列からコンストラクタ用の引数型のクラスのリストを取得します．
+     * Gets a list of constructor argument type classes from a string.
      *
-     * @param line デリミタは { ',', '\t', ' ' }
-     *            プリミティブ型はそのまま書く． int, long ...
+     * @param line The delimiters are { ',', '\t', ' ' }
+     *            Primitive types are written as is: int, long ...
      */
     public static Class<?>[] getArgumentTypes(String line)
         throws ClassNotFoundException {
@@ -85,7 +88,7 @@ Debug.println(Level.FINER, clazz);
     }
 
     /**
-     * 文字列からコンストラクタ用の引数のオブジェクトのリストを取得します．
+     * Gets a list of constructor argument objects from a string.
      *
      * @param line delimiters are <code>',', '\t', ' '</code>
      *            null is <code>'null'</code>
@@ -134,13 +137,13 @@ Debug.println(Level.FINER, clazz);
     }
 
     /**
-     * 新しいインスタンスを取得します．
+     * Get a new instance.
      *
-     * @param className プリミティブ型もそのまま指定できます．
-     * @param argTypes デリミタは { ',', '\t', ' ' }
-     *            プリミティブ型はそのまま書く． int, long ...
-     * @param args デリミタは { ',', '\t', ' ' }
-     *            null はそのまま書く． null
+     * @param className Primitive types can also be specified as is.
+     * @param argTypes The delimiters are { ',', '	', ' ' }
+     *            Primitive types are written as is: int, long ...
+     * @param args The delimiters are { ',', '	', ' ' }
+     *            null is written as it is.
      */
     public static Object newInstance(String className,
                                      String argTypes,
@@ -170,7 +173,7 @@ Debug.println(Level.FINER, clazz);
         int p = arg.lastIndexOf('.');
         String className = arg.substring(0, p);
         String enumName = arg.substring(p + 1, arg.length());
-Debug.println(Level.FINER, className + "#" + enumName);
+logger.log(Level.TRACE, className + "#" + enumName);
 
         Class<?> clazz = Class.forName(className);
 
@@ -178,8 +181,8 @@ Debug.println(Level.FINER, className + "#" + enumName);
     }
 
     /**
-     * プリミティブ型からラッパークラスを取得します。
-     * @param primitiveClass int.class 等
+     * Gets the wrapper class for a primitive type.
+     * @param primitiveClass int.class etc.
      */
     public Class<?> getWrapperClass(Class<?> primitiveClass) {
         Object array = Array.newInstance(primitiveClass, 1);
@@ -188,29 +191,27 @@ Debug.println(Level.FINER, className + "#" + enumName);
     }
 }
 
-/**
- */
+/** */
 interface Instantiator {
     Object newInstance(String arg) throws InstantiationException;
 }
 
-/**
- */
+/** */
 class IntegerInstantiator implements Instantiator {
     public Object newInstance(String arg) throws InstantiationException {
 
         try {
             // integer
-            return new Integer(arg);
+            return Integer.parseInt(arg);
         } catch (NumberFormatException e) {
-            // enumration class.enum
+            // enumeration class.enum
             try {
                 Field field = ClassUtil.getField(arg);
 
                 if (field.getType() != Integer.TYPE)
                     throw new IllegalArgumentException(arg + " for int");
 
-                return new Integer(field.getInt(null));
+                return field.getInt(null);
             } catch (Exception f) {
                 throw (InstantiationException)
                     new InstantiationException().initCause(f);
@@ -219,16 +220,14 @@ class IntegerInstantiator implements Instantiator {
     }
 }
 
-/**
- */
+/** */
 class StringInstantiator implements Instantiator {
     public Object newInstance(String arg) throws InstantiationException {
         return arg;
     }
 }
 
-/**
- */
+/** */
 class ColorInstantiator implements Instantiator {
     public Object newInstance(String arg) throws InstantiationException {
         try {
@@ -244,5 +243,3 @@ class ColorInstantiator implements Instantiator {
         }
     }
 }
-
-/* */

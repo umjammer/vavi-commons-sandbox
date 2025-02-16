@@ -41,5 +41,3 @@ System.out.print(rs.file + ":" + rs.lineNumber + ":" + rs.line);
         }, Pattern.compile(args[2])).dig(new File(args[0]));
     }
 }
-
-/* */

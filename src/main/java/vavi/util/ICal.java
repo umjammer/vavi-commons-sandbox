@@ -8,6 +8,8 @@ package vavi.util;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.lang.System.Logger;
+import java.lang.System.Logger.Level;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.ParameterizedType;
@@ -19,7 +21,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
-import java.util.logging.Level;
+import java.util.StringJoiner;
 
 import vavi.beans.BeanUtil;
 import vavi.util.serdes.BeanBinder;
@@ -27,6 +29,8 @@ import vavi.util.serdes.Binder;
 import vavi.util.serdes.Element;
 import vavi.util.serdes.Serdes;
 import vavi.util.serdes.SimpleBeanBinder;
+
+import static java.lang.System.getLogger;
 
 
 /**
@@ -37,6 +41,8 @@ import vavi.util.serdes.SimpleBeanBinder;
  */
 @Serdes(beanBinder = ICal.class)
 public class ICal extends SimpleBeanBinder<ICal.ICalIOSource> implements Binder {
+
+    private static final Logger logger = getLogger(ICal.class.getName());
 
     @Serdes
     public static class VCalendar {
@@ -90,13 +96,36 @@ public class ICal extends SimpleBeanBinder<ICal.ICalIOSource> implements Binder 
         public LocalDate getDate() {
             return formatter.parse(dtStart, LocalDate::from);
         }
+        public String getDescription() {
+            return description;
+        }
+        public String getSummary() {
+            return summary;
+        }
         @Override
         public String toString() {
-            return getDate() + " " + summary;
+            return getDate() + " " + summary + ", " + description;
         }
         @Override
         public int compareTo(VEvent o) {
             return this.getDate().compareTo(o.getDate());
+        }
+        public String toStringEx() {
+            return new StringJoiner(", ", VEvent.class.getSimpleName() + "[", "]")
+                    .add("dtStart='" + dtStart + "'")
+                    .add("dtEndId='" + dtEndId + "'")
+                    .add("dtStamp='" + dtStamp + "'")
+                    .add("uiId='" + uiId + "'")
+                    .add("clazz='" + clazz + "'")
+                    .add("created='" + created + "'")
+                    .add("description='" + description + "'")
+                    .add("lastModifiled='" + lastModifiled + "'")
+                    .add("sequence='" + sequence + "'")
+                    .add("status='" + status + "'")
+                    .add("summary='" + summary + "'")
+                    .add("transp='" + transp + "'")
+                    .add("formatter=" + formatter)
+                    .toString();
         }
     }
 
@@ -133,23 +162,23 @@ public class ICal extends SimpleBeanBinder<ICal.ICalIOSource> implements Binder 
                     switch (mode) {
                     default:
                     case 0:
-Debug.println(Level.WARNING, "unexpected mode: " + mode);
+logger.log(Level.WARNING, "unexpected mode: " + mode);
                         break;
                     case 1:
                         String[] ps = l.split("\\:");
                         lines1.put(ps[0], ps[1]);
                         break;
                     case 2:
-                        ps = l.split("\\:");
-Debug.println(Level.FINE, "pair: " + Arrays.toString(ps) + ", " + ev);
+                        ps = l.split("[\\:>]");
+logger.log(Level.DEBUG, "pair: " + Arrays.toString(ps) + " (" + l + "), " + ev);
                         ev.put(ps[0].split("\\;")[0], ps[1]);
                         break;
                     }
                 }
-Debug.println(Level.FINE, "mode: " + mode);
+logger.log(Level.DEBUG, "mode: " + mode);
             }
             s.close();
-Debug.println(Level.FINE, "lines1: " + lines1.size() + ", lines2: " + lines2.size());
+logger.log(Level.DEBUG, "lines1: " + lines1.size() + ", lines2: " + lines2.size());
         }
     }
 
@@ -183,7 +212,7 @@ Debug.println(Level.FINE, "lines1: " + lines1.size() + ", lines2: " + lines2.siz
             } else {
                 assert false : destBean.getClass().getName();
             }
-Debug.println(Level.FINE, "field: " + field.getName() + " <- " + context.getValue());
+logger.log(Level.DEBUG, "field: " + field.getName() + " <- " + context.getValue());
         }
     };
 
@@ -202,7 +231,7 @@ Debug.println(Level.FINE, "field: " + field.getName() + " <- " + context.getValu
                 }
                 String name = ((ParameterizedType) field.getGenericType()).getActualTypeArguments()[0].getTypeName();
                 Class<?> fieldElementClass = Class.forName(name);
-Debug.println(Level.FINE, "generic type: " + fieldElementClass + ", " + eachContext.context.in.lines2.size());
+logger.log(Level.DEBUG, "generic type: " + fieldElementClass + ", " + eachContext.context.in.lines2.size());
                 for (eachContext.context.in.index2 = 0; eachContext.context.in.index2 < eachContext.context.in.lines2.size(); eachContext.context.in.index2++) {
                     Object fieldBean = fieldElementClass.getDeclaredConstructor().newInstance();
                     context.deserialize(fieldBean);
@@ -226,6 +255,15 @@ Debug.println(Level.FINE, "generic type: " + fieldElementClass + ", " + eachCont
     public EachBinder[] getEachBinders() {
         return eachBinders;
     }
-}
 
-/* */
+    @Override
+    public String toString() {
+        return new StringJoiner(", ", ICal.class.getSimpleName() + "[", "]")
+                .add("calendar=" + calendar)
+                .add("events=" + events)
+                .add("stringEachBinder=" + stringEachBinder)
+                .add("listEachBinder=" + listEachBinder)
+                .add("eachBinders=" + Arrays.toString(eachBinders))
+                .toString();
+    }
+}

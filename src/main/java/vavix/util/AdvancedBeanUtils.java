@@ -88,5 +88,3 @@ logger.debug("wrong field: " + key);
         }
     }
 }
-
-/* */

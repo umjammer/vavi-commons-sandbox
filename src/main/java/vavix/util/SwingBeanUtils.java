@@ -71,5 +71,3 @@ public class SwingBeanUtils extends AdvancedBeanUtils {
 logger.debug("");
     }
 }
-
-/* */

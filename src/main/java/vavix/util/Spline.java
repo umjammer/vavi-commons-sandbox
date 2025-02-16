@@ -95,5 +95,3 @@ class Spline {
         return t * y[i + 1] + (1 - t) * y[i] + u[i] * u[i] * (xPow3minusX(t) * p[i + 1] + xPow3minusX(1 - t) * p[i]) / 6;
     }
 }
-
-/* */

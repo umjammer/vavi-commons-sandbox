@@ -6,11 +6,13 @@
 
 package vavix.util;
 
-import java.util.logging.Level;
+import java.lang.System.Logger;
+import java.lang.System.Logger.Level;
 
 import com.jacob.com.Variant;
-
 import vavi.util.Debug;
+
+import static java.lang.System.getLogger;
 
 
 /**
@@ -20,12 +22,15 @@ import vavi.util.Debug;
  * @version 0.00 040915 nsano initial version <br>
  */
 public final class ComUtil {
+
+    private static final Logger logger = getLogger(ComUtil.class.getName());
+
     /** */
     private ComUtil() {}
 
     /** */
     public static Object toObject(Variant variant) {
-Debug.println(Level.FINE, "variant: " + variant + ", " + Debug.getCallerMethod(1));
+logger.log(Level.DEBUG, "variant: " + variant + ", " + Debug.getCallerMethod(1));
         if (variant == null) {
             return null;
         }
@@ -55,7 +60,7 @@ Debug.println(Level.FINE, "variant: " + variant + ", " + Debug.getCallerMethod(1
             break;
         case Variant.VariantDate: // the VT_DATE variant type.
             name = "VariantDate";
-Debug.println(Level.FINE, "date: " + variant + ": " + variant.getJavaDate());
+logger.log(Level.DEBUG, "date: " + variant + ": " + variant.getJavaDate());
             value = variant.getJavaDate();
             break;
         case Variant.VariantDispatch: // the VT_DISPATCH variant type.
@@ -111,9 +116,7 @@ Debug.println(Level.FINE, "date: " + variant + ": " + variant.getJavaDate());
             value = variant.toJavaObject();
             break;
         }
-Debug.println(Level.FINE, name + "(" + type + "): " + value);
+logger.log(Level.DEBUG, name + "(" + type + "): " + value);
         return value;
     }
 }
-
-/* */

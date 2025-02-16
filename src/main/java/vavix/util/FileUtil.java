@@ -29,5 +29,3 @@ public class FileUtil {
         destChannel.transferFrom(srcChannel, 0, srcChannel.size());
     }
 }
-
-/* */

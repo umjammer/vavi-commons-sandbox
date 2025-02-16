@@ -84,5 +84,3 @@ class Singleton2Test {
         F f = F.getInstance(F.class);
     }
 }
-
-/* */

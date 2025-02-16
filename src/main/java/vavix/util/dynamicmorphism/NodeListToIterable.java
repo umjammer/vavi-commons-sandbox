@@ -42,5 +42,3 @@ public class NodeListToIterable extends Morphable<NodeList, Iterable<Node>> impl
     /** */
     public static NodeListToIterable morpher = new NodeListToIterable();
 }
-
-/* */

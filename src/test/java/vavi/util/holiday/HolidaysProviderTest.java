@@ -46,6 +46,7 @@ class HolidaysProviderTest {
             "2023-10-09 スポーツの日",
             "2023-11-03 文化の日",
             "2023-11-23 勤労感謝の日",
+            "2023-12-31 大晦日"
     };
 
     @Test
@@ -77,5 +78,3 @@ holidays.stream().sorted().forEach(System.err::println);
         assertInstanceOf(GoogleICalHolidaysJaProvider.class, p);
     }
 }
-
-/* */

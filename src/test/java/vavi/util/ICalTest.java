@@ -30,7 +30,7 @@ class ICalTest {
         InputStream is = ICal.class.getResourceAsStream("/holidays_jp.ics");
         ICal calendar = new ICal();
         Serdes.Util.deserialize(is, calendar);
-Debug.println(StringUtil.paramStringDeep(calendar, 2));
+//Debug.println(calendar);
         assertEquals(50, calendar.events.size());
     }
 
@@ -50,5 +50,3 @@ calendar.events.stream().sorted().forEach(System.err::println);
 calendar.events.forEach(System.err::println);
     }
 }
-
-/* */

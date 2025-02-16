@@ -16,5 +16,3 @@ package vavi.util.diff;
 interface UnaryPredicate {
     boolean execute(Object obj);
 }
-
-/* */

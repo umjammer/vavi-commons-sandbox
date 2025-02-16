@@ -947,5 +947,3 @@ public class Diff {
         }
     }
 }
-
-/* */

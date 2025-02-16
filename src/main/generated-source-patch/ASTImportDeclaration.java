@@ -27,5 +27,3 @@ public class ASTImportDeclaration extends SimpleNode {
         return name;
     }
 }
-
-/* */

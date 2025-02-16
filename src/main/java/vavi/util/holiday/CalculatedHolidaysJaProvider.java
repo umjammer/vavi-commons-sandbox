@@ -6,15 +6,16 @@
 
 package vavi.util.holiday;
 
+import java.lang.System.Logger;
+import java.lang.System.Logger.Level;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.logging.Level;
-
-import vavi.util.Debug;
 import vavi.util.Locales;
+
+import static java.lang.System.getLogger;
 
 
 /**
@@ -25,6 +26,8 @@ import vavi.util.Locales;
  */
 @Locales(countries = "Japan", languages = "Japanese")
 public class CalculatedHolidaysJaProvider implements HolidaysProvider {
+
+    private static final Logger logger = getLogger(CalculatedHolidaysJaProvider.class.getName());
 
     /** this causes the Y10K problem lol  */
     private static final int MoY = 9999;
@@ -90,7 +93,7 @@ public class CalculatedHolidaysJaProvider implements HolidaysProvider {
         // @see "https://kinsentansa.blogspot.com/2011/02/2012-11622.html"
         private static int[] equinoxes(int year) {
             if (year > 2099) {
-                Debug.println(Level.WARNING, "return value is not correct when year > 2099");
+                logger.log(Level.WARNING, "return value is not correct when year > 2099");
             }
             int unit = 1000000;
             int val = year - 1980;
@@ -108,7 +111,7 @@ public class CalculatedHolidaysJaProvider implements HolidaysProvider {
             if (date != null) {
                 holydays.add(new Holiday(date, e.summary));
                 if (year >= 1973 && date.getDayOfWeek() == DayOfWeek.SUNDAY) {
-                    // 祝日法第3条第2項による休日
+                    // 祝日法第3条第2項による休日 (Holidays under Article 3, Paragraph 2 of the Holidays Act)
                     holydays.add(new Holiday(date.withDayOfMonth(date.getDayOfMonth() + 1), "振替休日"));
                 }
             }
@@ -117,5 +120,3 @@ public class CalculatedHolidaysJaProvider implements HolidaysProvider {
         return holydays;
     }
 }
-
-/* */

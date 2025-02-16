@@ -6,25 +6,31 @@
 
 package vavi.util;
 
+import java.lang.System.Logger;
+import java.lang.System.Logger.Level;
 import java.util.HashMap;
 import java.util.Map;
+
+import static java.lang.System.getLogger;
 
 
 /**
  * Singleton.
  * <p>
- * パッケージが違うサブクラスはクラス、デフォルトコンストラクタともに public でなければなりません。
+ * Subclasses in different packages must have public classes and default constructors.
  * </p>
  * @author <a href="mailto:umjammer@gmail.com">Naohide Sano</a> (nsano)
  * @version 0.00 030821 nsano initial version <br>
  */
 public abstract class Singleton {
 
+    private static final Logger logger = getLogger(Singleton.class.getName());
+
     /**
-     * サブクラスを作れるようにするため、コンストラクタを protected にする
+     * Make the constructor protected to allow subclassing
      */
     protected Singleton() {
-Debug.println("class: " + this.getClass());
+logger.log(Level.DEBUG, "class: " + this.getClass());
         if (singletons.get(this.getClass()) != null) {
             throw new IllegalStateException("duplication, maybe bad constractor modifire");
         }
@@ -34,7 +40,7 @@ Debug.println("class: " + this.getClass());
     protected static Map<Class<? extends Singleton>, Singleton> singletons = new HashMap<>();
 
     /**
-     * @return このクラスの唯一のインスタンス
+     * @return The only instance of this class
      */
     @SuppressWarnings("unchecked")
     public static <T extends Singleton> T getInstance(Class<T> clazz) {
@@ -60,5 +66,3 @@ Debug.println("class: " + this.getClass());
         return instance;
     }
 }
-
-/* */
