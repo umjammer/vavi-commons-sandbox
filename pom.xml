@@ -170,7 +170,15 @@
       <dependency>
         <groupId>org.junit</groupId>
         <artifactId>junit-bom</artifactId>
-        <version>5.10.3</version>
+        <version>5.11.4</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
+
+      <dependency>
+        <groupId>com.google.cloud</groupId>
+        <artifactId>libraries-bom</artifactId>
+        <version>26.31.0</version>
         <type>pom</type>
         <scope>import</scope>
       </dependency>
@@ -191,12 +199,12 @@
     <dependency>
       <groupId>org.apache.ant</groupId>
       <artifactId>ant</artifactId>
-      <version>1.10.14</version>
+      <version>1.10.15</version>
     </dependency>
     <dependency>
       <groupId>com.github.umjammer</groupId> <!-- vavi / com.github.umjammer -->
       <artifactId>vavi-util-serdes</artifactId>
-      <version>1.0.7</version>
+      <version>1.0.8</version>
     </dependency>
 
     <dependency>
@@ -229,33 +237,13 @@
     <dependency>
       <groupId>com.github.umjammer.vavi-net-auth</groupId> <!-- vavi / com.github.umjammer.vavi-net-auth -->
       <artifactId>vavi-net-auth-google</artifactId>
-      <version>0.1.12</version>
+      <version>0.1.14</version>
       <scope>test</scope>
-      <exclusions>
-        <exclusion>
-          <groupId>org.bouncycastle</groupId>
-          <artifactId>bcprov-jdk18on</artifactId>
-        </exclusion>
-        <exclusion>
-          <groupId>com.google.guava</groupId>
-          <artifactId>guava</artifactId>
-        </exclusion>
-      </exclusions>
     </dependency>
-<dependency>
-  <groupId>org.bouncycastle</groupId>
-  <artifactId>bcprov-jdk18on</artifactId>
-  <version>1.78.1</version>
-</dependency>
-<dependency>
-  <groupId>com.google.guava</groupId>
-  <artifactId>guava</artifactId>
-  <version>33.2.1-jre</version>
-</dependency>
     <dependency>
       <groupId>com.google.apis</groupId>
       <artifactId>google-api-services-calendar</artifactId>
-      <version>v3-rev20240419-2.0.0</version>
+      <version>v3-rev20240927-2.0.0</version>
       <scope>test</scope>
     </dependency>
   </dependencies>
