@@ -51,9 +51,7 @@ wip
 
 ## Install
 
- * [maven](https://github.com/umjammer?tab=packages&repo_name=vavi-commons-sandbox)
- * this project uses github packages. add a personal access token to `~/.m2/settings.xml`
- * see https://docs.github.com/en/packages/working-with-a-github-packages-registry/working-with-the-apache-maven-registry
+ * [maven](https://jitpack.io/#umjammer/vavi-commons-sandbox)
 
 ## TODO
 
