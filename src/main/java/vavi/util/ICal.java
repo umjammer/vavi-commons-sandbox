@@ -204,11 +204,11 @@ logger.log(Level.DEBUG, "lines1: " + lines1.size() + ", lines2: " + lines2.size(
         @SuppressWarnings("unchecked")
         public void bind(EachContext context, Object destBean, Field field) {
             SimpleEachContext eachContext = (SimpleEachContext) context;
-            String key = Element.Util.getValue(field);
+            String key = field.getAnnotation(Element.class).value(); // TODO wanna use Element.Util class
             if (destBean instanceof VCalendar) {
-                context.setValue(eachContext.context.in.lines1.get(key));
+                context.setValue(eachContext.context.io.lines1.get(key));
             } else if (destBean instanceof VEvent) {
-                context.setValue(eachContext.context.in.lines2.get(eachContext.context.in.index2).get(key));
+                context.setValue(eachContext.context.io.lines2.get(eachContext.context.io.index2).get(key));
             } else {
                 assert false : destBean.getClass().getName();
             }
@@ -231,10 +231,10 @@ logger.log(Level.DEBUG, "field: " + field.getName() + " <- " + context.getValue(
                 }
                 String name = ((ParameterizedType) field.getGenericType()).getActualTypeArguments()[0].getTypeName();
                 Class<?> fieldElementClass = Class.forName(name);
-logger.log(Level.DEBUG, "generic type: " + fieldElementClass + ", " + eachContext.context.in.lines2.size());
-                for (eachContext.context.in.index2 = 0; eachContext.context.in.index2 < eachContext.context.in.lines2.size(); eachContext.context.in.index2++) {
+logger.log(Level.DEBUG, "generic type: " + fieldElementClass + ", " + eachContext.context.io.lines2.size());
+                for (eachContext.context.io.index2 = 0; eachContext.context.io.index2 < eachContext.context.io.lines2.size(); eachContext.context.io.index2++) {
                     Object fieldBean = fieldElementClass.getDeclaredConstructor().newInstance();
-                    context.deserialize(fieldBean);
+                    context.deserialize(fieldBean, null);
                     ((List<Object>) fieldValue).add(fieldBean);
                 }
                 context.setValue(fieldValue);
