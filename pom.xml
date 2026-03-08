@@ -170,7 +170,7 @@
       <dependency>
         <groupId>org.junit</groupId>
         <artifactId>junit-bom</artifactId>
-        <version>5.14.0</version>
+        <version>6.0.2</version>
         <type>pom</type>
         <scope>import</scope>
       </dependency>
@@ -178,7 +178,7 @@
       <dependency>
         <groupId>com.google.cloud</groupId>
         <artifactId>libraries-bom</artifactId>
-        <version>26.54.0</version>
+        <version>26.73.0</version>
         <type>pom</type>
         <scope>import</scope>
       </dependency>
@@ -204,7 +204,7 @@
     <dependency>
       <groupId>com.github.umjammer</groupId> <!-- vavi / com.github.umjammer -->
       <artifactId>vavi-util-serdes</artifactId>
-      <version>1.0.11</version>
+      <version>1.0.12</version>
     </dependency>
 
     <dependency>
