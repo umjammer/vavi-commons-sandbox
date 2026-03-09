@@ -239,7 +239,18 @@
       <artifactId>vavi-net-auth-google</artifactId>
       <version>0.1.15</version>
       <scope>test</scope>
+      <exclusions>
+        <exclusion>
+          <groupId>com.github.umjammer.rococoa</groupId>
+          <artifactId>rococoa-contrib</artifactId>
+        </exclusion>
+      </exclusions>
     </dependency>
+<dependency>
+  <groupId>com.github.umjammer.rococoa</groupId>
+  <artifactId>rococoa-contrib</artifactId>
+  <version>0.8.15</version>
+</dependency>
     <dependency>
       <groupId>com.google.apis</groupId>
       <artifactId>google-api-services-calendar</artifactId>
