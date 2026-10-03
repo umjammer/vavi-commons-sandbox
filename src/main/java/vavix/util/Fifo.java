@@ -16,7 +16,7 @@ import java.util.EmptyStackException;
  * @since Transmorpher 1.0
  * @see java.util.Stack#Stack()
  * @see java.util.Vector#Vector()
- * @author Fluxmedia and INRIA Rh�ne-Alpes.
+ * @author Fluxmedia and INRIA Rhône-Alpes.
  * @author <a href="mailto:umjammer@gmail.com">Naohide Sano</a> (nsano)
  * @version 0.00 030314 nsano ported <br>
  */
@@ -28,7 +28,7 @@ public class Fifo<E> extends ArrayList<E> {
     /** The last position at which there is no value */
     private int last = 0;
 
-    /** The constructor allocates a vector */
+    // The constructor allocates a vector
 
     /**
      * Creates an empty Fifo
