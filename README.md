@@ -5,7 +5,9 @@
 
 # vavi-commons-sandbox
 
-Many Utilities
+<img alt="logo" src="src/test/resources/duke_sandbox.png" width="160" />
+
+🔧 Many Utilities
 
 ## 🧰 Contents
 
@@ -60,3 +62,7 @@ wip
    * https://www.iana.org/assignments/media-types/media-types.xhtml
  * mac finder alias
    * https://en.wikipedia.org/wiki/Alias_(Mac_OS)
+
+---
+
+<sub>image designed by @umjammer, drawn by nano banana</sub>
